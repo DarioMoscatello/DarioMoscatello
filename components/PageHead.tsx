@@ -1,23 +1,18 @@
 import Link from "next/link";
 
 export function PageHead({
-  eyebrow,
   title,
-  accent,
+  subtitle,
   lede,
 }: {
-  eyebrow: string;
   title: string;
-  accent?: string;
+  subtitle?: string;
   lede?: string;
 }) {
   return (
     <div className="stagger">
-      <p className="eyebrow">{eyebrow}</p>
-      <h1 className="display">
-        {title}
-        {accent ? <em>{accent}</em> : null}
-      </h1>
+      <h1 className="display">{title}</h1>
+      {subtitle ? <p className="subtitle">{subtitle}</p> : null}
       {lede ? <p className="lede">{lede}</p> : null}
       <div className="rule" />
     </div>

@@ -16,14 +16,15 @@ function Buttons({ onNavigate }: { onNavigate?: () => void }) {
           <Link
             key={item.href}
             href={item.href}
-            className="button-row"
+            className="nav-row"
             data-active={active}
             aria-current={active ? "page" : undefined}
             onClick={onNavigate}
           >
-            <span className="idx">{item.index}</span>
+            <span className="mark" aria-hidden="true">
+              —
+            </span>
             <span>{item.label}</span>
-            <span className="led" aria-hidden="true" />
           </Link>
         );
       })}
@@ -40,8 +41,8 @@ function Foot() {
           LinkedIn
         </a>
       </div>
-      <div className="rail-coords">
-        {profile.city} — {profile.coordinates}
+      <div>
+        Made in {profile.city}, {profile.country}
       </div>
     </div>
   );
@@ -66,14 +67,11 @@ export default function SiteNav() {
     <>
       {/* desktop rail */}
       <aside className="rail">
-        <Link href="/" className="plate" aria-label="Home">
-          <div className="plate-name">
-            {profile.lastName}
-            <span>{profile.firstName}</span>
+        <Link href="/" className="wordmark" aria-label="Home">
+          <div className="wordmark-name">
+            {profile.firstName} {profile.lastName}
           </div>
-          <div className="plate-sub">
-            {profile.role} — {profile.city}
-          </div>
+          <div className="wordmark-sub">{profile.tagline}</div>
         </Link>
         <Buttons />
         <Foot />
@@ -82,7 +80,7 @@ export default function SiteNav() {
       {/* mobile bar */}
       <header className="topbar">
         <Link href="/" className="topbar-name">
-          {profile.lastName} {profile.firstName}
+          {profile.firstName} {profile.lastName}
         </Link>
         <button
           type="button"

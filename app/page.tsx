@@ -1,16 +1,14 @@
 import { NextLink } from "@/components/PageHead";
-import { intro, interests, languages, profile, strengths } from "@/data/site";
+import { intro, interests, profile } from "@/data/site";
 
 export default function AboutPage() {
   return (
     <div className="page">
       <div className="stagger">
-        <p className="eyebrow">01 — About</p>
-        <h1 className="display">
-          {profile.firstName}
-          <em>{profile.lastName}</em>
-        </h1>
-        <p className="lede">{profile.tagline}</p>
+        <h1 className="display">I am</h1>
+        <p className="subtitle">
+          {profile.firstName} {profile.lastName}
+        </p>
         <div className="rule" />
         <div className="prose">
           {intro.map((p) => (
@@ -22,47 +20,18 @@ export default function AboutPage() {
       <div className="rule" />
 
       <section>
-        <p className="section-label">What I spend my time on</p>
+        <p className="section-label">Some of my interests</p>
         <ul className="plain-list">
           {interests.map((item) => (
-            <li key={item}>
-              <span>{item}</span>
-            </li>
+            <li key={item}>{item}</li>
           ))}
         </ul>
       </section>
 
       <div className="rule" />
 
-      <section>
-        <p className="section-label">Languages</p>
-        <ul className="plain-list">
-          {languages.map((l) => (
-            <li key={l.name}>
-              <span>{l.name}</span>
-              <span className="right">{l.level}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <div className="rule" />
-
-      <section>
-        <p className="section-label">Strengths</p>
-        <div className="tags">
-          {strengths.map((s) => (
-            <span className="tag" key={s}>
-              {s}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <div className="rule" />
-
-      <section>
-        <p className="prose">
+      <section className="prose">
+        <p>
           Write to me at{" "}
           <a className="link" href={`mailto:${profile.email}`}>
             {profile.email}
@@ -70,7 +39,7 @@ export default function AboutPage() {
           . I answer everything, and I like meeting people who are building
           something.
         </p>
-        <NextLink href="/experience" label="Experience" />
+        <NextLink href="/education" label="Education" />
       </section>
     </div>
   );

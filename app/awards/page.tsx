@@ -12,9 +12,8 @@ export default function AwardsPage() {
   return (
     <div className="page">
       <PageHead
-        eyebrow="05 — Awards"
-        title="A few"
-        accent="results"
+        title="Awards"
+        subtitle="Chess and mathematics"
         lede="Mostly proof that I enjoy problems with a clock attached."
       />
 
@@ -32,7 +31,7 @@ export default function AwardsPage() {
         ))}
       </section>
 
-      <NextLink href="/contact" label="Contact" />
+      <NextLink href="/" label="Back to the start" />
     </div>
   );
 }

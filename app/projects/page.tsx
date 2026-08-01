@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 import { NextLink, PageHead } from "@/components/PageHead";
-import { education } from "@/data/site";
+import { projects } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Education",
+  title: "Projects",
   description:
-    "Student research at Harvard Business School and Duke University, BSc in Economics and Management at Bocconi, diploma at IIS Jean Monnet.",
+    "A global pharmaceutical supply-chain tracker built at Harvard Business School, and a polarization analysis application built at Duke.",
 };
 
-export default function EducationPage() {
+export default function ProjectsPage() {
   return (
     <div className="page">
       <PageHead
-        title="Education"
-        subtitle="Cambridge, Durham, Milan, Como"
-        lede="Two American research labs, one Italian business school, and the school in Como where the maths started."
+        title="Projects"
+        subtitle="Built during the summer of 2025"
+        lede="Two applications that turn unwieldy datasets into something you can actually interrogate."
       />
 
       <section>
-        {education.map((item) => (
+        {projects.map((item) => (
           <article className="entry" key={item.title}>
             <div className="entry-period">
               {item.period}
@@ -32,18 +32,12 @@ export default function EducationPage() {
                   <li key={p.slice(0, 24)}>{p}</li>
                 ))}
               </ul>
-              {item.tags ? (
-                <p className="coursework">
-                  <b>Coursework — </b>
-                  {item.tags.join(", ")}
-                </p>
-              ) : null}
             </div>
           </article>
         ))}
       </section>
 
-      <NextLink href="/work" label="Work" />
+      <NextLink href="/awards" label="Awards" />
     </div>
   );
 }

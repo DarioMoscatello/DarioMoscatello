@@ -1,20 +1,14 @@
 import { NextLink } from "@/components/PageHead";
+import { PageHead } from "@/components/PageHead";
 
 export default function NotFound() {
   return (
     <div className="page">
-      <div className="stagger">
-        <p className="eyebrow">404 — Not found</p>
-        <h1 className="display">
-          Nothing
-          <em>at this address</em>
-        </h1>
-        <p className="lede">
-          The page you asked for does not exist. The panel on the left still
-          works.
-        </p>
-        <div className="rule" />
-      </div>
+      <PageHead
+        title="Not found"
+        subtitle="Nothing at this address"
+        lede="The page you asked for does not exist. The menu on the left still works."
+      />
       <NextLink href="/" label="Back to the start" />
     </div>
   );

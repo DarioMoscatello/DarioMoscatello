@@ -32,14 +32,18 @@ app/
   layout.tsx        shell, fonts, metadata
   page.tsx          "I am" — about, interests, email
   education/        Harvard, Duke, Bocconi, Jean Monnet
-  work/             Copernicus, NOBE.ee, MrXShop
-  projects/         the two applications built in 2025
-  awards/           maths olympiad, FIDE, 100/100
+  work/             Copernicus, MrXShop
+  projects/         BExams, Hedels
+  readings/         the book shelf
+  awards/           maths olympiad, FIDE
   globals.css       the whole design system
   icon.svg          favicon
+  media/            project logos and screenshots (in /public)
+  books/            book covers (in /public)
 components/
   SiteNav.tsx       fixed left column + mobile drawer
   PageHead.tsx      page title block + "next page" link
+  Plate.tsx         framed image that opens full screen on click
 data/
   site.ts           all copy
 ```
@@ -58,6 +62,15 @@ data/
   looking like flat #FFF-adjacent beige.
 - Motion: one page-load stagger and a hairline that draws itself. Disabled entirely
   under `prefers-reduced-motion`.
+
+## Adding a book
+
+1. Drop the cover in `public/books/` (a 2:3 jpg, around 760px wide is plenty).
+2. Add an entry to `books` in `data/site.ts` with the title, author, cover path
+   and the cover's real pixel dimensions.
+
+An entry without a `cover` still works — it renders as a typographic spine, so you
+can list a book before you find a good image of it.
 
 ## Adding a page
 

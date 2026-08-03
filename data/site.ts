@@ -5,7 +5,7 @@
 export const profile = {
   firstName: "Dario",
   lastName: "Moscatello",
-  tagline: "Analyst. Builder. Chess player.",
+  tagline: "Dreamer · Thinker · Builder",
   city: "Milano",
   country: "Italy",
   email: "moscatello.dario@gmail.com",
@@ -17,21 +17,30 @@ export const nav = [
   { label: "Education", href: "/education" },
   { label: "Work", href: "/work" },
   { label: "Projects", href: "/projects" },
+  { label: "Readings", href: "/readings" },
   { label: "Awards", href: "/awards" },
 ];
 
 export const intro = [
-  "I study Economics and Management at Bocconi University, Milan. I currently work as a Real Estate Analyst at Copernicus RE Italia, pricing and underwriting UTP and NPL single names and portfolios — for our own fund, for other investment funds, and for banks.",
-  "I spent the summer of 2025 in the US, building research tools at Duke and Harvard Business School. Before university I co-founded a Web3 shop and ran it for four years.",
+  "I am studying Economics and Management at Bocconi University in Milan. Real estate has always been my greatest love, and I currently work as a RE Analyst at Copernicus.",
+  "Over the past few years, I have also developed a strong interest in technology and its potential to transform the real estate industry. My ambition is to combine finance, technology and innovation to build something meaningful and create lasting value.",
 ];
 
 export const interests = [
-  "Distressed credit and special situations",
-  "Real estate and architecture",
-  "Chess and pattern recognition",
-  "Running, golf, and the gym",
+  "Economics & Game Theory",
+  "Real Estate and architecture",
+  "Chess",
+  "Exploring AI and agents",
   "Reading",
 ];
+
+export type Media = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+};
 
 export type Entry = {
   title: string;
@@ -39,12 +48,13 @@ export type Entry = {
   place: string;
   period: string;
   points: string[];
-  tags?: string[];
+  note?: string;
+  image?: Media;
+  logo?: Media;
+  link?: { label: string; href: string };
 };
 
 // ------------------------------------------------------------- education --
-// Harvard and Duke sit at the top: most recent, and the reason the
-// Projects page exists.
 
 export const education: Entry[] = [
   {
@@ -53,8 +63,17 @@ export const education: Entry[] = [
     place: "Cambridge, USA",
     period: "Jul 2025 — Aug 2025",
     points: [
-      "Built a global pharmaceutical API supply-chain tracker used for risk and resilience analysis.",
+      "Built a data-driven pharmaceutical API supply-chain tracker using data independently scraped from FDA sources.",
+      "Developed global supplier mapping, risk indicators, resilience scoring, and interactive scenario analysis using Python, Streamlit, Pandas, and Plotly.",
     ],
+    note: "Supervisor: Prof. Michael Lingzhi Li",
+    image: {
+      src: "/media/hbs-supply-chain-tracker.jpg",
+      alt: "API Supply-Chain Tracker — risk and resilience overview dashboard",
+      width: 1672,
+      height: 941,
+      caption: "API Supply-Chain Tracker",
+    },
   },
   {
     title: "Duke University",
@@ -62,8 +81,17 @@ export const education: Entry[] = [
     place: "Durham, USA",
     period: "May 2025 — Jul 2025",
     points: [
-      "Built an interactive application for analysing political polarization trends across complex datasets.",
+      "Developed an interactive and data-driven web application for the Duke Polarization Lab to analyze political polarization trends using complex political datasets and dynamic visualizations.",
+      "Implemented front-end and back-end solutions using Streamlit, NumPy, Pandas, Plotly, and HoloViews.",
     ],
+    note: "Supervisors: Prof. Chris Bail, Sunshine Hillyguy and Alex Volfovsky",
+    image: {
+      src: "/media/duke-polarization-lab.jpg",
+      alt: "Research poster — Visualizing polarization in American public opinion",
+      width: 1448,
+      height: 1086,
+      caption: "Data+ poster, Duke Polarization Lab",
+    },
   },
   {
     title: "Bocconi University",
@@ -71,16 +99,8 @@ export const education: Entry[] = [
     place: "Milan, Italy",
     period: "2023 — 2026",
     points: [
-      "Expected GPA: 3.8.",
+      "Relevant coursework: Introduction to Blockchain 30, Venture and Development Capital 30L, International & Monetary Economics 30, Statistics 30L, Technology and Operations 30.",
       "Active member of the Bocconi Real Estate Club, BS for Hedge Funds, and the Ruy Lopez Chess Society.",
-    ],
-    tags: [
-      "Management",
-      "Macroeconomics",
-      "Financial Accounting",
-      "Statistics",
-      "Critical Thinking",
-      "Corporate Finance",
     ],
   },
   {
@@ -89,13 +109,6 @@ export const education: Entry[] = [
     place: "Como, Italy",
     period: "2023",
     points: ["Mathematics Olympiad team member, competing at national level."],
-    tags: [
-      "Law",
-      "Political Economy",
-      "Business Administration",
-      "Financial Accounting",
-      "Financial Mathematics",
-    ],
   },
 ];
 
@@ -103,24 +116,15 @@ export const education: Entry[] = [
 
 export const work: Entry[] = [
   {
-    title: "Copernicus RE Italia Srl",
+    title: "Copernicus",
     meta: "Real Estate Analyst",
     place: "Milan, Italy",
     period: "Mar 2026 — Present",
     points: [
-      "Pricing and underwriting of UTP and NPL single names and portfolios for Copernicus' own fund, for third-party investment funds, and for banks.",
-      "Build the valuation case behind each position: collateral, recovery paths, timing, and the discount that makes the trade work.",
+      "Conduct valuations and financial analysis of real estate-backed UTP and NPL positions, primarily within single-name portfolios.",
+      "Build financial models, cash-flow forecasts and recovery scenarios to support credit and investment decisions.",
     ],
-  },
-  {
-    title: "NOBE.ee",
-    meta: "Project Manager Intern",
-    place: "Tallinn, Estonia",
-    period: "Jun 2023 — Aug 2023",
-    points: [
-      "Supported the execution of two major developments: Keila Keskus and the EEDU Education & Business Campus.",
-      "Handled the organisational and strategic side of both projects, keeping delivery on schedule and clients in the loop.",
-    ],
+    note: "Attended: Executive Programme in NPL Management @ Luiss Business School",
   },
   {
     title: "MrXShop",
@@ -138,24 +142,54 @@ export const work: Entry[] = [
 
 export const projects: Entry[] = [
   {
-    title: "Global Pharma API Supply Chain Tracker",
-    meta: "Harvard Business School",
-    place: "Cambridge, USA",
+    title: "BExams",
+    meta: "Founder",
+    place: "Milan, Italy",
     period: "2025",
     points: [
-      "An application that maps the global pharmaceutical API supply chain — manufacturing sites, logistics routes, and market dependencies — in a single view.",
-      "Models disruption scenarios, a major port closing for instance, to estimate inventory depletion timelines and the availability of essential medicines across affected regions.",
+      "Founded a Bocconi exam-prep platform for practicing past exams by course and topic.",
     ],
+    link: { label: "bexams.app", href: "https://bexams.app" },
+    logo: {
+      src: "/media/bexams-logo.png",
+      alt: "B.Exams",
+      width: 544,
+      height: 146,
+    },
   },
   {
-    title: "The Polarization Lab",
-    meta: "Duke University",
-    place: "Durham, USA",
-    period: "2025",
-    points: [
-      "An interactive, data-driven web application built for Duke's Polarization Lab to analyse political polarization trends.",
-      "Turned complex political datasets into dynamic visualizations researchers could explore themselves.",
-    ],
+    title: "Hedels",
+    meta: "In progress",
+    place: "Milan, Italy",
+    period: "2026",
+    points: ["..."],
+    logo: {
+      src: "/media/hedels-logo.png",
+      alt: "Hedels",
+      width: 620,
+      height: 279,
+    },
+  },
+];
+
+// -------------------------------------------------------------- readings --
+// To add a book: drop the cover in /public/books and add an entry here.
+
+export type Book = {
+  title: string;
+  author: string;
+  cover?: string;
+  width?: number;
+  height?: number;
+};
+
+export const books: Book[] = [
+  {
+    title: "Principles for Dealing with the Changing World Order",
+    author: "Ray Dalio",
+    cover: "/books/changing-world-order.jpg",
+    width: 760,
+    height: 1154,
   },
 ];
 
@@ -172,10 +206,5 @@ export const awards = [
     title: "FIDE 1N Title — Chess",
     detail:
       "National title awarded by the Fédération Internationale des Échecs.",
-  },
-  {
-    year: "2023",
-    title: "High School Diploma — 100/100",
-    detail: "IIS Jean Monnet, Como.",
   },
 ];

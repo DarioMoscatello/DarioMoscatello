@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { NextLink, PageHead } from "@/components/PageHead";
 import { projects } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description:
-    "A global pharmaceutical supply-chain tracker built at Harvard Business School, and a polarization analysis application built at Duke.",
+  description: "BExams, a Bocconi exam-prep platform, and Hedels.",
 };
 
 export default function ProjectsPage() {
   return (
     <div className="page">
-      <PageHead
-        title="Projects"
-        subtitle="Built during the summer of 2025"
-        lede="Two applications that turn unwieldy datasets into something you can actually interrogate."
-      />
+      <PageHead title="Projects" />
 
       <section>
         {projects.map((item) => (
@@ -25,6 +21,15 @@ export default function ProjectsPage() {
               <span>{item.place}</span>
             </div>
             <div>
+              {item.logo ? (
+                <Image
+                  className="logo"
+                  src={item.logo.src}
+                  alt={item.logo.alt}
+                  width={item.logo.width}
+                  height={item.logo.height}
+                />
+              ) : null}
               <h2>{item.title}</h2>
               <p className="entry-meta">{item.meta}</p>
               <ul className="points">
@@ -32,12 +37,22 @@ export default function ProjectsPage() {
                   <li key={p.slice(0, 24)}>{p}</li>
                 ))}
               </ul>
+              {item.link ? (
+                <a
+                  className="entry-link"
+                  href={item.link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.link.label}
+                </a>
+              ) : null}
             </div>
           </article>
         ))}
       </section>
 
-      <NextLink href="/awards" label="Awards" />
+      <NextLink href="/readings" label="Readings" />
     </div>
   );
 }

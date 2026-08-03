@@ -5,17 +5,13 @@ import { awards } from "@/data/site";
 export const metadata: Metadata = {
   title: "Awards",
   description:
-    "Mathematics Olympiad national finalist, FIDE 1N chess title, and a 100/100 high school diploma.",
+    "Mathematics Olympiad national finalist and FIDE 1N chess title.",
 };
 
 export default function AwardsPage() {
   return (
     <div className="page">
-      <PageHead
-        title="Awards"
-        subtitle="Chess and mathematics"
-        lede="Mostly proof that I enjoy problems with a clock attached."
-      />
+      <PageHead title="Awards" subtitle="Chess and mathematics" />
 
       <section>
         {awards.map((a) => (
@@ -23,7 +19,7 @@ export default function AwardsPage() {
             <div className="entry-period">{a.year}</div>
             <div>
               <h2>{a.title}</h2>
-              <p className="coursework" style={{ marginTop: 10 }}>
+              <p className="entry-note" style={{ marginTop: 10 }}>
                 {a.detail}
               </p>
             </div>

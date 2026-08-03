@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { NextLink, PageHead } from "@/components/PageHead";
+import Plate from "@/components/Plate";
 import { education } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -32,12 +33,8 @@ export default function EducationPage() {
                   <li key={p.slice(0, 24)}>{p}</li>
                 ))}
               </ul>
-              {item.tags ? (
-                <p className="coursework">
-                  <b>Coursework — </b>
-                  {item.tags.join(", ")}
-                </p>
-              ) : null}
+              {item.note ? <p className="entry-note">{item.note}</p> : null}
+              {item.image ? <Plate media={item.image} /> : null}
             </div>
           </article>
         ))}

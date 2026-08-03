@@ -5,7 +5,7 @@ import { work } from "@/data/site";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Real Estate Analyst at Copernicus RE Italia, project management at NOBE.ee in Tallinn, four years co-founding MrXShop.",
+    "Real Estate Analyst at Copernicus, valuing real estate-backed UTP and NPL positions. Previously co-founder of MrXShop.",
 };
 
 export default function WorkPage() {
@@ -13,8 +13,8 @@ export default function WorkPage() {
     <div className="page">
       <PageHead
         title="Work"
-        subtitle="Milan, Tallinn"
-        lede="Underwriting distressed credit today. Building and selling since I was fifteen."
+        subtitle="Milan, Tallinn, USA"
+        lede="Exploring the unknown... Building and selling since I was fifteen."
       />
 
       <section>
@@ -32,6 +32,7 @@ export default function WorkPage() {
                   <li key={p.slice(0, 24)}>{p}</li>
                 ))}
               </ul>
+              {job.note ? <p className="entry-note">{job.note}</p> : null}
             </div>
           </article>
         ))}

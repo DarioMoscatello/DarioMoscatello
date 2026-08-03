@@ -14,6 +14,7 @@ export const profile = {
 };
 
 export const nav = [
+  { label: "About", href: "/" },
   { label: "Education", href: "/education" },
   { label: "Work", href: "/work" },
   { label: "Projects", href: "/projects" },
@@ -49,6 +50,7 @@ export type Entry = {
   period: string;
   points: string[];
   note?: string;
+  coursework?: string;
   image?: Media;
   logo?: Media;
   link?: { label: string; href: string };
@@ -109,6 +111,8 @@ export const education: Entry[] = [
     place: "Como, Italy",
     period: "2023",
     points: ["Mathematics Olympiad team member, competing at national level."],
+    coursework:
+      "Law, Political Economy, Business Administration, Financial Accounting, Financial Mathematics",
   },
 ];
 
@@ -159,10 +163,11 @@ export const projects: Entry[] = [
   },
   {
     title: "Hedels",
-    meta: "In progress",
+    meta: "Founder",
     place: "Milan, Italy",
     period: "2026",
     points: ["..."],
+    link: { label: "Hedels.com", href: "https://hedels.com" },
     logo: {
       src: "/media/hedels-logo.png",
       alt: "Hedels",
@@ -181,6 +186,8 @@ export type Book = {
   cover?: string;
   width?: number;
   height?: number;
+  // language the book was read in — drives the flag next to the title
+  language?: "it" | "en" | "ee";
 };
 
 export const books: Book[] = [
@@ -190,6 +197,31 @@ export const books: Book[] = [
     cover: "/books/changing-world-order.jpg",
     width: 760,
     height: 1154,
+    language: "en",
+  },
+  {
+    title: "The Selfish Gene",
+    author: "Richard Dawkins",
+    cover: "/books/selfish-gene.jpg",
+    width: 657,
+    height: 1000,
+    language: "it",
+  },
+  {
+    title: "Zero to One",
+    author: "Peter Thiel",
+    cover: "/books/zero-to-one.jpg",
+    width: 760,
+    height: 1193,
+    language: "en",
+  },
+  {
+    title: "Manifesteeri",
+    author: "Roxie Nafousi",
+    cover: "/books/manifesteeri.jpg",
+    width: 760,
+    height: 1140,
+    language: "ee",
   },
 ];
 

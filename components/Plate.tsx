@@ -37,9 +37,7 @@ export default function Plate({ media }: { media: Media }) {
             sizes="(max-width: 860px) 92vw, 520px"
           />
         </button>
-        {media.caption ? (
-          <figcaption>{media.caption} — click to enlarge</figcaption>
-        ) : null}
+        {media.caption ? <figcaption>{media.caption}</figcaption> : null}
       </figure>
 
       {open && (

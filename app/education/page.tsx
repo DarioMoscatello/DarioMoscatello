@@ -12,11 +12,7 @@ export const metadata: Metadata = {
 export default function EducationPage() {
   return (
     <div className="page">
-      <PageHead
-        title="Education"
-        subtitle="Cambridge, Durham, Milan, Como"
-        lede="Two American research labs, one Italian business school, and the school in Como where the maths started."
-      />
+      <PageHead title="Education" subtitle="Cambridge, Durham, Milan, Como" />
 
       <section>
         {education.map((item) => (
@@ -33,6 +29,12 @@ export default function EducationPage() {
                   <li key={p.slice(0, 24)}>{p}</li>
                 ))}
               </ul>
+              {item.coursework ? (
+                <p className="coursework">
+                  <b>Coursework — </b>
+                  {item.coursework}
+                </p>
+              ) : null}
               {item.note ? <p className="entry-note">{item.note}</p> : null}
               {item.image ? <Plate media={item.image} /> : null}
             </div>

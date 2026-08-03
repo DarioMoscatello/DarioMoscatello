@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Flag from "@/components/Flag";
 import { NextLink, PageHead } from "@/components/PageHead";
 import { books } from "@/data/site";
 
@@ -11,11 +12,7 @@ export const metadata: Metadata = {
 export default function ReadingsPage() {
   return (
     <div className="page">
-      <PageHead
-        title="Readings"
-        subtitle="The shelf"
-        lede="What I am reading, and what stayed with me afterwards."
-      />
+      <PageHead title="Readings" subtitle="The shelf" />
 
       <section className="shelf">
         {books.map((book) => (
@@ -33,7 +30,10 @@ export default function ReadingsPage() {
                 <div className="book-spine">{book.title}</div>
               )}
             </div>
-            <p className="book-title">{book.title}</p>
+            <p className="book-title">
+              {book.title}
+              {book.language ? <Flag lang={book.language} /> : null}
+            </p>
             <p className="book-author">{book.author}</p>
           </div>
         ))}

@@ -13,8 +13,9 @@ export default function WorkPage() {
     <div className="page">
       <PageHead
         title="Work"
-        subtitle="Milan, Tallinn, USA"
+        subtitle="Milan, Tallinn"
         lede="Exploring the unknown... Building and selling since I was fifteen."
+        wideLede
       />
 
       <section>

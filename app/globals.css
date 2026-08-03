@@ -214,6 +214,54 @@ h1.display {
   max-width: 40ch;
 }
 
+.lede-wide {
+  max-width: none;
+  font-size: 1.14rem;
+}
+
+/* ---------------------------------------------------------------- flag -- */
+
+.flag {
+  position: relative;
+  display: inline-block;
+  width: 19px;
+  margin-left: 9px;
+  vertical-align: 1px;
+  cursor: help;
+}
+
+.flag svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(20, 20, 15, 0.28);
+}
+
+.flag::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%) translateY(3px);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 6px 9px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.flag:hover::after,
+.flag:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .rule {
   height: 1px;
   background: var(--line);

@@ -1,33 +1,40 @@
-import type { Metadata } from "next";
-import { NextLink, PageHead } from "@/components/PageHead";
-import { awards } from "@/data/site";
+import { intro, interests, profile } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Awards",
-  description:
-    "Mathematics Olympiad national finalist and FIDE 1N chess title.",
-};
-
-export default function AwardsPage() {
+export default function AboutPage() {
   return (
     <div className="page">
-      <PageHead title="Awards" subtitle="Chess and mathematics" />
+      <div className="stagger">
+        <h1 className="display">I am</h1>
+        <p className="subtitle">
+          {profile.firstName} {profile.lastName}
+        </p>
+        <div className="rule" />
+        <div className="prose">
+          {intro.map((p) => (
+            <p key={p.slice(0, 24)}>{p}</p>
+          ))}
+        </div>
+      </div>
+
+      <div className="rule" />
 
       <section>
-        {awards.map((a) => (
-          <article className="entry" key={a.title}>
-            <div className="entry-period">{a.year}</div>
-            <div>
-              <h2>{a.title}</h2>
-              <p className="entry-note" style={{ marginTop: 10 }}>
-                {a.detail}
-              </p>
-            </div>
-          </article>
-        ))}
+        <p className="section-label">Some of my interests</p>
+        <ul className="plain-list">
+          {interests.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
 
-      <NextLink href="/" label="Back to the start" />
+      <div className="rule" />
+
+      <section>
+        <p className="section-label">Let&rsquo;s keep in touch</p>
+        <a className="mailto" href={`mailto:${profile.email}`}>
+          {profile.email}
+        </a>
+      </section>
     </div>
   );
 }

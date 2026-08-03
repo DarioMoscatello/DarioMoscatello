@@ -1,3 +1,4 @@
+import { NextLink } from "@/components/PageHead";
 import { intro, interests, profile } from "@/data/site";
 
 export default function AboutPage() {
@@ -34,6 +35,10 @@ export default function AboutPage() {
         <a className="mailto" href={`mailto:${profile.email}`}>
           {profile.email}
         </a>
+      </section>
+
+      <section>
+        <NextLink href="/education" label="Education" />
       </section>
     </div>
   );

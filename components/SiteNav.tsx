@@ -40,6 +40,9 @@ function Foot() {
         <a href={profile.linkedin} target="_blank" rel="noreferrer">
           LinkedIn
         </a>
+        <a href={profile.github} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
       </div>
       <div>
         Made in {profile.city}, {profile.country}

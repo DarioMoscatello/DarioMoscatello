@@ -11,6 +11,7 @@ export const profile = {
   email: "moscatello.dario@gmail.com",
   // TODO: paste your full LinkedIn URL here
   linkedin: "https://www.linkedin.com/in/dario-moscatello",
+  github: "https://github.com/DarioMoscaBC",
 };
 
 export const nav = [

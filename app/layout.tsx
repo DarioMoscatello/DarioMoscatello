@@ -8,7 +8,7 @@ const fullName = `${profile.firstName} ${profile.lastName}`;
 export const metadata: Metadata = {
   metadataBase: new URL("https://dariomoscatello.com"),
   title: {
-    default: `${fullName} — Real Estate Analyst`,
+    default: fullName,
     template: `%s — ${fullName}`,
   },
   description:

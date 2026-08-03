@@ -8,22 +8,28 @@ const fullName = `${profile.firstName} ${profile.lastName}`;
 export const metadata: Metadata = {
   metadataBase: new URL("https://dariomoscatello.com"),
   title: fullName,
-  description:
-    "Real Estate Analyst at Copernicus RE Italia, pricing and underwriting UTP and NPL single names and portfolios. Economics and Management at Bocconi University, Milan.",
+  description: `${profile.tagline}. Real Estate Analyst at Copernicus, studying Economics and Management at Bocconi University, Milan.`,
   keywords: [
     "Dario Moscatello",
     "NPL",
     "UTP",
     "real estate analyst",
-    "Copernicus RE Italia",
+    "Copernicus",
     "Bocconi University",
     "Milan",
   ],
   openGraph: {
-    title: `${fullName} — Real Estate Analyst`,
-    description: "Analyst. Builder. Chess player. Based in Milan.",
+    title: fullName,
+    description: `${profile.tagline}. Based in Milan.`,
+    url: "/",
+    siteName: fullName,
     type: "website",
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: fullName,
+    description: `${profile.tagline}. Based in Milan.`,
   },
 };
 

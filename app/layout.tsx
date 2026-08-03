@@ -7,10 +7,7 @@ const fullName = `${profile.firstName} ${profile.lastName}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dariomoscatello.com"),
-  title: {
-    default: fullName,
-    template: `%s — ${fullName}`,
-  },
+  title: fullName,
   description:
     "Real Estate Analyst at Copernicus RE Italia, pricing and underwriting UTP and NPL single names and portfolios. Economics and Management at Bocconi University, Milan.",
   keywords: [

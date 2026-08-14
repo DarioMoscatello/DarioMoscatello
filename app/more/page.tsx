@@ -1,19 +1,32 @@
 import type { Metadata } from "next";
 import { NextLink, PageHead } from "@/components/PageHead";
-import { awards } from "@/data/site";
+import { awards, languages } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Awards",
-  description:
-    "Mathematics Olympiad national finalist and FIDE 1N chess title.",
+  description: "Languages spoken and a FIDE chess title.",
 };
 
-export default function AwardsPage() {
+export default function MorePage() {
   return (
     <div className="page">
-      <PageHead title="Awards" subtitle="Chess and mathematics" />
+      <PageHead title="More" />
 
       <section>
+        <p className="section-label">Languages</p>
+        <ul className="plain-list">
+          {languages.map((l) => (
+            <li key={l.name}>
+              <span>{l.name}</span>
+              <span className="right">{l.level}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <div className="rule" />
+
+      <section>
+        <p className="section-label">Chess</p>
         {awards.map((a) => (
           <article className="entry" key={a.title}>
             <div className="entry-period">{a.year}</div>

@@ -4,7 +4,6 @@ import Plate from "@/components/Plate";
 import { education } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Education",
   description:
     "Student research at Harvard Business School and Duke University, BSc in Economics and Management at Bocconi, diploma at IIS Jean Monnet.",
 };

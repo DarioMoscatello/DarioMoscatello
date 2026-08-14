@@ -241,8 +241,8 @@ h1.display {
   content: attr(data-tip);
   position: absolute;
   bottom: calc(100% + 9px);
-  left: 50%;
-  transform: translateX(-50%) translateY(3px);
+  right: 0;
+  transform: translateY(3px);
   background: var(--ink);
   color: var(--paper);
   font-family: var(--mono);
@@ -259,7 +259,7 @@ h1.display {
 .flag:hover::after,
 .flag:focus-visible::after {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .rule {
@@ -557,6 +557,19 @@ h1.display {
 .plain-list li {
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.plain-list .right {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey);
+  white-space: nowrap;
 }
 
 .plain-list li:first-child {

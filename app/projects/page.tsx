@@ -4,7 +4,6 @@ import { NextLink, PageHead } from "@/components/PageHead";
 import { projects } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Projects",
   description: "BExams, a Bocconi exam-prep platform, and Hedels.",
 };
 

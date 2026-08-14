@@ -5,7 +5,6 @@ import { NextLink, PageHead } from "@/components/PageHead";
 import { books } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Readings",
   description: "The shelf — books worth the time.",
 };
 
@@ -39,7 +38,7 @@ export default function ReadingsPage() {
         ))}
       </section>
 
-      <NextLink href="/awards" label="Awards" />
+      <NextLink href="/more" label="More" />
     </div>
   );
 }

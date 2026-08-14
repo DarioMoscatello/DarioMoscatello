@@ -20,7 +20,7 @@ export const nav = [
   { label: "Work", href: "/work" },
   { label: "Projects", href: "/projects" },
   { label: "Readings", href: "/readings" },
-  { label: "Awards", href: "/awards" },
+  { label: "More", href: "/more" },
 ];
 
 export const intro = [
@@ -103,6 +103,7 @@ export const education: Entry[] = [
     period: "2023 — 2026",
     points: [
       "Relevant coursework: Introduction to Blockchain 30, Venture and Development Capital 30L, International & Monetary Economics 30, Statistics 30L, Technology and Operations 30.",
+      "Thesis: \"Smart Cities in The Data-Driven Era\", relator Prof. Gianmario Verona.",
       "Active member of the Bocconi Real Estate Club, BS for Hedge Funds, and the Ruy Lopez Chess Society.",
     ],
   },
@@ -133,12 +134,11 @@ export const work: Entry[] = [
   },
   {
     title: "MrXShop",
-    meta: "Co-Founder — Crypto & NFTs",
+    meta: "Co-Founder — Crypto & Web3",
     place: "Milan, Italy",
     period: "May 2019 — Oct 2022",
     points: [
-      "Researched the Web3 B2B market and turned the gaps into a product: custom NFT solutions built for business clients.",
-      "Grew it with a team of three to €50,000+ in revenue and 600+ clients served — all of it before I turned eighteen.",
+      "Grew it to €100,000+ in revenue and a peak of 3000+ monthly clients — all of it before I turned eighteen.",
     ],
   },
 ];
@@ -224,16 +224,115 @@ export const books: Book[] = [
     height: 1140,
     language: "ee",
   },
+  {
+    title: "Breaking the Social Media Prism",
+    author: "Chris Bail",
+    cover: "/books/breaking-social-media-prism.jpg",
+    width: 647,
+    height: 1000,
+    language: "en",
+  },
+  {
+    title: "The Black Swan",
+    author: "Nassim Nicholas Taleb",
+    cover: "/books/black-swan.jpg",
+    width: 700,
+    height: 1065,
+    language: "en",
+  },
+  {
+    title: "La lotteria dei geni",
+    author: "Kathryn Paige Harden",
+    cover: "/books/lotteria-dei-geni.jpg",
+    width: 700,
+    height: 1050,
+    language: "it",
+  },
+  {
+    title: "Atomic Habits",
+    author: "James Clear",
+    cover: "/books/atomic-habits.jpg",
+    width: 700,
+    height: 1066,
+    language: "it",
+  },
+  {
+    title: "Formae mentis",
+    author: "Howard Gardner",
+    cover: "/books/formae-mentis.jpg",
+    width: 700,
+    height: 1077,
+    language: "it",
+  },
+  {
+    title: "Il management",
+    author: "Abraham Maslow",
+    cover: "/books/il-management.jpg",
+    width: 700,
+    height: 1050,
+    language: "it",
+  },
+  {
+    title: "L'arte della guerra",
+    author: "Sun Tzu",
+    cover: "/books/arte-della-guerra.jpg",
+    width: 650,
+    height: 1000,
+    language: "it",
+  },
+  {
+    title: "Meditazioni di Marco Aurelio",
+    author: "Jonas Weifeld",
+    cover: "/books/meditazioni.jpg",
+    width: 687,
+    height: 1100,
+    language: "it",
+  },
+  {
+    title: "Gli Sforza",
+    author: "Carlo Maria Lomartire",
+    cover: "/books/gli-sforza.jpg",
+    width: 664,
+    height: 1000,
+    language: "it",
+  },
+  {
+    title: "Caterina Sforza — Leonessa di Romagna",
+    author: "Marco Viroli",
+    cover: "/books/caterina-sforza.jpg",
+    width: 700,
+    height: 993,
+    language: "it",
+  },
+  {
+    title: "Caterina de' Medici",
+    author: "Alessandra Necci",
+    cover: "/books/caterina-de-medici.jpg",
+    width: 651,
+    height: 1000,
+    language: "it",
+  },
+  {
+    title: "La casa dell'oppio",
+    author: "Su Tong",
+    cover: "/books/casa-dell-oppio.jpg",
+    width: 620,
+    height: 1000,
+    language: "it",
+  },
 ];
 
-// ---------------------------------------------------------------- awards --
+// ------------------------------------------------------------------ more --
+
+export const languages = [
+  { name: "Italian", level: "Fluent" },
+  { name: "English", level: "Fluent" },
+  { name: "Estonian", level: "Fluent" },
+  { name: "German", level: "B2" },
+  { name: "Spanish", level: "B1" },
+];
 
 export const awards = [
-  {
-    year: "2022",
-    title: "Mathematics Olympiad — Individual National Finals",
-    detail: "31st in Italy out of 45,000+ participants.",
-  },
   {
     year: "2022",
     title: "FIDE 1N Title — Chess",

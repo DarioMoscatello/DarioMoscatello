@@ -3,7 +3,6 @@ import { NextLink, PageHead } from "@/components/PageHead";
 import { work } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Work",
   description:
     "Real Estate Analyst at Copernicus, valuing real estate-backed UTP and NPL positions. Previously co-founder of MrXShop.",
 };

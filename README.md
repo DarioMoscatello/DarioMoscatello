@@ -35,7 +35,7 @@ app/
   work/             Copernicus, MrXShop
   projects/         BExams, Hedels
   readings/         the book shelf
-  awards/           maths olympiad, FIDE
+  more/             languages and the FIDE chess title
   globals.css       the whole design system
   icon.svg          favicon
   media/            project logos and screenshots (in /public)

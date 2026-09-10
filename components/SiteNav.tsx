@@ -68,10 +68,13 @@ export default function SiteNav() {
       {/* desktop rail */}
       <aside className="rail">
         <Link href="/" className="wordmark" aria-label="Home">
-          <div className="wordmark-name">
-            {profile.firstName} {profile.lastName}
+          <span className="solar-mark" aria-hidden="true" />
+          <div className="wordmark-copy">
+            <div className="wordmark-name">
+              {profile.firstName} {profile.lastName}
+            </div>
+            <div className="wordmark-sub">{profile.tagline}</div>
           </div>
-          <div className="wordmark-sub">{profile.tagline}</div>
         </Link>
         <Buttons />
         <Foot />
@@ -80,6 +83,7 @@ export default function SiteNav() {
       {/* mobile bar */}
       <header className="topbar">
         <Link href="/" className="topbar-name">
+          <span className="solar-mark" aria-hidden="true" />
           <span>{profile.firstName} {profile.lastName}</span>
         </Link>
         <button

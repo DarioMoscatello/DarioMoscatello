@@ -1,8 +1,8 @@
 # dariomoscatello.com
 
 Personal site built with Next.js 15 (App Router) and TypeScript, with no CSS framework.
-The visual system uses warm paper, restrained typography and a cursor-reactive
-particle composition.
+The visual system uses a black editorial canvas, oversized typography and an
+interactive glass object.
 
 ## Run it
 
@@ -52,9 +52,9 @@ data/
 
 ## Design notes
 
-- Warm paper canvas with a sparse, interactive particle orbit.
-- Cursor position disturbs the particle field and softly illuminates content rows.
-- Newsreader is used for display and body copy, with IBM Plex Mono for navigation.
+- Black editorial canvas with a custom half-dark, half-light sun mark.
+- A CSS 3D glass object follows the cursor and cycles through three themes on click.
+- Space Grotesk is used for display, Manrope for body copy and IBM Plex Mono for navigation.
 - Institutional lockups are compact and sit above the relevant education/work item.
 - Motion is disabled for coarse pointers and reduced under `prefers-reduced-motion`.
 

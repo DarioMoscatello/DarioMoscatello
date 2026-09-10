@@ -21,6 +21,7 @@ export default function InteractiveLayer() {
       if (!event) return;
       document.documentElement.style.setProperty("--cursor-x", `${event.clientX}px`);
       document.documentElement.style.setProperty("--cursor-y", `${event.clientY}px`);
+      document.documentElement.style.setProperty("--lens-opacity", "1");
 
       const target = event.target as Element | null;
       const surface = target?.closest<HTMLElement>("[data-interactive]") ?? null;
@@ -44,6 +45,7 @@ export default function InteractiveLayer() {
     const onLeave = () => {
       reset(active);
       active = null;
+      document.documentElement.style.setProperty("--lens-opacity", "0");
     };
 
     window.addEventListener("pointermove", onMove, { passive: true });
@@ -56,5 +58,5 @@ export default function InteractiveLayer() {
     };
   }, []);
 
-  return null;
+  return <div className="cursor-lens" aria-hidden="true" />;
 }

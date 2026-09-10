@@ -54,6 +54,8 @@ data/
 
 - Black editorial canvas with a custom half-dark, half-light sun mark.
 - A CSS 3D glass object follows the cursor and cycles through three themes on click.
+- The sun mark switches between persistent light and dark themes.
+- A soft cursor lens reveals the opposite theme and inverts the text beneath it.
 - Space Grotesk is used for display, Manrope for body copy and IBM Plex Mono for navigation.
 - Institutional lockups are compact and sit above the relevant education/work item.
 - Motion is disabled for coarse pointers and reduced under `prefers-reduced-motion`.

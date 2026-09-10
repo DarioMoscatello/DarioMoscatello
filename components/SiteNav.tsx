@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav, profile } from "@/data/site";
+import ThemeToggle from "@/components/ThemeToggle";
 
 function Buttons({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -67,25 +68,29 @@ export default function SiteNav() {
     <>
       {/* desktop rail */}
       <aside className="rail">
-        <Link href="/" className="wordmark" aria-label="Home">
-          <span className="solar-mark" aria-hidden="true" />
-          <div className="wordmark-copy">
-            <div className="wordmark-name">
-              {profile.firstName} {profile.lastName}
+        <div className="brand-cluster">
+          <ThemeToggle />
+          <Link href="/" className="wordmark" aria-label="Home">
+            <div className="wordmark-copy">
+              <div className="wordmark-name">
+                {profile.firstName} {profile.lastName}
+              </div>
+              <div className="wordmark-sub">{profile.tagline}</div>
             </div>
-            <div className="wordmark-sub">{profile.tagline}</div>
-          </div>
-        </Link>
+          </Link>
+        </div>
         <Buttons />
         <Foot />
       </aside>
 
       {/* mobile bar */}
       <header className="topbar">
-        <Link href="/" className="topbar-name">
-          <span className="solar-mark" aria-hidden="true" />
-          <span>{profile.firstName} {profile.lastName}</span>
-        </Link>
+        <div className="topbar-brand">
+          <ThemeToggle />
+          <Link href="/" className="topbar-name">
+            <span>{profile.firstName} {profile.lastName}</span>
+          </Link>
+        </div>
         <button
           type="button"
           className="menu-btn"

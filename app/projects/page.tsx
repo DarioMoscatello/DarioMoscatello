@@ -14,7 +14,7 @@ export default function ProjectsPage() {
 
       <section>
         {projects.map((item) => (
-          <article className="entry" key={item.title}>
+          <article className="entry" key={item.title} data-interactive>
             <div className="entry-period">
               {item.period}
               <span>{item.place}</span>

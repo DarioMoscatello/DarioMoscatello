@@ -22,7 +22,7 @@ export default function Plate({ media }: { media: Media }) {
 
   return (
     <>
-      <figure className="plate">
+      <figure className="plate" data-interactive>
         <button
           type="button"
           className="plate-btn"

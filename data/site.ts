@@ -44,6 +44,14 @@ export type Media = {
   caption?: string;
 };
 
+export type BrandKey =
+  | "hbs"
+  | "duke"
+  | "bocconi"
+  | "jeanmonnet"
+  | "copernicus"
+  | "mrxshop";
+
 export type Entry = {
   title: string;
   meta: string;
@@ -55,6 +63,7 @@ export type Entry = {
   image?: Media;
   logo?: Media;
   link?: { label: string; href: string };
+  brand?: BrandKey;
 };
 
 // ------------------------------------------------------------- education --
@@ -62,6 +71,7 @@ export type Entry = {
 export const education: Entry[] = [
   {
     title: "Harvard Business School",
+    brand: "hbs",
     meta: "Student Researcher",
     place: "Cambridge, USA",
     period: "Jul 2025 — Aug 2025",
@@ -80,6 +90,7 @@ export const education: Entry[] = [
   },
   {
     title: "Duke University",
+    brand: "duke",
     meta: "Student Researcher — The Polarization Lab",
     place: "Durham, USA",
     period: "May 2025 — Jul 2025",
@@ -98,6 +109,7 @@ export const education: Entry[] = [
   },
   {
     title: "Bocconi University",
+    brand: "bocconi",
     meta: "BSc in Economics and Management",
     place: "Milan, Italy",
     period: "2023 — 2026",
@@ -109,6 +121,7 @@ export const education: Entry[] = [
   },
   {
     title: "IIS Jean Monnet",
+    brand: "jeanmonnet",
     meta: "Diploma in Administration, Finance and Marketing — 100/100",
     place: "Como, Italy",
     period: "2023",
@@ -123,6 +136,7 @@ export const education: Entry[] = [
 export const work: Entry[] = [
   {
     title: "Copernicus",
+    brand: "copernicus",
     meta: "Real Estate Analyst",
     place: "Milan, Italy",
     period: "Mar 2026 — Present",
@@ -134,6 +148,7 @@ export const work: Entry[] = [
   },
   {
     title: "MrXShop",
+    brand: "mrxshop",
     meta: "Co-Founder — Crypto & Web3",
     place: "Milan, Italy",
     period: "May 2019 — Oct 2022",

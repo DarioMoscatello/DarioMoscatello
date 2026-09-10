@@ -11,7 +11,7 @@ export default function MorePage() {
     <div className="page">
       <PageHead title="More" />
 
-      <section>
+      <section className="glass-panel compact-panel" data-interactive>
         <p className="section-label">Languages</p>
         <ul className="plain-list">
           {languages.map((l) => (
@@ -25,10 +25,10 @@ export default function MorePage() {
 
       <div className="rule" />
 
-      <section>
+      <section className="glass-panel compact-panel" data-interactive>
         <p className="section-label">Chess</p>
         {awards.map((a) => (
-          <article className="entry" key={a.title}>
+          <article className="entry embedded-entry" key={a.title}>
             <div className="entry-period">{a.year}</div>
             <div>
               <h2>{a.title}</h2>

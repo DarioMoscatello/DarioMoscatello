@@ -10,7 +10,7 @@ function Buttons({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <nav className="panel" aria-label="Main">
-      {nav.map((item) => {
+      {nav.map((item, index) => {
         const active = pathname === item.href;
         return (
           <Link
@@ -21,10 +21,11 @@ function Buttons({ onNavigate }: { onNavigate?: () => void }) {
             aria-current={active ? "page" : undefined}
             onClick={onNavigate}
           >
-            <span className="mark" aria-hidden="true">
-              —
+            <span className="nav-index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
             </span>
             <span>{item.label}</span>
+            <span className="nav-arrow" aria-hidden="true">↗</span>
           </Link>
         );
       })}
@@ -45,7 +46,7 @@ function Foot() {
         </a>
       </div>
       <div>
-        Made in {profile.city}, {profile.country}
+        {profile.city}, {profile.country} · 2026
       </div>
     </div>
   );
@@ -71,6 +72,7 @@ export default function SiteNav() {
       {/* desktop rail */}
       <aside className="rail">
         <Link href="/" className="wordmark" aria-label="Home">
+          <span className="wordmark-symbol" aria-hidden="true">DM</span>
           <div className="wordmark-name">
             {profile.firstName} {profile.lastName}
           </div>
@@ -83,7 +85,8 @@ export default function SiteNav() {
       {/* mobile bar */}
       <header className="topbar">
         <Link href="/" className="topbar-name">
-          {profile.firstName} {profile.lastName}
+          <span className="wordmark-symbol" aria-hidden="true">DM</span>
+          <span>{profile.firstName} {profile.lastName}</span>
         </Link>
         <button
           type="button"

@@ -15,7 +15,7 @@ export default function ReadingsPage() {
 
       <section className="shelf">
         {books.map((book) => (
-          <div key={book.title}>
+          <article className="book-card" key={book.title} data-interactive>
             <div className="book-cover">
               {book.cover ? (
                 <Image
@@ -34,7 +34,7 @@ export default function ReadingsPage() {
               {book.language ? <Flag lang={book.language} /> : null}
             </p>
             <p className="book-author">{book.author}</p>
-          </div>
+          </article>
         ))}
       </section>
 

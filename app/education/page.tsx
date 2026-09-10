@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NextLink, PageHead } from "@/components/PageHead";
 import Plate from "@/components/Plate";
+import BrandMark from "@/components/BrandMark";
 import { education } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -15,12 +16,13 @@ export default function EducationPage() {
 
       <section>
         {education.map((item) => (
-          <article className="entry" key={item.title}>
+          <article className="entry" key={item.title} data-interactive>
             <div className="entry-period">
               {item.period}
               <span>{item.place}</span>
             </div>
             <div>
+              {item.brand ? <BrandMark brand={item.brand} /> : null}
               <h2>{item.title}</h2>
               <p className="entry-meta">{item.meta}</p>
               <ul className="points">

@@ -1,6 +1,8 @@
 # dariomoscatello.com
 
 Personal site — Next.js 15 (App Router) + TypeScript, no CSS framework.
+The visual system is a dark, violet, faceted environment with cursor-reactive
+lighting and subtle 3D surfaces.
 
 ## Run it
 
@@ -50,18 +52,11 @@ data/
 
 ## Design notes
 
-- Two inks and nothing else: paper `#F7F4EC`, ink `#14140F`, grey `#8A867C` for
-  secondary text, `#E2DCCE` for hairlines. No accent colour anywhere.
-- The left column shares the page's background and is separated by a single
-  hairline that runs the full height, so it reads as part of the sheet rather than
-  a panel sitting on top of it.
-- The current page is marked with an em dash in the menu — no numbering.
-- Type: **Newsreader** for display and body, **IBM Plex Mono** for the menu, dates
-  and labels. Loaded from Google Fonts in `app/layout.tsx`.
-- A faint SVG grain sits on the background, which is what keeps the cream from
-  looking like flat #FFF-adjacent beige.
-- Motion: one page-load stagger and a hairline that draws itself. Disabled entirely
-  under `prefers-reduced-motion`.
+- Near-black canvas with violet light, animated faceted geometry and fine grid/noise.
+- Cursor position drives the ambient light and local illumination/tilt on cards.
+- Space Grotesk is used for display, Manrope for body copy and IBM Plex Mono for UI labels.
+- Institutional lockups are compact and sit above the relevant education/work item.
+- Motion is disabled for coarse pointers and reduced under `prefers-reduced-motion`.
 
 ## Adding a book
 

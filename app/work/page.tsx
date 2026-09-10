@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NextLink, PageHead } from "@/components/PageHead";
 import { work } from "@/data/site";
+import BrandMark from "@/components/BrandMark";
 
 export const metadata: Metadata = {
   description:
@@ -19,12 +20,13 @@ export default function WorkPage() {
 
       <section>
         {work.map((job) => (
-          <article className="entry" key={job.title}>
+          <article className="entry" key={job.title} data-interactive>
             <div className="entry-period">
               {job.period}
               <span>{job.place}</span>
             </div>
             <div>
+              {job.brand ? <BrandMark brand={job.brand} /> : null}
               <h2>{job.title}</h2>
               <p className="entry-meta">{job.meta}</p>
               <ul className="points">

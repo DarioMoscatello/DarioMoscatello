@@ -32,7 +32,7 @@ export default function EducationPage() {
               </ul>
               {item.coursework ? (
                 <p className="coursework">
-                  <b>Coursework — </b>
+                  <b>Coursework: </b>
                   {item.coursework}
                 </p>
               ) : null}

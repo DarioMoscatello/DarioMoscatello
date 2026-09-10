@@ -40,7 +40,7 @@ export default function MorePage() {
         ))}
       </section>
 
-      <NextLink href="/" label="Back to the start" />
+      <NextLink href="/" label="About" />
     </div>
   );
 }

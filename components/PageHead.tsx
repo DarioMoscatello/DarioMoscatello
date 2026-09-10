@@ -13,7 +13,6 @@ export function PageHead({
 }) {
   return (
     <header className="page-head stagger">
-      <p className="eyebrow">Selected chapter / {title}</p>
       <h1 className="display">{title}</h1>
       {subtitle ? <p className="subtitle">{subtitle}</p> : null}
       {lede ? (
@@ -27,8 +26,8 @@ export function PageHead({
 export function NextLink({ href, label }: { href: string; label: string }) {
   return (
     <Link href={href} className="next-link">
-      <span>Continue to {label}</span>
-      <span className="next-orb" aria-hidden="true">↗</span>
+      <span>Next: {label}</span>
+      <span aria-hidden="true">→</span>
     </Link>
   );
 }

@@ -10,7 +10,7 @@ function Buttons({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <nav className="panel" aria-label="Main">
-      {nav.map((item, index) => {
+      {nav.map((item) => {
         const active = pathname === item.href;
         return (
           <Link
@@ -21,11 +21,7 @@ function Buttons({ onNavigate }: { onNavigate?: () => void }) {
             aria-current={active ? "page" : undefined}
             onClick={onNavigate}
           >
-            <span className="nav-index" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
             <span>{item.label}</span>
-            <span className="nav-arrow" aria-hidden="true">↗</span>
           </Link>
         );
       })}
@@ -72,7 +68,6 @@ export default function SiteNav() {
       {/* desktop rail */}
       <aside className="rail">
         <Link href="/" className="wordmark" aria-label="Home">
-          <span className="wordmark-symbol" aria-hidden="true">DM</span>
           <div className="wordmark-name">
             {profile.firstName} {profile.lastName}
           </div>
@@ -85,7 +80,6 @@ export default function SiteNav() {
       {/* mobile bar */}
       <header className="topbar">
         <Link href="/" className="topbar-name">
-          <span className="wordmark-symbol" aria-hidden="true">DM</span>
           <span>{profile.firstName} {profile.lastName}</span>
         </Link>
         <button

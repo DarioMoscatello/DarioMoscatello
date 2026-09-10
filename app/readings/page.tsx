@@ -5,7 +5,7 @@ import { NextLink, PageHead } from "@/components/PageHead";
 import { books } from "@/data/site";
 
 export const metadata: Metadata = {
-  description: "The shelf — books worth the time.",
+  description: "The shelf. Books worth the time.",
 };
 
 export default function ReadingsPage() {
@@ -20,7 +20,7 @@ export default function ReadingsPage() {
               {book.cover ? (
                 <Image
                   src={book.cover}
-                  alt={`${book.title} — ${book.author}`}
+                  alt={`${book.title} by ${book.author}`}
                   width={book.width ?? 760}
                   height={book.height ?? 1140}
                   sizes="(max-width: 860px) 33vw, 160px"

@@ -1,8 +1,8 @@
 # dariomoscatello.com
 
-Personal site — Next.js 15 (App Router) + TypeScript, no CSS framework.
-The visual system is a dark, violet, faceted environment with cursor-reactive
-lighting and subtle 3D surfaces.
+Personal site built with Next.js 15 (App Router) and TypeScript, with no CSS framework.
+The visual system uses warm paper, restrained typography and a cursor-reactive
+particle composition.
 
 ## Run it
 
@@ -14,25 +14,25 @@ npm run dev      # http://localhost:3000
 ## Deploy it
 
 Push the folder to a GitHub repo, then import it on [vercel.com/new](https://vercel.com/new).
-No environment variables, no build settings to change — Vercel detects Next.js on its own.
+No environment variables or build settings need changing. Vercel detects Next.js on its own.
 
 ## Edit the content
 
-**Everything you'll want to change lives in `data/site.ts`** — bio, education, work,
+**Everything you'll want to change lives in `data/site.ts`**: bio, education, work,
 projects, awards, links. The pages just read from it, so you never have to touch JSX
 to update the CV.
 
 Two things to fix before going live:
 
-1. `profile.linkedin` in `data/site.ts` — paste your real LinkedIn URL.
-2. `metadataBase` in `app/layout.tsx` — set your real domain.
+1. In `data/site.ts`, paste your real LinkedIn URL into `profile.linkedin`.
+2. In `app/layout.tsx`, set your real domain in `metadataBase`.
 
 ## Structure
 
 ```
 app/
   layout.tsx        shell, fonts, metadata
-  page.tsx          "I am" — about, interests, email
+  page.tsx          "I am": about, interests, email
   education/        Harvard, Duke, Bocconi, Jean Monnet
   work/             Copernicus, MrXShop
   projects/         BExams, Hedels
@@ -52,9 +52,9 @@ data/
 
 ## Design notes
 
-- Near-black canvas with violet light, animated faceted geometry and fine grid/noise.
-- Cursor position drives the ambient light and local illumination/tilt on cards.
-- Space Grotesk is used for display, Manrope for body copy and IBM Plex Mono for UI labels.
+- Warm paper canvas with a sparse, interactive particle orbit.
+- Cursor position disturbs the particle field and softly illuminates content rows.
+- Newsreader is used for display and body copy, with IBM Plex Mono for navigation.
 - Institutional lockups are compact and sit above the relevant education/work item.
 - Motion is disabled for coarse pointers and reduced under `prefers-reduced-motion`.
 
@@ -64,7 +64,7 @@ data/
 2. Add an entry to `books` in `data/site.ts` with the title, author, cover path
    and the cover's real pixel dimensions.
 
-An entry without a `cover` still works — it renders as a typographic spine, so you
+An entry without a `cover` still works. It renders as a typographic spine, so you
 can list a book before you find a good image of it.
 
 ## Adding a page

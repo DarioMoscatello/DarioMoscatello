@@ -1,0 +1,8 @@
+This build is intentionally a single-page portfolio.
+
+The legacy routes /education, /work, /projects, /readings and /more are included
+only as compatibility redirects so that copying these files over an older repo
+cannot leave stale TypeScript pages that break a Vercel build.
+
+BrandMark.tsx and BrandKey are also kept as compatibility shims for the same
+reason. The active interface is app/page.tsx + components/PortfolioExperience.tsx.

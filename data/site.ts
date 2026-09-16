@@ -36,6 +36,12 @@ export const interests = [
   "Reading",
 ];
 
+// Compatibility type for older portfolio components that may still exist in a
+// repository after files are copied over an earlier version. Keeping this as
+// `string` makes legacy BrandMark components compile without constraining the
+// new single-page experience.
+export type BrandKey = string;
+
 export type Media = {
   src: string;
   alt: string;

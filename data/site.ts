@@ -44,14 +44,6 @@ export type Media = {
   caption?: string;
 };
 
-export type BrandKey =
-  | "hbs"
-  | "duke"
-  | "bocconi"
-  | "jeanmonnet"
-  | "copernicus"
-  | "mrxshop";
-
 export type Entry = {
   title: string;
   meta: string;
@@ -63,7 +55,6 @@ export type Entry = {
   image?: Media;
   logo?: Media;
   link?: { label: string; href: string };
-  brand?: BrandKey;
 };
 
 // ------------------------------------------------------------- education --
@@ -71,10 +62,9 @@ export type Entry = {
 export const education: Entry[] = [
   {
     title: "Harvard Business School",
-    brand: "hbs",
     meta: "Student Researcher",
     place: "Cambridge, USA",
-    period: "Jul 2025 to Aug 2025",
+    period: "Jul 2025 — Aug 2025",
     points: [
       "Built a data-driven pharmaceutical API supply-chain tracker using data independently scraped from FDA sources.",
       "Developed global supplier mapping, risk indicators, resilience scoring, and interactive scenario analysis using Python, Streamlit, Pandas, and Plotly.",
@@ -82,7 +72,7 @@ export const education: Entry[] = [
     note: "Supervisor: Prof. Michael Lingzhi Li",
     image: {
       src: "/media/hbs-supply-chain-tracker.jpg",
-      alt: "API Supply-Chain Tracker, risk and resilience overview dashboard",
+      alt: "API Supply-Chain Tracker — risk and resilience overview dashboard",
       width: 1672,
       height: 941,
       caption: "API Supply-Chain Tracker",
@@ -90,10 +80,9 @@ export const education: Entry[] = [
   },
   {
     title: "Duke University",
-    brand: "duke",
-    meta: "Student Researcher, The Polarization Lab",
+    meta: "Student Researcher — The Polarization Lab",
     place: "Durham, USA",
-    period: "May 2025 to Jul 2025",
+    period: "May 2025 — Jul 2025",
     points: [
       "Developed an interactive and data-driven web application for the Duke Polarization Lab to analyze political polarization trends using complex political datasets and dynamic visualizations.",
       "Implemented front-end and back-end solutions using Streamlit, NumPy, Pandas, Plotly, and HoloViews.",
@@ -101,7 +90,7 @@ export const education: Entry[] = [
     note: "Supervisors: Prof. Chris Bail, Sunshine Hillyguy and Alex Volfovsky",
     image: {
       src: "/media/duke-polarization-lab.jpg",
-      alt: "Research poster: Visualizing polarization in American public opinion",
+      alt: "Research poster — Visualizing polarization in American public opinion",
       width: 1448,
       height: 1086,
       caption: "Data+ poster, Duke Polarization Lab",
@@ -109,10 +98,9 @@ export const education: Entry[] = [
   },
   {
     title: "Bocconi University",
-    brand: "bocconi",
     meta: "BSc in Economics and Management",
     place: "Milan, Italy",
-    period: "2023 to 2026",
+    period: "2023 — 2026",
     points: [
       "Relevant coursework: Introduction to Blockchain 30, Venture and Development Capital 30L, International & Monetary Economics 30, Statistics 30L, Technology and Operations 30.",
       "Thesis: \"Smart Cities in The Data-Driven Era\", relator Prof. Gianmario Verona.",
@@ -121,8 +109,7 @@ export const education: Entry[] = [
   },
   {
     title: "IIS Jean Monnet",
-    brand: "jeanmonnet",
-    meta: "Diploma in Administration, Finance and Marketing, 100/100",
+    meta: "Diploma in Administration, Finance and Marketing — 100/100",
     place: "Como, Italy",
     period: "2023",
     points: ["Mathematics Olympiad team member, competing at national level."],
@@ -136,10 +123,9 @@ export const education: Entry[] = [
 export const work: Entry[] = [
   {
     title: "Copernicus",
-    brand: "copernicus",
     meta: "Real Estate Analyst",
     place: "Milan, Italy",
-    period: "Mar 2026 to Present",
+    period: "Mar 2026 — Present",
     points: [
       "Conduct valuations and financial analysis of real estate-backed UTP and NPL positions, primarily within single-name portfolios.",
       "Build financial models, cash-flow forecasts and recovery scenarios to support credit and investment decisions.",
@@ -148,12 +134,11 @@ export const work: Entry[] = [
   },
   {
     title: "MrXShop",
-    brand: "mrxshop",
-    meta: "Co-Founder, Crypto & Web3",
+    meta: "Co-Founder — Crypto & Web3",
     place: "Milan, Italy",
-    period: "May 2019 to Oct 2022",
+    period: "May 2019 — Oct 2022",
     points: [
-      "Grew it to €100,000+ in revenue and a peak of 3000+ monthly clients, all before I turned eighteen.",
+      "Grew it to €100,000+ in revenue and a peak of 3000+ monthly clients — all of it before I turned eighteen.",
     ],
   },
 ];
@@ -202,7 +187,7 @@ export type Book = {
   cover?: string;
   width?: number;
   height?: number;
-  // The language the book was read in drives the flag next to the title.
+  // language the book was read in — drives the flag next to the title
   language?: "it" | "en" | "ee";
 };
 
@@ -312,7 +297,7 @@ export const books: Book[] = [
     language: "it",
   },
   {
-    title: "Caterina Sforza: Leonessa di Romagna",
+    title: "Caterina Sforza — Leonessa di Romagna",
     author: "Marco Viroli",
     cover: "/books/caterina-sforza.jpg",
     width: 700,
@@ -350,7 +335,7 @@ export const languages = [
 export const awards = [
   {
     year: "2022",
-    title: "FIDE 1N Title, Chess",
+    title: "FIDE 1N Title — Chess",
     detail:
       "National title awarded by the Fédération Internationale des Échecs.",
   },

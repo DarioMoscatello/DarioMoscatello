@@ -1,15 +1,11 @@
-import { NextLink } from "@/components/PageHead";
-import { PageHead } from "@/components/PageHead";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="page">
-      <PageHead
-        title="Not found"
-        subtitle="Nothing at this address"
-        lede="The page you asked for does not exist. The menu on the left still works."
-      />
-      <NextLink href="/" label="Back to the start" />
-    </div>
+    <main className="not-found">
+      <div className="not-found-code">404<span className="terminal-caret" /></div>
+      <p>Nothing at this address.</p>
+      <Link href="/">RETURN_HOME</Link>
+    </main>
   );
 }

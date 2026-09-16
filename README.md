@@ -1,6 +1,6 @@
-# Dario Moscatello — interactive portfolio
+# Dario Moscatello — Interactive Portfolio
 
-A single-screen Next.js 15 portfolio rebuilt around a glass START / ESC key, an orbital navigation and a code-editor style content panel.
+Single-screen interactive portfolio built with Next.js.
 
 ## Run locally
 
@@ -9,27 +9,14 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+## Production check
 
-## Interaction
+```bash
+npm run build
+```
 
-- Home: click the glass **START** key, click **CLICK TO ENTER**, or press any keyboard key.
-- Inside: use the five orbiting section points for Education, Work, Projects, Readings and More.
-- **ABOUT** stays available on the right edge of the orbit and in the editor tab.
-- Click the glass **ESC** key itself to return to the initial screen. Keyboard Escape intentionally does not close the portfolio.
-- The layout has a dedicated mobile arrangement for narrow screens.
+## Important when replacing an older version
 
-## Content
+Replace the old project contents instead of merging folders. The current interface is intentionally a single interactive experience under `app/page.tsx`; old route files such as `app/education/page.tsx`, `app/work/page.tsx`, `app/projects/page.tsx`, `app/readings/page.tsx`, and `app/more/page.tsx` are no longer part of the frontend.
 
-All personal information still lives in `data/site.ts`. The new interface reads from that file and does not use the previous frontend styling.
-
-Main UI files:
-
-- `components/PortfolioExperience.tsx`
-- `app/globals.css`
-- `app/page.tsx`
-- `app/layout.tsx`
-
-## Deploy
-
-The project is compatible with Vercel's standard Next.js deployment. No custom server or environment variables are required.
+`Entry.brand` remains optional in `data/site.ts` only for backwards compatibility, so a stale earlier component referencing `item.brand` will not fail TypeScript compilation while the old files are being removed.

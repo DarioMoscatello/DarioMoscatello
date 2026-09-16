@@ -50,6 +50,9 @@ export type Entry = {
   place: string;
   period: string;
   points: string[];
+  // Kept optional for backwards compatibility with earlier page components
+  // that rendered an institution/company brand mark.
+  brand?: string;
   note?: string;
   coursework?: string;
   image?: Media;

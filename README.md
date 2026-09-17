@@ -81,25 +81,48 @@ Links work per card too: `…/#education/harvard` opens that card directly.
 
 ## Book cards
 
-The 15 books that had no artwork use generated cards: white card, small flag of
-the language in the top-right corner (same size and position as the flag on the
-Zero to One card), title and author drawn as outlines of the site font, so the
-SVG carries no font file. To add or change one, edit the `BOOKS` list in
-`tools/make_book_cards.py` and run it from the project root:
+Every book card is built from its cover photo: 700 x 1000, the cover full bleed
+inside the rounded card shape, with the flag of the language in the top-right
+corner at the same size and position as the flag on the Zero to One card. The
+source photos sit in `Readings/_covers` and are never loaded by the site. To add
+a book, drop its cover in that folder, add a line to `BOOKS` in
+`tools/make_book_cards.py`, run it, then add the book to `content.js`:
 
 ```
-pip install fonttools brotli
+pip install pillow
 python3 tools/make_book_cards.py
 ```
 
-Replacing a generated card with real artwork later only means pointing that
-book's `image` in `content.js` at the new file.
+## Weight of the cards
+
+The card artwork arrived as PNGs of two to three megabytes each, which is why
+cards sometimes appeared a moment late. `tools/slim_cards.py` rewrites the
+images embedded in the card SVGs as WebP at 840 pixels wide, which is all the
+resolution a card that is never wider than 280 pixels can show. That took the
+set from 22 MB to under 2 MB with no visible difference. Run it after adding any
+new card with a photo in it:
+
+```
+python3 tools/slim_cards.py            # report what it would save
+python3 tools/slim_cards.py --write    # rewrite the files
+```
+
+The site also preloads the artwork of a section before dealing it, and fetches
+the other sections in the background once the first screen is up, so a card is
+never dealt as an empty rectangle.
 
 ## Notes
 
-- The dial rim, its marks and the line under the arrow all use one colour token,
-  `--dial` in `assets/css/main.css`.
+- The line under the arrow takes the dominant colour of the card it points at,
+  worked out from the artwork itself in `assets/js/card-image.js`: the border of
+  the card when it has one, otherwise the strongest colour inside it. Cards that
+  are only black and white fall back to `--dial` in `assets/css/main.css`.
+- The dial is deliberately plain: a flat disc, two dashed hairline circles, the
+  turning PORTFOLIO ring, the fixed ME marker and the draw button. No gradients,
+  no shadow, no rim.
 - The About head card is deliberately left white, waiting for artwork.
+- The Rockefeller cover is 334 x 500, still under the 700 or so a card can show,
+  so it stays a touch soft. Every other cover is fine.
 - `data/site.ts` in the repo is a leftover of the old Next.js version and can be
   deleted.
 - `Projects/BExams_card_site_ready.svg` (2.2 MB) and

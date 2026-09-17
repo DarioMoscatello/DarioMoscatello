@@ -1,144 +1,135 @@
-"""Generates one 700x1000 card per book: white card, small flag top-right,
-title and author drawn as outlines of the site font (so the SVG needs no font)."""
+"""Builds one 700x1000 card per book: the cover photo full bleed inside the
+rounded card shape, with a small flag in the top-right corner, the same size
+and position as the flag on the Zero to One card.
 
+    pip install pillow
+    python3 tools/make_book_cards.py
+
+Source covers live in Readings/_covers and are never loaded by the site.
+"""
+
+import base64
+import io
 import os
-from fontTools.ttLib import TTFont
-from fontTools.pens.svgPathPen import SVGPathPen
-from fontTools.pens.transformPen import TransformPen
-from fontTools.misc.transform import Transform
 
-FONTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets/fonts')
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'Readings')
-W, H, RX = 700, 1000, 46
-INK = '#101720'
-GREY = '#8A8A85'
+from PIL import Image
 
-title_font = TTFont(f'{FONTS}/geist-sans-latin-500-normal.woff2')
-body_font = TTFont(f'{FONTS}/geist-sans-latin-400-normal.woff2')
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+COVERS = os.path.join(ROOT, 'Readings/_covers')
+OUT = os.path.join(ROOT, 'Readings')
 
+W, H, RX = 700, 1000, 42
+MAX_WIDTH = 840
+QUALITY = 82
 
-def shape(font, text, size):
-    """Returns (svg path data, advance width) for text at the given size."""
-    upem = font['head'].unitsPerEm
-    cmap = font.getBestCmap()
-    glyphs = font.getGlyphSet()
-    scale = size / upem
-    pen_out = SVGPathPen(glyphs)
-    x = 0.0
-    for ch in text:
-        name = cmap.get(ord(ch))
-        if name is None:
-            name = cmap.get(ord('?'))
-        glyph = glyphs[name]
-        t = Transform(scale, 0, 0, -scale, x, 0)
-        glyph.draw(TransformPen(pen_out, t))
-        x += glyph.width * scale
-    return pen_out.getCommands(), x
+# Flag geometry: Zero to One is 637 wide, with a 56 x 34 flag inset by 24.
+SCALE = W / 637
+FW = round(56 * SCALE, 1)
+FH = round(34 * SCALE, 1)
+INSET = round(24 * SCALE, 1)
 
-
-def width_of(font, text, size):
-    return shape(font, text, size)[1]
-
-
-def wrap(font, text, size, max_width):
-    words, lines, line = text.split(), [], ''
-    for word in words:
-        trial = f'{line} {word}'.strip()
-        if width_of(font, trial, size) <= max_width or not line:
-            line = trial
-        else:
-            lines.append(line)
-            line = word
-    if line:
-        lines.append(line)
-    return lines
+FLAGS = {
+    'it': '''      <rect width="{w}" height="{h}" fill="#008C45"/>
+      <rect x="{third}" width="{third}" height="{h}" fill="#F4F5F0"/>
+      <rect x="{twothirds}" width="{third}" height="{h}" fill="#CD212A"/>''',
+    'uk': '''      <rect width="{w}" height="{h}" fill="#012169"/>
+      <path d="M0 0 L{a} 0 L{w} {hb} L{w} {h} L{wa} {h} L0 {b} Z" fill="#FFFFFF"/>
+      <path d="M{w} 0 L{wa} 0 L0 {hb} L0 {h} L{a} {h} L{w} {b} Z" fill="#FFFFFF"/>
+      <rect x="{cx}" width="{cw}" height="{h}" fill="#FFFFFF"/>
+      <rect y="{cy}" width="{w}" height="{ch}" fill="#FFFFFF"/>
+      <rect x="{rx2}" width="{rw}" height="{h}" fill="#C8102E"/>
+      <rect y="{ry2}" width="{w}" height="{rh}" fill="#C8102E"/>''',
+    'ee': '''      <rect width="{w}" height="{third_h}" fill="#0072CE"/>
+      <rect y="{third_h}" width="{w}" height="{third_h}" fill="#0F0F0F"/>
+      <rect y="{twothirds_h}" width="{w}" height="{third_h}" fill="#FFFFFF"/>''',
+}
 
 
 def flag(kind):
-    """Small flag, 56 x 34, drawn at the origin."""
-    if kind == 'uk':
-        return '''    <rect width="56" height="34" fill="#012169"/>
-    <path d="M0 0 L6 0 L56 28 L56 34 L50 34 L0 6 Z" fill="#FFFFFF"/>
-    <path d="M56 0 L50 0 L0 28 L0 34 L6 34 L56 6 Z" fill="#FFFFFF"/>
-    <path d="M0 0 L3.2 0 L56 30 L56 34 L52.8 34 L0 4 Z" fill="#C8102E"/>
-    <path d="M56 0 L52.8 0 L0 30 L0 34 L3.2 34 L56 4 Z" fill="#C8102E"/>
-    <rect x="22" width="12" height="34" fill="#FFFFFF"/>
-    <rect y="11" width="56" height="12" fill="#FFFFFF"/>
-    <rect x="24.5" width="7" height="34" fill="#C8102E"/>
-    <rect y="13.5" width="56" height="7" fill="#C8102E"/>'''
-    if kind == 'it':
-        return '''    <rect width="18.67" height="34" fill="#008C45"/>
-    <rect x="18.67" width="18.66" height="34" fill="#F4F5F0"/>
-    <rect x="37.33" width="18.67" height="34" fill="#CD212A"/>'''
-    if kind == 'ee':
-        return '''    <rect width="56" height="11.34" fill="#0072CE"/>
-    <rect y="11.34" width="56" height="11.33" fill="#0F0F0F"/>
-    <rect y="22.67" width="56" height="11.33" fill="#FFFFFF"/>'''
-    raise ValueError(kind)
+    values = {
+        'w': FW,
+        'h': FH,
+        'third': round(FW / 3, 2),
+        'twothirds': round(FW * 2 / 3, 2),
+        'third_h': round(FH / 3, 2),
+        'twothirds_h': round(FH * 2 / 3, 2),
+        'a': round(FW * 0.107, 2),
+        'wa': round(FW * 0.893, 2),
+        'b': round(FH * 0.176, 2),
+        'hb': round(FH * 0.824, 2),
+        'cx': round(FW * 0.393, 2),
+        'cw': round(FW * 0.214, 2),
+        'cy': round(FH * 0.324, 2),
+        'ch': round(FH * 0.353, 2),
+        'rx2': round(FW * 0.437, 2),
+        'rw': round(FW * 0.125, 2),
+        'ry2': round(FH * 0.397, 2),
+        'rh': round(FH * 0.206, 2),
+    }
+    return FLAGS[kind].format(**values)
 
 
-def card(title, author, lang, filename):
-    title_size = 68
-    lines = wrap(title_font, title, title_size, 520)
-    while len(lines) > 3 and title_size > 44:
-        title_size -= 6
-        lines = wrap(title_font, title, title_size, 520)
+def cover_data(name):
+    image = Image.open(os.path.join(COVERS, name)).convert('RGB')
+    if image.width > MAX_WIDTH:
+        ratio = MAX_WIDTH / image.width
+        image = image.resize((MAX_WIDTH, round(image.height * ratio)), Image.LANCZOS)
+    buffer = io.BytesIO()
+    image.save(buffer, 'WEBP', quality=QUALITY, method=6)
+    return base64.b64encode(buffer.getvalue()).decode(), image.size
 
-    line_height = title_size * 1.16
-    author_size = 36
-    gap = 92
-    block = line_height * (len(lines) - 1) + title_size * 0.74 + gap + author_size * 0.74
-    top = 510 - block / 2 + title_size * 0.74  # first baseline
 
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
-        f'  <rect width="{W}" height="{H}" rx="{RX}" ry="{RX}" fill="#FFFFFF"/>',
-        f'  <g transform="translate({W - 56 - 26} 26)">',
-        f'    <clipPath id="flagClip"><rect width="56" height="34" rx="3" ry="3"/></clipPath>',
-        '    <g clip-path="url(#flagClip)">',
-        flag(lang),
-        '    </g>',
-        '    <rect width="56" height="34" rx="3" ry="3" fill="none" stroke="#D2D2CE" stroke-width="0.8"/>',
-        '  </g>',
-    ]
-
-    for i, line in enumerate(lines):
-        data, width = shape(title_font, line, title_size)
-        x = (W - width) / 2
-        y = top + i * line_height
-        parts.append(f'  <g transform="translate({x:.1f} {y:.1f})"><path d="{data}" fill="{INK}"/></g>')
-
-    data, width = shape(body_font, author, author_size)
-    y = top + (len(lines) - 1) * line_height + gap
-    parts.append(
-        f'  <g transform="translate({(W - width) / 2:.1f} {y:.1f})"><path d="{data}" fill="{GREY}"/></g>'
-    )
-
-    parts.append('</svg>')
+def card(title, cover, lang, filename):
+    data, size = cover_data(cover)
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}"
+     role="img" aria-label="{title}">
+  <defs>
+    <clipPath id="cardClip"><rect width="{W}" height="{H}" rx="{RX}" ry="{RX}"/></clipPath>
+    <clipPath id="flagClip"><rect width="{FW}" height="{FH}" rx="3.3" ry="3.3"/></clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <rect width="{W}" height="{H}" fill="#FFFFFF"/>
+    <image width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice"
+           href="data:image/webp;base64,{data}"/>
+  </g>
+  <g transform="translate({round(W - FW - INSET, 1)} {INSET})">
+    <g clip-path="url(#flagClip)">
+{flag(lang)}
+    </g>
+    <rect width="{FW}" height="{FH}" rx="3.3" ry="3.3" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+</svg>
+'''
     with open(os.path.join(OUT, filename), 'w') as fh:
-        fh.write('\n'.join(parts) + '\n')
-    return filename
+        fh.write(svg)
+    return filename, size
 
 
+# title, cover file, flag, output file
 BOOKS = [
-    ('Principles for Dealing with the Changing World Order', 'Ray Dalio', 'uk', 'Principles_card.svg'),
-    ('The Selfish Gene', 'Richard Dawkins', 'it', 'The_Selfish_Gene_card.svg'),
-    ('Manifesteeri', 'Roxie Nafousi', 'ee', 'Manifesteeri_card.svg'),
-    ('Breaking the Social Media Prism', 'Chris Bail', 'uk', 'Social_Media_Prism_card.svg'),
-    ('The Black Swan', 'Nassim Nicholas Taleb', 'uk', 'The_Black_Swan_card.svg'),
-    ('La lotteria dei geni', 'Kathryn Paige Harden', 'it', 'La_lotteria_dei_geni_card.svg'),
-    ('Atomic Habits', 'James Clear', 'it', 'Atomic_Habits_card.svg'),
-    ('Formae mentis', 'Howard Gardner', 'it', 'Formae_mentis_card.svg'),
-    ('Il management', 'Abraham Maslow', 'it', 'Il_management_card.svg'),
-    ("L'arte della guerra", 'Sun Tzu', 'it', 'Arte_della_guerra_card.svg'),
-    ('Meditazioni di Marco Aurelio', 'Jonas Weifeld', 'it', 'Meditazioni_card.svg'),
-    ('Gli Sforza', 'Carlo Maria Lomartire', 'it', 'Gli_Sforza_card.svg'),
-    ('Caterina Sforza, Leonessa di Romagna', 'Marco Viroli', 'it', 'Caterina_Sforza_card.svg'),
-    ("Caterina de' Medici", 'Alessandra Necci', 'it', 'Caterina_de_Medici_card.svg'),
-    ("La casa dell'oppio", 'Su Tong', 'it', 'La_casa_dell_oppio_card.svg'),
+    ('Principles for Dealing with the Changing World Order', '71-WJgHWC1L._AC_UF1000,1000_QL80_.jpg', 'uk', 'Principles_card.svg'),
+    ('The Selfish Gene', '61CXvkfdXlL._AC_UF1000,1000_QL80_.jpg', 'it', 'The_Selfish_Gene_card.svg'),
+    ('Breaking the Social Media Prism', '71rBoljyMpL._AC_UF1000,1000_QL80_.jpg', 'uk', 'Social_Media_Prism_card.svg'),
+    ('The Black Swan', '61NFGAAbwlL._AC_UF1000,1000_QL80_.jpg', 'uk', 'The_Black_Swan_card.svg'),
+    ('La lotteria dei geni', 'cover_la-lotteria-dei-geni.jpg', 'it', 'La_lotteria_dei_geni_card.svg'),
+    ('Atomic Habits', '719riMv0DfL._AC_UF1000,1000_QL80_.jpg', 'it', 'Atomic_Habits_card.svg'),
+    ('Formae mentis', '713x1nGHcEL._AC_UF1000,1000_QL80_.jpg', 'it', 'Formae_mentis_card.svg'),
+    ('Il management', '91WJ4cQiLVL._AC_UF1000,1000_QL80_.jpg', 'it', 'Il_management_card.svg'),
+    ("L'arte della guerra", '61SWVg400eL._AC_UF1000,1000_QL80_.jpg', 'it', 'Arte_della_guerra_card.svg'),
+    ('Meditazioni di Marco Aurelio', '9798230916840_0_0_536_0_75.jpg', 'it', 'Meditazioni_card.svg'),
+    ('Gli Sforza', '815KQKkrnNL._AC_UF1000,1000_QL80_.jpg', 'it', 'Gli_Sforza_card.svg'),
+    ('Caterina Sforza, Leonessa di Romagna', '81c1H6okIVL._AC_UF1000,1000_QL80_.jpg', 'it', 'Caterina_Sforza_card.svg'),
+    ("Caterina de' Medici", '81eJ4hagC8L._AC_UF1000,1000_QL80_.jpg', 'it', 'Caterina_de_Medici_card.svg'),
+    ("La casa dell'oppio", '81UTSvssLHL._AC_UF1000,1000_QL80_.jpg', 'it', 'La_casa_dell_oppio_card.svg'),
+    ('Intelligenza emotiva', '71UXQ-i8siL._AC_UF1000,1000_QL80_.jpg', 'it', 'Intelligenza_emotiva_card.svg'),
+    ('Il Principe', '9788807900341_0_0_536_0_75.jpg', 'it', 'Il_Principe_card.svg'),
+    ('John D. Rockefeller', '9781950010318.jpg', 'it', 'Rockefeller_card.svg'),
+    ('Valutazione immobiliare', '61rTt2F50wL._AC_UF1000,1000_QL80_.jpg', 'it', 'Valutazione_immobiliare_card.svg'),
+    ("L'inganno dei confini", '9788858053904_0_0_536_0_75.jpg', 'it', 'Inganno_dei_confini_card.svg'),
+    ('Manifesteeri', '71dtfDCdTvL._AC_UF1000,1000_QL80_.jpg', 'ee', 'Manifest_card.svg'),
 ]
 
 if __name__ == '__main__':
-    os.makedirs(OUT, exist_ok=True)
-    for title, author, lang, name in BOOKS:
-        print(card(title, author, lang, name))
+    for title, cover, lang, name in BOOKS:
+        out, size = card(title, cover, lang, name)
+        print(f'{out}  from {size[0]}x{size[1]}')

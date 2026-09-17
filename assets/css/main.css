@@ -520,14 +520,14 @@ a {
   position: absolute;
   left: 50%;
   top: calc(var(--cy) - var(--line-to, 200px));
-  width: 1.5px;
+  width: max(2.4px, calc(var(--cw) * 0.0135));
   height: calc(var(--line-to, 200px) - var(--line-from, 180px));
-  margin-left: -0.75px;
-  background: var(--dial);
+  margin-left: max(-1.2px, calc(var(--cw) * -0.00675));
+  background: var(--line-color, var(--dial));
   z-index: 3001;
   transform: scaleY(0);
   transform-origin: 50% 100%;
-  transition: transform 0.14s ease-in;
+  transition: transform 0.14s ease-in, background-color 0.3s ease;
   pointer-events: none;
 }
 
@@ -545,10 +545,7 @@ a {
   margin: calc(var(--disc) * -1) 0 0 calc(var(--disc) * -1);
   border-radius: 50%;
   z-index: 3000;
-  background: radial-gradient(circle at 50% 14%, #efefec 0%, #e8e8e4 46%, #e1e1dd 100%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.8),
-    0 calc(var(--cw) * -0.04) calc(var(--cw) * 0.22) calc(var(--cw) * -0.06) rgb(0 0 0 / 0.16);
+  background: #eeeeeb;
 }
 
 .wheel__ring {
@@ -559,33 +556,18 @@ a {
   overflow: visible;
 }
 
-.wheel__rim {
-  fill: none;
-  stroke: var(--dial);
-  stroke-width: 1.15;
-}
-
-.wheel__ticks line {
-  stroke: var(--dial);
-  stroke-width: 0.62;
-}
-
-.wheel__ticks line.is-long {
-  stroke-width: 0.95;
-}
-
 .wheel__dash {
   fill: none;
-  stroke: #a3a39e;
-  stroke-width: 0.45;
-  stroke-dasharray: 2.4 2.6;
+  stroke: #b9b9b3;
+  stroke-width: 0.5;
+  stroke-dasharray: 2.6 3.4;
 }
 
 .wheel__ring-text {
   font-family: "Geist Mono", ui-monospace, monospace;
-  font-size: 5.4px;
+  font-size: 5.6px;
   font-weight: 500;
-  fill: #a09f9a;
+  fill: #b3b3ad;
 }
 
 .wheel__tri {

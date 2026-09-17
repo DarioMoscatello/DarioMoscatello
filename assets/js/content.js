@@ -54,8 +54,8 @@ export const SECTIONS = [
         image: 'About/INTRODUCTION_card_site_ready.svg',
         title: 'Introduction',
         body: [
-          'I am studying Economics and Management at Bocconi University in Milan. Real estate has always been my greatest love, and I currently work as a RE Analyst at Copernicus.',
-          'Over the past few years, I have also developed a strong interest in technology and its potential to transform the real estate industry. My ambition is to combine finance, technology and innovation to build something meaningful and create lasting value.',
+          'I am studying Economics and Management at Bocconi University in Milan. Over the past few years, I have developed a strong interest in technology, artificial intelligence and building products with real-world impact.',
+          'I am always open to ambitious projects, new ideas and opportunities at the intersection of business and technology.',
         ],
       },
       {
@@ -65,6 +65,7 @@ export const SECTIONS = [
         list: [
           'Economics & Game Theory',
           'Real Estate and architecture',
+          'Tech',
           'Chess',
           'Exploring AI and agents',
           'Reading',
@@ -201,8 +202,8 @@ export const SECTIONS = [
         subtitle: 'Founder',
         meta: ['Milan, Italy', '2026'],
         body: [
-          'Sells real estate transaction data, built on the largest Italian dataset of its kind: more than 1,500 transactions in hotels, student housing (PBSA) and care homes (RSA).',
-          'Clients are hedge funds, valuers and companies that need comparable deals to price an asset.',
+          'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 1,500+ deals.',
+          'Clients include hedge funds, valuers and real estate companies looking for comparable deals to price assets.',
         ],
         links: [{ label: 'hedels.com', href: 'https://hedels.com' }],
       },
@@ -222,7 +223,7 @@ export const SECTIONS = [
       book('principles-changing-world-order', 'Principles for Dealing with the Changing World Order', 'Ray Dalio', 'English', 'Readings/Principles_card.svg'),
       book('selfish-gene', 'The Selfish Gene', 'Richard Dawkins', 'Italian', 'Readings/The_Selfish_Gene_card.svg'),
       book('zero-to-one', 'Zero to One', 'Peter Thiel', 'English', 'Readings/Zero_to_One_card_UK_flag_site_ready.svg'),
-      book('manifesteeri', 'Manifesteeri', 'Roxie Nafousi', 'Estonian', 'Readings/Manifesteeri_card.svg'),
+      book('manifesteeri', 'Manifesteeri', 'Roxie Nafousi', 'Estonian', 'Readings/Manifest_card.svg'),
       book('social-media-prism', 'Breaking the Social Media Prism', 'Chris Bail', 'English', 'Readings/Social_Media_Prism_card.svg'),
       book('black-swan', 'The Black Swan', 'Nassim Nicholas Taleb', 'English', 'Readings/The_Black_Swan_card.svg'),
       book('lotteria-dei-geni', 'La lotteria dei geni', 'Kathryn Paige Harden', 'Italian', 'Readings/La_lotteria_dei_geni_card.svg'),
@@ -235,6 +236,11 @@ export const SECTIONS = [
       book('caterina-sforza', 'Caterina Sforza, Leonessa di Romagna', 'Marco Viroli', 'Italian', 'Readings/Caterina_Sforza_card.svg'),
       book('caterina-de-medici', "Caterina de' Medici", 'Alessandra Necci', 'Italian', 'Readings/Caterina_de_Medici_card.svg'),
       book('casa-dell-oppio', "La casa dell'oppio", 'Su Tong', 'Italian', 'Readings/La_casa_dell_oppio_card.svg'),
+      book('intelligenza-emotiva', 'Intelligenza emotiva', 'Daniel Goleman', 'Italian', 'Readings/Intelligenza_emotiva_card.svg'),
+      book('il-principe', 'Il Principe', 'Niccolò Machiavelli', 'Italian', 'Readings/Il_Principe_card.svg'),
+      book('rockefeller', 'John D. Rockefeller, The Original Titan', 'JR MacGregor', 'Italian', 'Readings/Rockefeller_card.svg'),
+      book('valutazione-immobiliare', 'Valutazione immobiliare', 'Giacomo Morri and Paolo Benedetto', 'Italian', 'Readings/Valutazione_immobiliare_card.svg'),
+      book('inganno-dei-confini', "L'inganno dei confini", 'Simone Guida', 'Italian', 'Readings/Inganno_dei_confini_card.svg'),
     ],
   },
 

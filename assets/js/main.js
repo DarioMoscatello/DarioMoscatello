@@ -2,6 +2,7 @@ import { SECTIONS, CONFIG } from './content.js';
 import { createTwistTitle } from './title-twist.js';
 import { createWheel } from './wheel.js';
 import { createPanel } from './panel.js';
+import { preloadAll } from './card-image.js';
 
 const sectionsById = new Map(SECTIONS.map((s) => [s.id, s]));
 
@@ -67,7 +68,11 @@ function buildDeck(section) {
   return filled;
 }
 
-function openSection(id, { cardKey, scroll = false } = {}) {
+const imagesOf = (section) => section.cards.map((card) => card.image).filter(Boolean);
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function openSection(id, { cardKey, scroll = false } = {}) {
   const section = sectionsById.get(id) || sectionsById.get(CONFIG.defaultSection) || SECTIONS[0];
 
   if (current?.id === section.id) {
@@ -78,6 +83,10 @@ function openSection(id, { cardKey, scroll = false } = {}) {
     deck = buildDeck(section);
     const start = cardKey ? Math.max(0, deck.findIndex((d) => d.key === cardKey)) : 0;
     markNav();
+    // Give the artwork a moment to arrive so the cards are dealt complete;
+    // anything slower than that is dealt as soon as it loads.
+    await Promise.race([preloadAll(imagesOf(section)), wait(350)]);
+    if (current !== section) return; // another section was opened meanwhile
     wheel.setDeck(deck, { start });
   }
 
@@ -105,3 +114,14 @@ window.addEventListener('hashchange', () => {
 const initial = fromHash();
 openSection(initial.id, { cardKey: initial.cardKey });
 wheel.setAutoRotate(CONFIG.autoRotate, CONFIG.autoRotateEvery);
+
+// Once the first section is on screen, fetch the artwork of the others in the
+// background, one section at a time, so later switches have nothing to wait for.
+const prefetchRest = async () => {
+  for (const section of SECTIONS) {
+    if (section === current) continue;
+    await preloadAll(imagesOf(section));
+  }
+};
+if ('requestIdleCallback' in window) requestIdleCallback(prefetchRest, { timeout: 4000 });
+else setTimeout(prefetchRest, 2500);

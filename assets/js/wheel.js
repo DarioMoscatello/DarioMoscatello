@@ -13,6 +13,7 @@
  */
 
 import { clamp, mod, springStep, ease } from './motion.js';
+import { cardColor, loadImage } from './card-image.js';
 
 const SPACING = 27; // degrees between two cards
 const RAD = Math.PI / 180;
@@ -28,7 +29,6 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
   const layer = root.querySelector('[data-wheel-cards]');
   const ringGroup = root.querySelector('[data-wheel-ring]');
   const drawButton = root.querySelector('[data-wheel-draw]');
-  const ticksGroup = root.querySelector('[data-wheel-ticks]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const geo = { cw: 0, ch: 0, r: 0, cy: 0, lift: 0 };
@@ -53,32 +53,6 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
   let autoTimer = 0;
   let autoEnabled = false;
   let autoEvery = 3600;
-
-  /* ---------- dial ---------- */
-
-  // Marks around the rim of the dial, outside the dashed circle: a short one
-  // every 6 degrees and a long one every 30.
-  function buildTicks() {
-    if (!ticksGroup) return;
-    const ns = 'http://www.w3.org/2000/svg';
-    const frag = document.createDocumentFragment();
-    for (let a = 0; a < 360; a += 6) {
-      const long = a % 30 === 0;
-      const outer = 117.4;
-      const inner = long ? 105.5 : 111.5;
-      const rad = ((a - 90) * Math.PI) / 180;
-      const line = document.createElementNS(ns, 'line');
-      line.setAttribute('x1', (Math.cos(rad) * outer).toFixed(2));
-      line.setAttribute('y1', (Math.sin(rad) * outer).toFixed(2));
-      line.setAttribute('x2', (Math.cos(rad) * inner).toFixed(2));
-      line.setAttribute('y2', (Math.sin(rad) * inner).toFixed(2));
-      if (long) line.setAttribute('class', 'is-long');
-      frag.append(line);
-    }
-    ticksGroup.append(frag);
-  }
-
-  buildTicks();
 
   /* ---------- geometry ---------- */
 
@@ -167,7 +141,23 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
       born: now,
       delay: Math.min(Math.abs(offsetFor(i, start, n)), 6) * 55,
       dealt: false,
+      // A card waits for its artwork before it is dealt, so it never shows up
+      // as an empty rectangle.
+      ready: !entry.data.image,
+      accent: null,
     };
+
+    if (entry.data.image) {
+      loadImage(entry.data.image).then(() => {
+        card.ready = true;
+        card.born = performance.now();
+        wake();
+      });
+      cardColor(entry.data.image).then((color) => {
+        card.accent = color;
+        if (restIndex === card.i) applyAccent(card);
+      });
+    }
 
     el.addEventListener('click', () => {
       if (spinning) return;
@@ -373,7 +363,7 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
     for (const card of cards) {
       const o = offsetFor(card.i, p, n);
       const vis = visibilityFor(o, n);
-      const dealT = reduced ? 1 : clamp((now - card.born - card.delay) / DEAL_MS, 0, 1);
+      const dealT = !card.ready ? 0 : reduced ? 1 : clamp((now - card.born - card.delay) / DEAL_MS, 0, 1);
       if (dealT < 1) busy = true;
       else card.dealt = true;
       const dealE = ease.out(dealT);
@@ -428,6 +418,10 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
     if (busy) raf = requestAnimationFrame(frame);
   }
 
+  function applyAccent(card) {
+    root.style.setProperty('--line-color', card && card.accent ? card.accent : 'var(--dial)');
+  }
+
   function place(card, angle, radius, tilt, opacity, z) {
     const s = card.el.style;
     const hidden = opacity < 0.01 || Math.abs(angle) > 150;
@@ -460,6 +454,7 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
     }
     const index = currentIndex();
     const drawn = pendingPop;
+    applyAccent(cards[index]);
     if (pendingPop) {
       pendingPop = false;
       const card = cards[index];

@@ -28,6 +28,7 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
   const layer = root.querySelector('[data-wheel-cards]');
   const ringGroup = root.querySelector('[data-wheel-ring]');
   const drawButton = root.querySelector('[data-wheel-draw]');
+  const ticksGroup = root.querySelector('[data-wheel-ticks]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const geo = { cw: 0, ch: 0, r: 0, cy: 0, lift: 0 };
@@ -52,6 +53,32 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
   let autoTimer = 0;
   let autoEnabled = false;
   let autoEvery = 3600;
+
+  /* ---------- dial ---------- */
+
+  // Marks around the rim of the dial, outside the dashed circle: a short one
+  // every 6 degrees and a long one every 30.
+  function buildTicks() {
+    if (!ticksGroup) return;
+    const ns = 'http://www.w3.org/2000/svg';
+    const frag = document.createDocumentFragment();
+    for (let a = 0; a < 360; a += 6) {
+      const long = a % 30 === 0;
+      const outer = 117.4;
+      const inner = long ? 105.5 : 111.5;
+      const rad = ((a - 90) * Math.PI) / 180;
+      const line = document.createElementNS(ns, 'line');
+      line.setAttribute('x1', (Math.cos(rad) * outer).toFixed(2));
+      line.setAttribute('y1', (Math.sin(rad) * outer).toFixed(2));
+      line.setAttribute('x2', (Math.cos(rad) * inner).toFixed(2));
+      line.setAttribute('y2', (Math.sin(rad) * inner).toFixed(2));
+      if (long) line.setAttribute('class', 'is-long');
+      frag.append(line);
+    }
+    ticksGroup.append(frag);
+  }
+
+  buildTicks();
 
   /* ---------- geometry ---------- */
 

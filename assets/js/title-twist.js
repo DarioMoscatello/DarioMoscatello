@@ -22,9 +22,9 @@ export function createTwistTitle(canvas, options = {}) {
     weight: 800,
     ink: '#000000',
     paper: '#FFFFFF',
-    speed: 1.45, // radians per second
-    twist: 2.6, // extra radians from left edge to right edge
-    halfAngle: 0.7, // how much of the drum one line of text covers
+    speed: 2.0, // radians per second
+    twist: 2.9, // extra radians from left edge to right edge
+    halfAngle: 0.75, // how much of the drum one line of text covers
     lines: 4,
     ...options,
   };
@@ -55,7 +55,9 @@ export function createTwistTitle(canvas, options = {}) {
     if (!cssWidth) return false;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    column = Math.max(1, Math.round(dpr));
+    // One slice per screen pixel, a little coarser on very wide canvases so the
+    // number of draws per frame stays roughly constant.
+    column = Math.max(1, Math.round(dpr), Math.ceil((cssWidth * dpr) / 1100));
 
     const m = document.createElement('canvas').getContext('2d');
     m.font = `${o.weight} 100px ${o.family}`;
@@ -66,7 +68,7 @@ export function createTwistTitle(canvas, options = {}) {
     width = Math.round(cssWidth * dpr);
     const widest = Math.max(measureWord(m, o.front), measureWord(m, o.back)) / 100;
     const roughSize = width / (widest + minTrack * (letters - 1));
-    const stroke = Math.max(1.2 * dpr, roughSize * 0.016);
+    const stroke = Math.max(1.4 * dpr, roughSize * 0.021);
     const inset = Math.ceil(stroke * 2);
     const usable = width - inset * 2;
     const fontSize = usable / (widest + minTrack * (letters - 1));
@@ -114,6 +116,7 @@ export function createTwistTitle(canvas, options = {}) {
 
   function render(time) {
     ctx.clearRect(0, 0, width, height);
+    let currentAlpha = 1;
     const at = o.halfAngle;
     const span = at * 2;
     const step = TAU / o.lines;
@@ -139,9 +142,21 @@ export function createTwistTitle(canvas, options = {}) {
 
         const sy = ((top - hi) / span) * texH;
         const sh = ((hi - lo) / span) * texH;
+
+        // A line rolling over the edge of the drum loses part of its letters.
+        // Fade it as it goes instead of showing the cut.
+        const seen = (hi - lo) / span;
+        const alpha = seen >= 0.9 ? 1 : (seen - 0.42) / 0.48;
+        if (alpha <= 0) continue;
+        const wanted = alpha < 1 ? alpha * alpha : 1;
+        if (wanted !== currentAlpha) {
+          ctx.globalAlpha = wanted;
+          currentAlpha = wanted;
+        }
         ctx.drawImage(faces[j & 1], x, sy, cw, sh, x, yTop, cw, h);
       }
     }
+    if (currentAlpha !== 1) ctx.globalAlpha = 1;
   }
 
   function tick(now) {

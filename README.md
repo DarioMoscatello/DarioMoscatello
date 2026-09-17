@@ -35,7 +35,9 @@ or `npx serve .`, then open http://localhost:8000.
 
 Any static host works, and there is nothing to build.
 
-- Vercel: import the folder or repo, framework preset "Other", no build command.
+- Vercel: `vercel.json` already tells Vercel there is no framework, nothing to
+  install and nothing to build. The repo must not contain an old `package.json`
+  or `next.config.*`, otherwise Vercel tries to build a Next.js app.
 - Netlify: drag the `dario-moscatello` folder onto app.netlify.com/drop.
 - GitHub Pages: push the folder and enable Pages on the branch.
 
@@ -77,12 +79,29 @@ Links work per card too: `…/#education/harvard` opens that card directly.
 - Distance between cards: `SPACING` in `assets/js/wheel.js`.
 - Strength of the shake: the `kick` function in `assets/js/wheel.js`.
 
+## Book cards
+
+The 15 books that had no artwork use generated cards: white card, small flag of
+the language in the top-right corner (same size and position as the flag on the
+Zero to One card), title and author drawn as outlines of the site font, so the
+SVG carries no font file. To add or change one, edit the `BOOKS` list in
+`tools/make_book_cards.py` and run it from the project root:
+
+```
+pip install fonttools brotli
+python3 tools/make_book_cards.py
+```
+
+Replacing a generated card with real artwork later only means pointing that
+book's `image` in `content.js` at the new file.
+
 ## Notes
 
-- The German card says B1, while the content file says B2. The text panel
-  follows the content file; change one of the two so they match.
-- Hedels has no description yet (the content file had "..."), so its panel
-  shows role, year and link only.
+- The dial rim, its marks and the line under the arrow all use one colour token,
+  `--dial` in `assets/css/main.css`.
+- The About head card is deliberately left white, waiting for artwork.
+- `data/site.ts` in the repo is a leftover of the old Next.js version and can be
+  deleted.
 - `Projects/BExams_card_site_ready.svg` (2.2 MB) and
   `Education/Education_card_site_ready.svg` (1.5 MB) contain large embedded
   PNGs. Exporting those images as WebP inside the SVG would make the first load

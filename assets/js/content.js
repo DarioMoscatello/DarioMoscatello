@@ -45,6 +45,7 @@ export const SECTIONS = [
       {
         id: 'about',
         head: true,
+        image: 'About/ABOUT_card_site_ready.svg',
         title: 'Dario Moscatello',
         meta: ['Based in Milano, Italy'],
         links: LINKS,
@@ -64,10 +65,10 @@ export const SECTIONS = [
         title: 'Interests',
         list: [
           'Economics & Game Theory',
-          'Real Estate and architecture',
+          'Real Estate and Architecture',
           'Tech',
           'Chess',
-          'Exploring AI and agents',
+          'Exploring AI and Agents',
           'Reading',
         ],
       },

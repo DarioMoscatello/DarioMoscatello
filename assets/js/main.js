@@ -22,8 +22,8 @@ document.fonts
 
 /* ---------- nav ---------- */
 
-// "Start Here" sits next to the first section until it or that section is
-// pressed; it comes back only on the next visit to the page.
+// "Start Here" sits next to the first section until any section is pressed;
+// it comes back only on the next visit to the page.
 const startId = SECTIONS[0].id;
 
 navList.innerHTML = SECTIONS.map(
@@ -40,7 +40,7 @@ const hint = navList.querySelector('[data-hint]');
 navList.addEventListener('click', (e) => {
   const button = e.target.closest('[data-section]');
   if (!button) return;
-  if (button.dataset.section === startId) hint?.remove();
+  hint?.remove();
   openSection(button.dataset.section, { scroll: true });
 });
 

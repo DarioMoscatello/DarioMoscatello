@@ -35,7 +35,7 @@ const EMAIL = 'moscatello.dario@gmail.com';
 const LINKS = [
   { label: EMAIL, href: `mailto:${EMAIL}` },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dario-moscatello' },
-  { label: 'GitHub', href: 'https://github.com/DarioMoscaBC' },
+  { label: 'GitHub', href: 'https://github.com/DarioMoscatello' },
 ];
 
 export const SECTIONS = [

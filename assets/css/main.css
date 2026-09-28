@@ -173,7 +173,6 @@ a {
 }
 
 .hero__lede,
-.hero__name,
 .hero__tag {
   position: relative;
   margin: 0;
@@ -224,11 +223,6 @@ a {
 .hero__arrow--right {
   right: 0;
   transform: translate(50%, -50%);
-}
-
-.hero__name {
-  grid-column: 1;
-  grid-row: 3;
 }
 
 .hero__tag {

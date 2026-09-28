@@ -22,18 +22,30 @@ document.fonts
 
 /* ---------- nav ---------- */
 
+// "Start Here" sits next to the first section until it or that section is
+// pressed; it comes back only on the next visit to the page.
+const startId = SECTIONS[0].id;
+
 navList.innerHTML = SECTIONS.map(
-  (s) => `<li><button type="button" data-section="${s.id}">${s.label}</button></li>`,
+  (s) =>
+    `<li><button type="button" data-section="${s.id}">${s.label}</button>` +
+    (s.id === startId
+      ? `<button type="button" class="sections__hint" data-section="${s.id}" data-hint>Start Here</button>`
+      : '') +
+    '</li>',
 ).join('');
+
+const hint = navList.querySelector('[data-hint]');
 
 navList.addEventListener('click', (e) => {
   const button = e.target.closest('[data-section]');
   if (!button) return;
+  if (button.dataset.section === startId) hint?.remove();
   openSection(button.dataset.section, { scroll: true });
 });
 
 function markNav() {
-  for (const button of navList.querySelectorAll('[data-section]')) {
+  for (const button of navList.querySelectorAll('[data-section]:not([data-hint])')) {
     button.setAttribute('aria-current', String(button.dataset.section === current?.id));
   }
 }

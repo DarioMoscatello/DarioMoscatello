@@ -291,6 +291,28 @@ a {
   transform: translate(0, -50%);
 }
 
+/* "Start Here", next to the first section: italic like the hero labels, red
+   like the marker, and gone once pressed. */
+.sections li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+}
+
+.sections .sections__hint {
+  padding: 0;
+  font-size: clamp(12px, 1.02vw, 16px); /* same as the hero labels */
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  color: var(--burgundy);
+}
+
+.sections .sections__hint::before {
+  content: none;
+}
+
 /* panel */
 
 .panel {

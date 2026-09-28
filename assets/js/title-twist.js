@@ -1,8 +1,9 @@
 /*
  * Twisting title.
  *
- * The word is printed on the four flat faces of a square bar that turns on its
- * horizontal axis: black, outlined, black, outlined. At any moment at most two
+ * The two words are printed on the four flat faces of a square bar that turns
+ * on its horizontal axis: black front word, outlined back word, black,
+ * outlined. At any moment at most two
  * faces look at the viewer, one above the other, and as one grows the other
  * shrinks. The turn angle also changes along the width, so each vertical slice
  * of the title is a little further round than the one on its left: that is the
@@ -18,8 +19,8 @@ const QUARTER_PI = Math.PI / 4;
 
 export function createTwistTitle(canvas, options = {}) {
   const o = {
-    front: 'PORTFOLIO',
-    back: 'PORTFOLIO',
+    front: 'DARIODARIO',
+    back: 'MOSCATELLO',
     family: '"Unbounded", "Arial Black", system-ui, sans-serif',
     weight: 800,
     ink: '#000000',

@@ -1,7 +1,7 @@
 /*
  * Twisting title.
  *
- * The two words are printed as four lines around a drum that turns on its
+ * The words are printed as four lines around a drum that turns on its
  * horizontal axis (black word, white word, black word, white word). The turn
  * angle also changes along the width, so each vertical slice of the title is a
  * little further around the drum than the one on its left: that is the twist.
@@ -16,15 +16,19 @@ const HALF_PI = Math.PI / 2;
 
 export function createTwistTitle(canvas, options = {}) {
   const o = {
-    front: 'DARIODARIO',
-    back: 'MOSCATELLO',
+    front: 'PORTFOLIO',
+    back: 'PORTFOLIO',
     family: '"Unbounded", "Arial Black", system-ui, sans-serif',
     weight: 800,
     ink: '#000000',
-    paper: '#FFFFFF',
-    speed: 2.0, // radians per second
-    twist: 2.9, // extra radians from left edge to right edge
-    halfAngle: 0.75, // how much of the drum one line of text covers
+    // Measured on the reference video: the picture repeats every 2.47 s
+    // (half a turn, one black and one white line), the right edge trails the
+    // left one by 0.78 of that, and the text rolls downward.
+    speed: -1.27, // radians per second; negative rolls the text downward
+    twist: 2.45, // extra radians from left edge to right edge
+    // Half of the drum one line covers. PI / lines packs the lines edge to
+    // edge, as in the reference, where the letters fill 69% of the height.
+    halfAngle: Math.PI / 4,
     lines: 4,
     ...options,
   };
@@ -73,7 +77,7 @@ export function createTwistTitle(canvas, options = {}) {
     const usable = width - inset * 2;
     const fontSize = usable / (widest + minTrack * (letters - 1));
     const cap = (cap100 / 100) * fontSize;
-    const pad = Math.ceil(cap * 0.09 + stroke);
+    const pad = Math.ceil(stroke * 1.5);
 
     texH = Math.ceil(cap + pad * 2);
     radius = texH / (2 * Math.sin(o.halfAngle));
@@ -100,13 +104,16 @@ export function createTwistTitle(canvas, options = {}) {
           f.fillStyle = o.ink;
           f.fillText(ch, x, pad + cap);
         } else {
-          // Stroke first at double width, then fill on top: the fill hides the
-          // inner half of the stroke and any overlapping contours of the font.
+          // Stroke first at double width, then cut the letter shape out: that
+          // removes the inner half of the stroke and any overlapping contours
+          // of the font, and leaves the letter hollow so the page shows
+          // through, as in the reference.
           f.lineWidth = stroke * 2;
           f.strokeStyle = o.ink;
           f.strokeText(ch, x, pad + cap);
-          f.fillStyle = o.paper;
+          f.globalCompositeOperation = 'destination-out';
           f.fillText(ch, x, pad + cap);
+          f.globalCompositeOperation = 'source-over';
         }
         x += f.measureText(ch).width + gap;
       }
@@ -116,7 +123,6 @@ export function createTwistTitle(canvas, options = {}) {
 
   function render(time) {
     ctx.clearRect(0, 0, width, height);
-    let currentAlpha = 1;
     const at = o.halfAngle;
     const span = at * 2;
     const step = TAU / o.lines;
@@ -143,20 +149,11 @@ export function createTwistTitle(canvas, options = {}) {
         const sy = ((top - hi) / span) * texH;
         const sh = ((hi - lo) / span) * texH;
 
-        // A line rolling over the edge of the drum loses part of its letters.
-        // Fade it as it goes instead of showing the cut.
-        const seen = (hi - lo) / span;
-        const alpha = seen >= 0.9 ? 1 : (seen - 0.42) / 0.48;
-        if (alpha <= 0) continue;
-        const wanted = alpha < 1 ? alpha * alpha : 1;
-        if (wanted !== currentAlpha) {
-          ctx.globalAlpha = wanted;
-          currentAlpha = wanted;
-        }
+        // A line rolling over the edge stays solid: the drum itself squashes
+        // it to nothing at the horizon, as in the reference.
         ctx.drawImage(faces[j & 1], x, sy, cw, sh, x, yTop, cw, h);
       }
     }
-    if (currentAlpha !== 1) ctx.globalAlpha = 1;
   }
 
   function tick(now) {

@@ -13,7 +13,7 @@ dario-moscatello/
     js/main.js          <- sections, navigation, links in the URL
     js/wheel.js         <- card wheel: turning, drag, shake, random draw
     js/panel.js         <- text shown when a card is pressed
-    js/title-twist.js   <- the twisting DARIODARIO / MOSCATELLO title
+    js/title-twist.js   <- the twisting PORTFOLIO title
     js/motion.js        <- easing helpers
     fonts/              <- Unbounded, Geist, Geist Mono (self-hosted)
     favicon.svg

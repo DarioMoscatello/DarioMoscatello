@@ -38,14 +38,14 @@ export function createTwistTitle(canvas, options = {}) {
     weight: 800,
     ink: '#000000',
     twist: 2.45, // radians from left edge to right edge, as in the reference
-    turn: 0.5, // seconds of each quarter turn
-    pause: 0.7, // seconds DARIODARIO stays in front
-    rest: 5, // seconds MOSCATELLO stays in front before the next round
+    turn: 0.8, // seconds of each quarter turn
+    pause: 1.5, // seconds DARIODARIO stays in front
+    rest: 7, // seconds MOSCATELLO stays in front before the next round
     // The shake after the second turn is a damped spring: how far it swings
     // past MOSCATELLO (radians), how fast it wobbles and how soon it dies out.
-    shake: 0.2,
-    shakeRate: 17.5, // radians per second
-    shakeDamping: 5, // per second
+    shake: 0.16,
+    shakeRate: 12, // radians per second
+    shakeDamping: 4, // per second
     ...options,
   };
 

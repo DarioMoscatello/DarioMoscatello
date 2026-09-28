@@ -408,7 +408,9 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
     });
 
     const restCard = cards[restIndex];
-    setLine(Boolean(restingNow && restCard && restCard.dealt));
+    const resting = Boolean(restingNow && restCard && restCard.dealt);
+    setLine(resting);
+    root.classList.toggle('is-me', resting && Boolean(deck[restIndex]?.data?.me));
 
     if (!settled && !tween && !(drag && drag.active) && n) {
       settle();

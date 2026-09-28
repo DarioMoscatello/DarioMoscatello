@@ -14,6 +14,7 @@
  *   facts     [label, value] pairs
  *   list      simple list (interests)
  *   links     [{ label, href }]
+ *   me        true on the card with my portrait: the ME under the arrow shows only there
  */
 
 export const CONFIG = {
@@ -46,6 +47,7 @@ export const SECTIONS = [
         id: 'about',
         head: true,
         image: 'About/ABOUT_card_site_ready.svg',
+        me: true,
         title: 'Dario Moscatello',
         meta: ['Based in Milano, Italy'],
         links: LINKS,

@@ -1,18 +1,20 @@
 /*
  * Twisting title.
  *
- * The words are printed as four lines around a drum that turns on its
- * horizontal axis (black word, white word, black word, white word). The turn
- * angle also changes along the width, so each vertical slice of the title is a
- * little further around the drum than the one on its left: that is the twist.
- * Only the half of the drum facing the viewer is drawn.
+ * The word is printed on the four flat faces of a square bar that turns on its
+ * horizontal axis: black, outlined, black, outlined. At any moment at most two
+ * faces look at the viewer, one above the other, and as one grows the other
+ * shrinks. The turn angle also changes along the width, so each vertical slice
+ * of the title is a little further round than the one on its left: that is the
+ * twist, and it is what makes the two words cross.
  *
  * Every frame, each 1px column of the pre-rendered words is copied onto the
- * canvas with the height and position it has on the drum.
+ * canvas once per visible face, squashed to the height that face shows.
  */
 
 const TAU = Math.PI * 2;
 const HALF_PI = Math.PI / 2;
+const QUARTER_PI = Math.PI / 4;
 
 export function createTwistTitle(canvas, options = {}) {
   const o = {
@@ -21,15 +23,11 @@ export function createTwistTitle(canvas, options = {}) {
     family: '"Unbounded", "Arial Black", system-ui, sans-serif',
     weight: 800,
     ink: '#000000',
-    // Measured on the reference video: the picture repeats every 2.47 s
-    // (half a turn, one black and one white line), the right edge trails the
-    // left one by 0.78 of that, and the text rolls downward.
+    // Measured on the reference video: the picture repeats every 2.47 s (half
+    // a turn: one black and one outlined face), the right edge trails the left
+    // one by 0.78 of that, and the text rolls downward.
     speed: -1.27, // radians per second; negative rolls the text downward
     twist: 2.45, // extra radians from left edge to right edge
-    // Half of the drum one line covers. PI / lines packs the lines edge to
-    // edge, as in the reference, where the letters fill 69% of the height.
-    halfAngle: Math.PI / 4,
-    lines: 4,
     ...options,
   };
 
@@ -40,7 +38,7 @@ export function createTwistTitle(canvas, options = {}) {
   let width = 0; // device px
   let height = 0;
   let texH = 0;
-  let radius = 0;
+  let corner = 0; // distance from the axis to an edge of the bar
   let centerY = 0;
   let column = 1;
   let raf = 0;
@@ -79,9 +77,10 @@ export function createTwistTitle(canvas, options = {}) {
     const cap = (cap100 / 100) * fontSize;
     const pad = Math.ceil(stroke * 1.5);
 
+    // The letters fill a face; the bar is tallest seen corner-on.
     texH = Math.ceil(cap + pad * 2);
-    radius = texH / (2 * Math.sin(o.halfAngle));
-    height = Math.ceil(radius * 2 + stroke * 4);
+    corner = texH / Math.SQRT2;
+    height = Math.ceil(corner * 2 + stroke * 2);
     centerY = height / 2;
 
     canvas.width = width;
@@ -123,35 +122,24 @@ export function createTwistTitle(canvas, options = {}) {
 
   function render(time) {
     ctx.clearRect(0, 0, width, height);
-    const at = o.halfAngle;
-    const span = at * 2;
-    const step = TAU / o.lines;
     const base = time * o.speed;
 
     for (let x = 0; x < width; x += column) {
       const cw = Math.min(column, width - x);
       const phase = base + ((x + cw / 2) / width) * o.twist;
 
-      for (let j = 0; j < o.lines; j++) {
-        let phi = phase + j * step;
-        phi -= TAU * Math.floor((phi + Math.PI) / TAU); // keep in [-PI, PI)
+      for (let j = 0; j < 4; j++) {
+        // psi is where the face points: 0 straight at the viewer, positive up.
+        let psi = phase + j * HALF_PI;
+        psi -= TAU * Math.floor((psi + Math.PI) / TAU); // keep in [-PI, PI)
+        if (psi <= -HALF_PI || psi >= HALF_PI) continue; // facing away
 
-        const top = phi + at;
-        const bottom = phi - at;
-        const hi = top < HALF_PI ? top : HALF_PI;
-        const lo = bottom > -HALF_PI ? bottom : -HALF_PI;
-        if (hi <= lo) continue; // this line is on the back of the drum
-
-        const yTop = centerY - radius * Math.sin(hi);
-        const h = centerY - radius * Math.sin(lo) - yTop;
+        // The face runs between the two edges at psi + 45deg and psi - 45deg.
+        const yTop = centerY - corner * Math.sin(psi + QUARTER_PI);
+        const h = centerY - corner * Math.sin(psi - QUARTER_PI) - yTop;
         if (h < 0.4) continue;
 
-        const sy = ((top - hi) / span) * texH;
-        const sh = ((hi - lo) / span) * texH;
-
-        // A line rolling over the edge stays solid: the drum itself squashes
-        // it to nothing at the horizon, as in the reference.
-        ctx.drawImage(faces[j & 1], x, sy, cw, sh, x, yTop, cw, h);
+        ctx.drawImage(faces[j & 1], x, 0, cw, texH, x, yTop, cw, h);
       }
     }
   }

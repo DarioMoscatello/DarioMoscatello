@@ -74,8 +74,8 @@ Links work per card too: `…/#education/harvard` opens that card directly.
 
 ## Tuning the motion
 
-- Title speed and amount of twist: `speed` and `twist` at the top of
-  `assets/js/title-twist.js`.
+- Title timing and amount of twist: `turn`, `pause`, `rest`, the three
+  `shake` values and `twist` at the top of `assets/js/title-twist.js`.
 - Distance between cards: `SPACING` in `assets/js/wheel.js`.
 - Strength of the shake: the `kick` function in `assets/js/wheel.js`.
 

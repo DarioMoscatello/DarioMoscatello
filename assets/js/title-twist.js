@@ -1,3 +1,5 @@
+import { cubicBezier } from './motion.js';
+
 /*
  * Twisting title.
  *
@@ -9,6 +11,12 @@
  * of the title is a little further round than the one on its left: that is the
  * twist, and it is what makes the two words cross.
  *
+ * It does not spin all the time: a quick quarter turn brings DARIODARIO to the
+ * front, a short stop, another quick quarter turn brings MOSCATELLO to the
+ * front and overshoots into a small shake, then it rests before starting
+ * again. "To the front" means the word faces the viewer at the middle of the
+ * title; the twist leans it away towards the two ends.
+ *
  * Every frame, each 1px column of the pre-rendered words is copied onto the
  * canvas once per visible face, squashed to the height that face shows.
  */
@@ -17,6 +25,11 @@ const TAU = Math.PI * 2;
 const HALF_PI = Math.PI / 2;
 const QUARTER_PI = Math.PI / 4;
 
+// Quick start, soft stop: the first quarter turn.
+const easeTurn = cubicBezier(0.6, 0, 0.25, 1);
+// Still moving when it arrives, so the spring has a speed to overshoot with.
+const easeInto = cubicBezier(0.55, 0, 0.75, 0.75);
+
 export function createTwistTitle(canvas, options = {}) {
   const o = {
     front: 'DARIODARIO',
@@ -24,11 +37,15 @@ export function createTwistTitle(canvas, options = {}) {
     family: '"Unbounded", "Arial Black", system-ui, sans-serif',
     weight: 800,
     ink: '#000000',
-    // Measured on the reference video: the picture repeats every 2.47 s (half
-    // a turn: one black and one outlined face), the right edge trails the left
-    // one by 0.78 of that, and the text rolls downward.
-    speed: -1.27, // radians per second; negative rolls the text downward
-    twist: 2.45, // extra radians from left edge to right edge
+    twist: 2.45, // radians from left edge to right edge, as in the reference
+    turn: 0.5, // seconds of each quarter turn
+    pause: 0.7, // seconds DARIODARIO stays in front
+    rest: 5, // seconds MOSCATELLO stays in front before the next round
+    // The shake after the second turn is a damped spring: how far it swings
+    // past MOSCATELLO (radians), how fast it wobbles and how soon it dies out.
+    shake: 0.2,
+    shakeRate: 17.5, // radians per second
+    shakeDamping: 5, // per second
     ...options,
   };
 
@@ -121,13 +138,39 @@ export function createTwistTitle(canvas, options = {}) {
     return true;
   }
 
+  /*
+   * Turn of the bar at a given time. 0 is DARIODARIO in front, -PI/2 is
+   * MOSCATELLO in front; the angle only goes down, so the text rolls downward.
+   * One round is two quarter turns, and it starts with MOSCATELLO in front.
+   */
+  function angleAt(time) {
+    const round = o.turn * 2 + o.pause + o.rest;
+    const n = Math.floor(time / round);
+    let t = time - n * round;
+    const start = -HALF_PI - n * Math.PI;
+
+    if (t < o.turn) return start - HALF_PI * easeTurn(t / o.turn);
+    t -= o.turn;
+    if (t < o.pause) return start - HALF_PI;
+    t -= o.pause;
+    if (t < o.turn) return start - HALF_PI - HALF_PI * easeInto(t / o.turn);
+    t -= o.turn;
+
+    // A damped wobble around MOSCATELLO. It starts at the speed the turn
+    // arrived with (shake * shakeRate, about PI / 2 per turn second), so the
+    // turn runs straight into the overshoot without a jolt.
+    const end = start - Math.PI;
+    const decay = Math.exp(-o.shakeDamping * t);
+    return end - o.shake * decay * Math.sin(o.shakeRate * t);
+  }
+
   function render(time) {
     ctx.clearRect(0, 0, width, height);
-    const base = time * o.speed;
+    const base = angleAt(time);
 
     for (let x = 0; x < width; x += column) {
       const cw = Math.min(column, width - x);
-      const phase = base + ((x + cw / 2) / width) * o.twist;
+      const phase = base + ((x + cw / 2) / width - 0.5) * o.twist;
 
       for (let j = 0; j < 4; j++) {
         // psi is where the face points: 0 straight at the viewer, positive up.
@@ -164,7 +207,7 @@ export function createTwistTitle(canvas, options = {}) {
 
   function redraw() {
     if (!layout()) return;
-    render(reduceMotion.matches ? 0.55 : clock);
+    render(reduceMotion.matches ? o.turn : clock); // DARIODARIO in front
   }
 
   const resizeObserver = new ResizeObserver(() => redraw());

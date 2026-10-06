@@ -57,9 +57,9 @@ m-700 -5 c22 -7 -307 -16 -455 -13 -27 1 -69 2 -93 2 -26 1 -41 5 -37 11 7 12
       <clipPath id="horseInnerClip"><rect x="4" y="4" width="352" height="352"/></clipPath>
   </defs>
   <g clip-path="url(#cardClip)">
-    <rect width="700" height="1000" fill="#0A0A0A"/>
+    <rect width="700" height="1000" fill="#8B8881"/>
     <g transform="translate(-72.55 79.6) scale(2.3)">
-      <g clip-path="url(#horseInnerClip)"><rect width="360" height="360" fill="#F2F2F0" mask="url(#horseCutout)"/></g>
+      <g clip-path="url(#horseInnerClip)"><rect width="360" height="360" fill="#FFFFFF" mask="url(#horseCutout)"/></g>
     </g>
   </g>
 </svg>

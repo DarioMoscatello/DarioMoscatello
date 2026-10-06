@@ -22,9 +22,9 @@ TITLE_SIZE = 58
 
 # flag, level
 ROWS = [
-    ('it', 'FLUENT'),
+    ('it', 'NATIVE'),
+    ('ee', 'NATIVE'),
     ('uk', 'FLUENT'),
-    ('ee', 'FLUENT'),
     ('de', 'B1'),
     ('es', 'B1'),
 ]
@@ -51,7 +51,7 @@ def card():
             rows.append(f'  <rect x="{LEFT}" y="{y}" width="{TEXT_W}" height="1" fill="#FFFFFF" fill-opacity="0.22"/>\n')
 
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}"
-     role="img" aria-label="Languages: Italian fluent, English fluent, Estonian fluent, German B1, Spanish B1">
+     role="img" aria-label="Languages: Italian native, Estonian native, English fluent, German B1, Spanish B1">
   <style>{BOLD.embed(used, 'Geist Card', 500)}
     text {{ font-family: 'Geist Card', 'Geist', system-ui, sans-serif; font-weight: 500; fill: #FFFFFF; }}
     .title {{ font-size: {TITLE_SIZE}px; letter-spacing: {TITLE_TRACK}em; }}

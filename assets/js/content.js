@@ -261,7 +261,7 @@ export const SECTIONS = [
         id: 'languages',
         image: 'More/LANGUAGES_card.svg',
         title: 'Languages',
-        list: ['Italian · Fluent', 'English · Fluent', 'Estonian · Fluent', 'German · B1', 'Spanish · B1'],
+        list: ['Italian · Native', 'Estonian · Native', 'English · Fluent', 'German · B1', 'Spanish · B1'],
       },
       {
         id: 'chess',

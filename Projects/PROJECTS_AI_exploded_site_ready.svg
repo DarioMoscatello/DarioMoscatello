@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 829 1184" width="829" height="1184"
      role="img" aria-label="Projects: a blue block on black with a smaller block about to drop into a lit slot">
-  <style>@font-face{font-family:'Geist Mono Card';font-weight:500;src:url(data:font/woff2;base64,d09GMgABAAAAAAQ8ABAAAAAAB8wAAAPiAAGzdQAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIBwqBmA/U1RBVEQAVBEICoUMhDgBNgIkAxYLFAAEIAWDfgcgDAcbTAZRlDBKP8wfEuiUFR5XLlpCToJqJ4YhxZEbGRQj98XFnRK2Tlnbj3R/HhMRNVb27AOzZIUBdmFFim0qOhaNREtgsXyEA3QXffPvZn4SP/MpJqcKZ0BUyLWeEIHEsboNu+hmNvZ1Mwmp+LIZ0er2pgAo4sDx56sv6P4H8IWdgNnw+c9ZWA95Yezzfz/5R4028D2Qgc2GeBcROK/waLMAqqYUeccXNOHejek2yySpAbhrRNEStAKKiEYRNBulAe0/6IsBlVqoCnBIzbOROAzXdv0iVwYDbozdteVsKuoot8tZwLHJ4pwzmR2gRBM2jAc9PagPPLFPrP79qN3NbQRKb/mASQoRjQp6STBLcvMSxUG4sskiNAdSqxMEGUkFNaJkHkBAQQ16jSbUyOy6W5NDmL8PziMkdtLUQZHn3HuvPfesYJ1IVR1UTS7rBrTgC1kCQK276VQVFCLjrV2dHa1NA03LjRdvNxq5tfPjx+ZzYjzWaDSdrdcBUWw+9zERr9eb5a2gRTO5homErS8kbZYcrscmROAIEOcEKKqT+OSmZFOTREqmG8OkNtfAdB8NisebiPM3n3fLOq5LW+DFLZXjptTVoB3x2Pmnr5vO1oEbolvMDriOJqgdNPUoQtiEXGNY5JqwmUgeP9TDlORtbo9vahpfMe7ZSBh34yvTc/5oS6go63ziFNi4T3rfrOxceRclQRcnBS/WIH9OCUXWguvrq4GQSIu7D5wGQ+Jc/JKF3ZiA8/g4fG230IGrYslJbMm4Z/Nm414MnpwEAAQoRmNLgPjmKc/AKQyjkeVpD9tapXxOZAkuN+6jAPq9driWmhr2u4aOLrklLliOdj6j2x8Y9nQO7+/dxazjyPwCDq8zYJqfQdCy3F1QpOw4ahgZfvhfp/vut3h6XN1bJu2eOWR+a37K66EW4KwCK8hdI3cHl7C5Mc1jXPM71kfCQ+HFRWRT2Zhxf8hkY6ENQJCnN+5ff7Rv/m+U1vyEb2efJAC+/37yxuxdpstX1Csg/C6BctYsM5nCajlVUrGCl22wMCGghthAaLKcqAHua3FbjdQ24QECiWnXSdHuE6mxodFd60TqDKdVW28y8xWhNQeBGRGOM3PCucea15SrUBVVezBoORSOzqRxk6bpxFAydJwyaCyOTgijIi+DxNFZw+NQKhgsHRsKh1PFWjRmTA49DueljCJVlIwRZDBIGUW0LTFvRFZFGWc0tNf+AG6/2V2Z/ndGGo1XEpGRwytKYkwYNWfchCWECJTPUhrbrj/CECkGi6YuHbYWyiRsL7DG8LpunKQiGimioiSpTApUb+XzKH6Vaut7AA==) format('woff2')}
+  <style>@font-face{font-family:'Geist Mono Card';font-weight:500;src:url(data:font/woff2;base64,d09GMgABAAAAAARAABAAAAAAB8wAAAPkAAGzdQAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIBwqBmA/U1RBVEQAVBEICoUMhDgBNgIkAxYLFAAEIAWDfgcgDAcbTAZRlDBKP8wfEugGu0KbWhVCoCWqnZEWJutmY0HLhos3hVx9y9h+oft5TDz///v9b659z1fEPHpSa3iy5JVBpmqJYsmkaiJRSaLt/fzm3037JF7zKVpTSh1qQFRI7zwhAolj5zbsopvZeO82k5ATXzYjXNzvArCIA+eW2fD6/Q/gCzv/OQsDsB7ywtjn/37yjxpt4HsgA5sN8S4icF7h0WYBVE0p8o4vaMK9G9NtlklSA3DXiKIlGA8oEcMiGDWfAbR7rycCdBr0BTikVhqkcBiu6fJZoQh63Bi7W51Mj5q6XicBhyaLcwqcbUDFCDaMBz2+uAc8sUtk/j/a9lxHoKbXeyymETGsMJ0CyymunmMECBcunodWgDSTQZB56QE6UVkJIKDQYbrRhBqV7e7xySHM34XkEhCpNLVf6Dn3zivPPC1YJ9LXJKoRl00FjMNnsgYAzd10qgqFyMLxUya3NI7MGlk7fPZ6rZZrOz9+rD8nRyO1Wt3ZahXIcv25j7FotVqvbgQNmsk1TMVsfSFlveJwNTYhgyNAnROgqE7iU5uSdXUKJZluDJPaXANIFw2KRuuo8zefd8s6rktb4MUtleOm1FWjHdHI+aev685WwQ3ZKWcHXEcd1Azq2jhK2oRd43jsmrSZih8/1MEV1E1Ol2caIVesezZi1t3kCjLnDTcE8qrWJ06Bjfu0+83KzpV3YRq0sTPoYgXyZrRQaM2/vr7qC8isvPvAaTAiKkQvWdqNCThPjKLXdksduCoSh4kl657Nm617CRSGAQABitHEEqC+uYozaIIgaGQRcfGNZcZjx5bQcuMeBuDfK4crielRr2Pk6JJT4UDVeOsztvmBZU/r6P7OXdw6ic0vkOg6BxBeDsOLamdOkxgiccvY6MP/JtN3b7+rw9G+BR5yzWHzW7PTbhezgKY1RE7tGLs7vETMTRgek4bfkS4aHQkuLmKbisZM+kN/oYcLbQCCPLly+/rYt9OTNo8NK7tf8P3kgxjAjz+P19sKqa8YVCD8LoE6aZb1msJqOVXpgfGyDf16UXAjBkEYsTZRA9w3znWdtBHcQSCx1HVSJvpIOpvUupsTGTA347WDFmdlRRifvcDMEw4zK4RTj7VSXS7ClZTtwWFlMAQmsEkwhEkEI8XELoXFE5gEcEqyUmgCkzUiAaOEwzMZxBAIyniLJkzIYMfhooRxtJKCCZIUDi0lj7Yl5o1JKykSjIf2Dj2A22t2l6b/nZLEEhWEpGSI8uI4U8bNmTRlCSUE57GUxrbrjzFUisNjqcuErYUyMdsLrDG8rpMgLo9FCykpiCtSAv1b93kUv0y/tVsAAAA=) format('woff2')}
     .label { font-family: 'Geist Mono Card', 'Geist Mono', ui-monospace, monospace; font-weight: 500; font-size: 43.1px; letter-spacing: 0.262em; fill: #FFFFFF; }
   </style>
   <defs>
@@ -21,6 +21,17 @@
       <stop offset="0" stop-color="#1A3D78"/>
       <stop offset="1" stop-color="#2A5AA6"/>
     </linearGradient>
+    <linearGradient id="cylSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#07132B"/>
+      <stop offset="0.55" stop-color="#10295A"/>
+      <stop offset="1" stop-color="#1A3D78"/>
+    </linearGradient>
+    <radialGradient id="sphere" cx="38%" cy="32%" r="70%">
+      <stop offset="0" stop-color="#FFF1C4"/>
+      <stop offset="0.25" stop-color="#FFD066"/>
+      <stop offset="0.75" stop-color="#8A6420"/>
+      <stop offset="1" stop-color="#2A1E0A"/>
+    </radialGradient>
     <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
       <feGaussianBlur stdDeviation="10"/>
     </filter>
@@ -36,13 +47,13 @@
     <circle cx="414.5" cy="690.0" r="372" fill="none" stroke="#FFFFFF" stroke-opacity="0.13" stroke-width="1.2"/>
     <circle cx="64.8" cy="563.5" r="4" fill="#FFFFFF" fill-opacity="0.35"/>
     <circle cx="637.7" cy="987.6" r="3" fill="#FFFFFF" fill-opacity="0.25"/>
-    <line x1="447.2" y1="986.9" x2="651.6" y2="868.9" stroke="#3B5E95" stroke-width="1" stroke-opacity="0.85"/><line x1="442.7" y1="979.1" x2="451.7" y2="994.7" stroke="#3B5E95" stroke-width="1" stroke-opacity="0.85"/><line x1="647.1" y1="861.1" x2="656.1" y2="876.7" stroke="#3B5E95" stroke-width="1" stroke-opacity="0.85"/>
+    <line x1="447.2" y1="986.9" x2="651.6" y2="868.9" stroke="#3B5E95" stroke-width="1" stroke-linecap="round" stroke-opacity="0.85"/><line x1="442.7" y1="979.1" x2="451.7" y2="994.7" stroke="#3B5E95" stroke-width="1" stroke-linecap="round" stroke-opacity="0.85"/><line x1="647.1" y1="861.1" x2="656.1" y2="876.7" stroke="#3B5E95" stroke-width="1" stroke-linecap="round" stroke-opacity="0.85"/>
     <polygon points="414.5,968.0 210.1,850.0 210.1,614.0 414.5,732.0" fill="#07132B"/>
     <polygon points="414.5,968.0 618.9,850.0 618.9,614.0 414.5,732.0" fill="#10295A"/>
     <polygon points="414.5,732.0 618.9,614.0 414.5,496.0 210.1,614.0" fill="url(#topFace)"/>
-    <line x1="414.5" y1="732.0" x2="618.9" y2="850.0" stroke="#3B5E95" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>
-    <line x1="414.5" y1="732.0" x2="210.1" y2="850.0" stroke="#3B5E95" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>
-    <line x1="414.5" y1="732.0" x2="414.5" y2="496.0" stroke="#3B5E95" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>
+    <line x1="414.5" y1="732.0" x2="618.9" y2="850.0" stroke="#3B5E95" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7" stroke-opacity="0.7"/>
+    <line x1="414.5" y1="732.0" x2="210.1" y2="850.0" stroke="#3B5E95" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7" stroke-opacity="0.7"/>
+    <line x1="414.5" y1="732.0" x2="414.5" y2="496.0" stroke="#3B5E95" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7" stroke-opacity="0.7"/>
     <polygon points="414.5,656.5 488.1,614.0 414.5,571.5 340.9,614.0" fill="#FFD066" fill-opacity="0.16" filter="url(#glow)"/>
     <polygon points="414.5,656.5 488.1,614.0 414.5,571.5 340.9,614.0" fill="none" stroke="#FFD066" stroke-width="1.3" stroke-dasharray="4 5" stroke-opacity="0.85"/>
     <circle cx="414.5" cy="614.0" r="3.2" fill="#FFD066"/>
@@ -56,13 +67,13 @@
     <line x1="618.9" y1="614.0" x2="414.5" y2="496.0" stroke="#6F9AD6" stroke-width="1.6" stroke-linecap="round"/>
     <line x1="210.1" y1="614.0" x2="414.5" y2="496.0" stroke="#6F9AD6" stroke-width="1.6" stroke-linecap="round"/>
     <ellipse cx="414.5" cy="614.0" rx="106.2" ry="61.2" fill="url(#landing)"/>
-    <line x1="414.5" y1="385.1" x2="414.5" y2="656.5" stroke="#3B5E95" stroke-width="1" stroke-dasharray="2 6" stroke-opacity="0.8"/><line x1="488.1" y1="342.6" x2="488.1" y2="614.0" stroke="#3B5E95" stroke-width="1" stroke-dasharray="2 6" stroke-opacity="0.8"/><line x1="340.9" y1="342.6" x2="340.9" y2="614.0" stroke="#3B5E95" stroke-width="1" stroke-dasharray="2 6" stroke-opacity="0.8"/>
+    <line x1="414.5" y1="385.1" x2="414.5" y2="656.5" stroke="#3B5E95" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 6" stroke-opacity="0.8"/><line x1="488.1" y1="342.6" x2="488.1" y2="614.0" stroke="#3B5E95" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 6" stroke-opacity="0.8"/><line x1="340.9" y1="342.6" x2="340.9" y2="614.0" stroke="#3B5E95" stroke-width="1" stroke-linecap="round" stroke-dasharray="2 6" stroke-opacity="0.8"/>
     <polygon points="414.5,385.1 340.9,342.6 340.9,257.6 414.5,300.1" fill="#07132B"/>
     <polygon points="414.5,385.1 488.1,342.6 488.1,257.6 414.5,300.1" fill="#10295A"/>
     <polygon points="414.5,300.1 488.1,257.6 414.5,215.2 340.9,257.6" fill="url(#topFace)"/>
-    <line x1="414.5" y1="300.1" x2="488.1" y2="342.6" stroke="#3B5E95" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>
-    <line x1="414.5" y1="300.1" x2="340.9" y2="342.6" stroke="#3B5E95" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>
-    <line x1="414.5" y1="300.1" x2="414.5" y2="215.2" stroke="#3B5E95" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>
+    <line x1="414.5" y1="300.1" x2="488.1" y2="342.6" stroke="#3B5E95" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7" stroke-opacity="0.7"/>
+    <line x1="414.5" y1="300.1" x2="340.9" y2="342.6" stroke="#3B5E95" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7" stroke-opacity="0.7"/>
+    <line x1="414.5" y1="300.1" x2="414.5" y2="215.2" stroke="#3B5E95" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="5 7" stroke-opacity="0.7"/>
     <line x1="414.5" y1="385.1" x2="488.1" y2="342.6" stroke="#6F9AD6" stroke-width="1.6" stroke-linecap="round"/>
     <line x1="414.5" y1="385.1" x2="340.9" y2="342.6" stroke="#6F9AD6" stroke-width="1.6" stroke-linecap="round"/>
     <line x1="414.5" y1="385.1" x2="414.5" y2="300.1" stroke="#6F9AD6" stroke-width="1.6" stroke-linecap="round"/>

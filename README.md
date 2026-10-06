@@ -81,17 +81,23 @@ Links work per card too: `…/#education/harvard` opens that card directly.
 
 ## Book cards
 
-Every book card is built from its cover photo: 700 x 1000, the cover full bleed
-inside the rounded card shape, with the flag of the language in the top-right
-corner at the same size and position as the flag on the Zero to One card. The
-source photos sit in `Readings/_covers` and are never loaded by the site. To add
-a book, drop its cover in that folder, add a line to `BOOKS` in
-`tools/make_book_cards.py`, run it, then add the book to `content.js`:
+Every book card is a plain grey book drawn in SVG: 700 x 1000, a darker spine
+on the left, the title in large white capitals, a hairline, the subtitle in
+small capitals and the authors at the bottom. The text is set in Geist, and
+each card carries the few letters of the font it uses, because a card shown as
+an image cannot reach the page's fonts. Titles get the largest size that fits
+in four lines; subtitles and authors wrap to the card width.
+
+To add a book, add a line to `BOOKS` in `tools/make_book_cards.py` (title,
+subtitle, authors, file name), run it, then add the book to `content.js`:
 
 ```
-pip install pillow
+pip install fonttools brotli
 python3 tools/make_book_cards.py
 ```
+
+The cover photos in `Readings/_covers` were used by the earlier cover cards
+and are no longer loaded or needed.
 
 ## Weight of the cards
 
@@ -121,8 +127,6 @@ never dealt as an empty rectangle.
   turning PORTFOLIO ring, the fixed ME marker and the draw button. No gradients,
   no shadow, no rim.
 - The About head card is deliberately left white, waiting for artwork.
-- The Rockefeller cover is 334 x 500, still under the 700 or so a card can show,
-  so it stays a touch soft. Every other cover is fine.
 - `data/site.ts` in the repo is a leftover of the old Next.js version and can be
   deleted.
 - `Projects/BExams_card_site_ready.svg` (2.2 MB) and

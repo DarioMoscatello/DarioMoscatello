@@ -16,7 +16,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCE = os.path.join(ROOT, 'About/23-09-26.jpg')
 OUT = os.path.join(ROOT, 'About/ABOUT_card_site_ready.svg')
 
-W, H, RX = 829, 1313, 72
+W, H, RX = 829, 1184, 72  # 0.7 wide, like every other card
 MAX_WIDTH = 840
 QUALITY = 84
 

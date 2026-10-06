@@ -3,21 +3,23 @@ const escapeHtml = (value) =>
 
 function entryMarkup(card, section) {
   const parts = [];
-  parts.push(`<h2 class="entry__title">${escapeHtml(card.title || section.label)}</h2>`);
+  const title = `<h2 class="entry__title">${escapeHtml(card.title || section.label)}</h2>`;
+  // A project's own website sits beside its title: visible without
+  // scrolling, easy to press, and no extra line.
+  if (card.site) {
+    parts.push(
+      `<div class="entry__head">${title}` +
+        `<a class="entry__site" href="${escapeHtml(card.site.href)}" target="_blank" rel="noopener">` +
+        `${escapeHtml(card.site.label)}<span aria-hidden="true"> ↗</span></a></div>`,
+    );
+  } else {
+    parts.push(title);
+  }
 
   if (card.subtitle) parts.push(`<p class="entry__subtitle">${escapeHtml(card.subtitle)}</p>`);
 
   if (card.meta?.length) {
     parts.push(`<p class="entry__meta">${card.meta.map((m) => `<span>${escapeHtml(m)}</span>`).join('')}</p>`);
-  }
-
-  // A project's own website sits right under its title, so it is visible
-  // without scrolling and easy to press.
-  if (card.site) {
-    parts.push(
-      `<p class="entry__site"><a href="${escapeHtml(card.site.href)}" target="_blank" rel="noopener">` +
-        `${escapeHtml(card.site.label)}<span aria-hidden="true"> ↗</span></a></p>`,
-    );
   }
 
   if (card.body?.length) {

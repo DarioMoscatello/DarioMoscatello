@@ -14,7 +14,7 @@
  *   facts     [label, value] pairs
  *   list      simple list (interests)
  *   links     [{ label, href }]
- *   site      { label, href }: a project's website, as a button under the title
+ *   site      { label, href }: a project's website, as a button beside the title
  *   me        true on the card with my portrait: the ME under the arrow shows only there
  */
 

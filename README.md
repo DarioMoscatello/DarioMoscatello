@@ -83,13 +83,14 @@ Links work per card too: `…/#education/harvard` opens that card directly.
 
 Every book card is a plain grey book drawn in SVG: 700 x 1000, a darker spine
 on the left, the title in large white capitals, a hairline, the subtitle in
-small capitals and the authors at the bottom. The text is set in Geist, and
+small capitals, the authors at the bottom and a small flag of the
+language of the edition in the top-right corner. The text is set in Geist, and
 each card carries the few letters of the font it uses, because a card shown as
 an image cannot reach the page's fonts. Titles get the largest size that fits
 in four lines; subtitles and authors wrap to the card width.
 
 To add a book, add a line to `BOOKS` in `tools/make_book_cards.py` (title,
-subtitle, authors, file name), run it, then add the book to `content.js`:
+subtitle, authors, flag `it`/`uk`/`ee`, file name), run it, then add the book to `content.js`:
 
 ```
 pip install fonttools brotli

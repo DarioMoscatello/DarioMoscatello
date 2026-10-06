@@ -1,6 +1,7 @@
 """Builds one 700x1000 card per book: a plain grey book with a darker spine on
 the left, the title in large white capitals, a hairline, the subtitle in small
-capitals and the authors at the bottom. Nothing else: no cover, no flag.
+capitals, the authors at the bottom and a small flag of the language of the
+edition in the top-right corner. No cover photo.
 
 The text is real SVG text set in Geist, the site font. The cards are shown as
 <img>, which cannot reach the page's fonts, so each card carries its own copy
@@ -49,29 +50,65 @@ SMALL_TRACK = 0.02  # em
 SUB_MAX_LINES = 5
 BOTTOM = H - 78  # baseline of the last author line
 
-# title, subtitle ('' for none), authors, output file
+FLAG_W, FLAG_H, FLAG_R = 42, 27, 2.5
+FLAG_INSET = 40  # from the top and right edges
+
+FLAGS = {
+    'it': '''<rect width="{w}" height="{h}" fill="#008C45"/>
+      <rect x="{t1}" width="{t1}" height="{h}" fill="#F4F5F0"/>
+      <rect x="{t2}" width="{t1}" height="{h}" fill="#CD212A"/>''',
+    'uk': '''<rect width="{w}" height="{h}" fill="#012169"/>
+      <path d="M0 0L{w} {h}M{w} 0L0 {h}" stroke="#FFFFFF" stroke-width="{diag}"/>
+      <path d="M0 0L{w} {h}M{w} 0L0 {h}" stroke="#C8102E" stroke-width="{diag_red}"/>
+      <path d="M{cx} 0V{h}M0 {cy}H{w}" stroke="#FFFFFF" stroke-width="{cross}"/>
+      <path d="M{cx} 0V{h}M0 {cy}H{w}" stroke="#C8102E" stroke-width="{cross_red}"/>''',
+    'ee': '''<rect width="{w}" height="{h3}" fill="#0072CE"/>
+      <rect y="{h3}" width="{w}" height="{h3}" fill="#0F0F0F"/>
+      <rect y="{h6}" width="{w}" height="{h3}" fill="#FFFFFF"/>''',
+}
+
+
+def flag(lang):
+    w, h = FLAG_W, FLAG_H
+    shape = FLAGS[lang].format(
+        w=w, h=h, t1=round(w / 3, 2), t2=round(w * 2 / 3, 2),
+        h3=round(h / 3, 2), h6=round(h * 2 / 3, 2), cx=w / 2, cy=h / 2,
+        diag=round(h * 0.2, 2), diag_red=round(h * 0.07, 2),
+        cross=round(h / 3, 2), cross_red=round(h / 5, 2),
+    )
+    return f'''  <g transform="translate({W - FLAG_INSET - w} {FLAG_INSET})">
+    <clipPath id="flagClip"><rect width="{w}" height="{h}" rx="{FLAG_R}" ry="{FLAG_R}"/></clipPath>
+    <g clip-path="url(#flagClip)">
+      {shape}
+    </g>
+    <rect width="{w}" height="{h}" rx="{FLAG_R}" ry="{FLAG_R}" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+'''
+
+
+# title, subtitle ('' for none), authors, edition language, output file
 BOOKS = [
-    ('Principles for Dealing with the Changing World Order', 'Why nations succeed and fail', ['Ray Dalio'], 'Principles_card.svg'),
-    ('The Selfish Gene', '40th anniversary edition', ['Richard Dawkins'], 'The_Selfish_Gene_card.svg'),
-    ('Zero to One', 'Notes on startups, or how to build the future', ['Peter Thiel'], 'Zero_to_One_card_UK_flag_site_ready.svg'),
-    ('Manifesteeri', '', ['Roxie Nafousi'], 'Manifest_card.svg'),
-    ('Breaking the Social Media Prism', 'How to make our platforms less polarizing', ['Chris Bail'], 'Social_Media_Prism_card.svg'),
-    ('The Black Swan', 'The impact of the highly improbable', ['Nassim Nicholas Taleb'], 'The_Black_Swan_card.svg'),
-    ('La lotteria dei geni', 'Come il DNA influenza la nostra vita e la società', ['Kathryn Paige Harden'], 'La_lotteria_dei_geni_card.svg'),
-    ('Atomic Habits', 'Piccole abitudini per grandi cambiamenti', ['James Clear'], 'Atomic_Habits_card.svg'),
-    ('Formae mentis', 'Saggio sulla pluralità dell’intelligenza', ['Howard Gardner'], 'Formae_mentis_card.svg'),
-    ('Il management', '', ['Abraham Maslow'], 'Il_management_card.svg'),
-    ('L’arte della guerra', '', ['Sun Tzu'], 'Arte_della_guerra_card.svg'),
-    ('Meditazioni di Marco Aurelio', 'Una guida alla filosofia stoica per trovare forza interiore, resilienza e calma nella vita quotidiana', ['Jonas Weifeld'], 'Meditazioni_card.svg'),
-    ('Gli Sforza', 'Il racconto della dinastia che fece grande Milano', ['Carlo Maria Lomartire'], 'Gli_Sforza_card.svg'),
-    ('Caterina Sforza', 'Leonessa di Romagna', ['Marco Viroli'], 'Caterina_Sforza_card.svg'),
-    ('Caterina de’ Medici', 'Un’italiana alla conquista della Francia', ['Alessandra Necci'], 'Caterina_de_Medici_card.svg'),
-    ('La casa dell’oppio', '', ['Su Tong'], 'La_casa_dell_oppio_card.svg'),
-    ('Intelligenza emotiva', 'Che cos’è e perché può renderci felici', ['Daniel Goleman'], 'Intelligenza_emotiva_card.svg'),
-    ('Il Principe', '', ['Niccolò Machiavelli'], 'Il_Principe_card.svg'),
-    ('John D. Rockefeller', 'The original titan', ['JR MacGregor'], 'Rockefeller_card.svg'),
-    ('Valutazione immobiliare', 'Metodologia e casi · seconda edizione', ['Giacomo Morri', 'Paolo Benedetto'], 'Valutazione_immobiliare_card.svg'),
-    ('L’inganno dei confini', 'Come la geografia governa il mondo', ['Simone Guida'], 'Inganno_dei_confini_card.svg'),
+    ('Principles for Dealing with the Changing World Order', 'Why nations succeed and fail', ['Ray Dalio'], 'uk', 'Principles_card.svg'),
+    ('The Selfish Gene', '40th anniversary edition', ['Richard Dawkins'], 'it', 'The_Selfish_Gene_card.svg'),
+    ('Zero to One', 'Notes on startups, or how to build the future', ['Peter Thiel'], 'uk', 'Zero_to_One_card_UK_flag_site_ready.svg'),
+    ('Manifesteeri', '', ['Roxie Nafousi'], 'ee', 'Manifest_card.svg'),
+    ('Breaking the Social Media Prism', 'How to make our platforms less polarizing', ['Chris Bail'], 'uk', 'Social_Media_Prism_card.svg'),
+    ('The Black Swan', 'The impact of the highly improbable', ['Nassim Nicholas Taleb'], 'uk', 'The_Black_Swan_card.svg'),
+    ('La lotteria dei geni', 'Come il DNA influenza la nostra vita e la società', ['Kathryn Paige Harden'], 'it', 'La_lotteria_dei_geni_card.svg'),
+    ('Atomic Habits', 'Piccole abitudini per grandi cambiamenti', ['James Clear'], 'it', 'Atomic_Habits_card.svg'),
+    ('Formae mentis', 'Saggio sulla pluralità dell’intelligenza', ['Howard Gardner'], 'it', 'Formae_mentis_card.svg'),
+    ('Il management', '', ['Abraham Maslow'], 'it', 'Il_management_card.svg'),
+    ('L’arte della guerra', '', ['Sun Tzu'], 'it', 'Arte_della_guerra_card.svg'),
+    ('Meditazioni di Marco Aurelio', 'Una guida alla filosofia stoica per trovare forza interiore, resilienza e calma nella vita quotidiana', ['Jonas Weifeld'], 'it', 'Meditazioni_card.svg'),
+    ('Gli Sforza', 'Il racconto della dinastia che fece grande Milano', ['Carlo Maria Lomartire'], 'it', 'Gli_Sforza_card.svg'),
+    ('Caterina Sforza', 'Leonessa di Romagna', ['Marco Viroli'], 'it', 'Caterina_Sforza_card.svg'),
+    ('Caterina de’ Medici', 'Un’italiana alla conquista della Francia', ['Alessandra Necci'], 'it', 'Caterina_de_Medici_card.svg'),
+    ('La casa dell’oppio', '', ['Su Tong'], 'it', 'La_casa_dell_oppio_card.svg'),
+    ('Intelligenza emotiva', 'Che cos’è e perché può renderci felici', ['Daniel Goleman'], 'it', 'Intelligenza_emotiva_card.svg'),
+    ('Il Principe', '', ['Niccolò Machiavelli'], 'it', 'Il_Principe_card.svg'),
+    ('John D. Rockefeller', 'The original titan', ['JR MacGregor'], 'it', 'Rockefeller_card.svg'),
+    ('Valutazione immobiliare', 'Metodologia e casi · seconda edizione', ['Giacomo Morri', 'Paolo Benedetto'], 'it', 'Valutazione_immobiliare_card.svg'),
+    ('L’inganno dei confini', 'Come la geografia governa il mondo', ['Simone Guida'], 'it', 'Inganno_dei_confini_card.svg'),
 ]
 
 
@@ -145,7 +182,7 @@ def tspans(lines, x, first, step):
     )
 
 
-def card(title, sub, authors, filename):
+def card(title, sub, authors, lang, filename):
     title_up, sub_up = title.upper(), sub.upper()
     authors_up = [a.upper() for a in authors]
 
@@ -188,7 +225,7 @@ def card(title, sub, authors, filename):
 {tspans(title_lines, LEFT, first, step)}
   </text>
   <rect x="{LEFT}" y="{rule_y}" width="{TEXT_W}" height="1.5" fill="#FFFFFF" fill-opacity="0.5"/>
-{sub_block}  <text class="small" fill-opacity="0.9">
+{flag(lang)}{sub_block}  <text class="small" fill-opacity="0.9">
 {tspans(author_lines, LEFT, author_first, small_step)}
   </text>
 </svg>
@@ -199,6 +236,6 @@ def card(title, sub, authors, filename):
 
 
 if __name__ == '__main__':
-    for title, sub, authors, name in BOOKS:
-        size, tl, sl, nbytes = card(title, sub, authors, name)
+    for title, sub, authors, lang, name in BOOKS:
+        size, tl, sl, nbytes = card(title, sub, authors, lang, name)
         print(f'{name:42} title {size}px x{tl}  subtitle x{sl}  {nbytes // 1024} kB')

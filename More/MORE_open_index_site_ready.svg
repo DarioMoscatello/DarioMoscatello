@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 829 1184" width="829" height="1184"
      role="img" aria-label="More: a slab holding a blue block, a blue cylinder and a gold sphere">
-  <style>@font-face{font-family:'Geist Mono Card';font-weight:500;src:url(data:font/woff2;base64,d09GMgABAAAAAANcABAAAAAABlwAAAMAAAGzdQAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIBwqBmA/U1RBVEQATBEICoI0ghUBNgIkAw4LDAAEIAWDfgcgDAcbGQVRVC72CL44sIlMLfiKsI3x4ytKDAvmhYu4jjzjogjYlg2tjT/Fw/P7qee+/BSSDAg0Mygg4aYmETTqgqockOvs/tD+3g8oEZPYHnWY4uJKAEteUoJaWf8XcjZO1VZ9nZzYWW6nb1Fi32IPPLGOTuVkW0TyBFG7fNYUTLqGrW1aoL0EqgtbsgJCtYvZJFLeca1rchKi3kCgAkhCyIRASXdp5mkz5i3jkkEOECgZqMrijRbYt/nYASmbMC5Lq6JZkXRdJJnMTXl5bNAZE5lSqBWE8M9YsWTqPE+m2yz8/X9kk+I6AlL79AG9OYRQI6E9C/qznNy561hg97HN+2IAs0xrZohu0YyCkGIgEwIkFNCeVaA9m1FMSmokyXQr1mzmoB4qf5+/yJ/nTwUAQuS0AkVQQhXWMbkMyAAhJKkSa42KTrXlYgsVy6StStpKxfJ6z0ZvPqvDKuKioSEuNzaWb9TXy0/dihsqjMtVWLqOUAAdsoGncBh2xy1f7llx+fBLqZQKA58Hcf6q5+c1932ixz651VRYfvp/f2v7883pOjhGNz9sX3p9MEYjuBztjDycOLVChpGDd4YfTp0gcN020Tk9VDh9eFg4mx7uHAKArMzT6otMU9t0+NLhLV3N+fON87GzLbOG7VPDb93qRd/T4ea5+DGYnBnpHz19eBKYQCCeHb92/V7Txlbj/tVYCz+E4esqe0x8+9X655+6UwOqJBB8hTCtsnhFfLk5xCmaDeGpfe2KpphR1LunDQ+VXVcQWS0eoFDo6xElLX1CBSP8DWYuKuoaFbFK7xhYFlRiBohuzBJiALPhswbyxB5TNLpTgIDDQ7I6tevULWsbj5E1hyGAkKx1gEbEoCBZEzCEpwGgrCoeguigQW3acITtdozUiqJRtDnCACgMmfpNi1qwNCqktWG49gxnxXI0ETNoAu+k2MTgYDIC0KFVn3YdhuzaNGXZkDZjlrYQu0kAEjiQZXcNxJ7+jk317y5ACDIBZZNGQVBZgfyG/JLC16HH2QAAAAA=) format('woff2')}
+  <style>@font-face{font-family:'Geist Mono Card';font-weight:500;src:url(data:font/woff2;base64,d09GMgABAAAAAANUABAAAAAABlwAAAL4AAGzdQAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbIBwqBmA/U1RBVEQATBEICoI0ghUBNgIkAw4LDAAEIAWDfgcgDAcbGQVRVC72CL44sI1hjR3iXEqXF0YtbsWj/rj40tJZ0cEwdTB9FcHza+m8v3uByxUINDOogKowVZUIGnXSqkpAl9ru8XO/2746kNS0Te0JFomUIFoyyZJYK/R/IWfj/lDNhteAsrS1jk7lZFtE8gRRu3zWFEy6hq1tWqC9BKoLW7ICQrWL2SRS3nGta3ISot5AoAJIQsiFQFlvpZhZcxatEpZDARAoG6oe642WPLT91BElNmFcntZFqxKpXiSBhSkvjy06YypIoVYQwj9jzYqZizyZbTP7+z/yaVGPgNQ5vUV/QSHUSOiMxWDs2b37TgX2n9p+KIZg5NpjIHpFKzIhxVCAAAkZOvMJdOY3DiirkSSzrVizWYB6qOJNcVGhAECIgnagBMqowibgOiAHhJCkSqw9KrrV1pXaqFgm7dxQ7C+X6jZHt8byWV3WcRefPsX1z5/rGlpa8NO8pkGFcb0Ky/UIAeiQDTyFo7rujlu9Orrm8t7HcjllA58Hcf665yc7F75P3Tb2uXInZKtP/+9s7X5uvNlzeIwa3+5eeX0wRlNqNdkZeThzboUMI4fuDD+cO0Pgum2uc3qo6vzhYdXZ9HDnCABkZZ5WXwRTb78cv3Z8R1fz4vmm84nz2XnDgZmZt/3tng48n2m+VDhGkzMj/eNnD08iAIF4fPpWfdPtre0m/avJsh/C8HWde4Bvvx6gujh1p0+okkDwFcK0zuJV48vNIU7RagRP7WtXbQqDkv49bXioTr1M5LW4i0JhoEeUtPUeZcb4G8xdVNIzKmKV/jG0LKjEHBC9mBXEEGbLZw0VjQOmOFynEI1CRZTr1K5Tt3LbVJJycyQajCi3DnHoJAKi3ASKUDkQrFw9FUG4sEFt2ii07XaK10rgsLQ5IkEEEpP6TYtayBw2orVhuOEZzorlOCKWiDTeybJJoqBMHKRDqz7tOgzZtWnKsiFtxixtIXaTCKZxoJzdNRB7+js21b+7gOCYNIJNDgvH5gOKG/FLCl+EHuQDAAAA) format('woff2')}
     .label { font-family: 'Geist Mono Card', 'Geist Mono', ui-monospace, monospace; font-weight: 500; font-size: 43.1px; letter-spacing: 0.262em; fill: #FFFFFF; }
   </style>
   <defs>
@@ -25,6 +25,11 @@
       <stop offset="0" stop-color="#07132B"/>
       <stop offset="0.55" stop-color="#10295A"/>
       <stop offset="1" stop-color="#1A3D78"/>
+    </linearGradient>
+    <linearGradient id="cylGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6E4E14"/>
+      <stop offset="0.55" stop-color="#C9962E"/>
+      <stop offset="1" stop-color="#FFD066"/>
     </linearGradient>
     <radialGradient id="sphere" cx="38%" cy="32%" r="70%">
       <stop offset="0" stop-color="#FFF1C4"/>

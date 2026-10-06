@@ -1,8 +1,13 @@
-"""Builds the drawn section covers for Work, Projects and More: no generated
+"""Builds the drawn section covers (Education, Work, Projects, More and the
+Interests card in About): no generated
 images, only shapes. All three share the language of the Readings rose: black,
 the rose's blues, one single warm note in gold, a faint dot grid and a hairline
 orbit, and the section name in Geist Mono at the same spot as on every cover.
 
+    Education a graduation cap: a square board on a round crown, its tassel
+              hanging over the front corner and ending in gold.
+    Interests a tray in four parts, one per interest: a chessboard, a molecule,
+              a tower of blocks and a stack of gold coins.
     Work      three blocks rising like a chart, a dashed trend line ending in
               a gold point on the tallest one.
     Projects  a block like a page of a blueprint, its hidden edges dashed, an
@@ -147,6 +152,11 @@ def frame(label, description, body, orbit=(W / 2, 690, 372)):
       <stop offset="0.55" stop-color="{SIDE_RIGHT}"/>
       <stop offset="1" stop-color="#1A3D78"/>
     </linearGradient>
+    <linearGradient id="cylGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6E4E14"/>
+      <stop offset="0.55" stop-color="#C9962E"/>
+      <stop offset="1" stop-color="{GOLD}"/>
+    </linearGradient>
     <radialGradient id="sphere" cx="38%" cy="32%" r="70%">
       <stop offset="0" stop-color="#FFF1C4"/>
       <stop offset="0.25" stop-color="{GOLD}"/>
@@ -246,19 +256,21 @@ def work():
         'WORK', 'three blue blocks rising like a chart, a trend line ending in a gold point', '\n    '.join(parts)))
 
 
-def cylinder(center, r, h):
+def cylinder(center, r, h, gold=False, hidden=True):
     """Upright cylinder in isometric view; center is the middle of its base."""
     x, y = center
     ry = r * 0.5
+    side_fill, top_fill, stroke = (('url(#cylGold)', GOLD, '#FFE3A0') if gold
+                                   else ('url(#cylSide)', 'url(#topFace)', EDGE))
     side = (f'<path d="M{x - r:.1f},{y - h:.1f} L{x - r:.1f},{y:.1f} '
-            f'A{r:.1f},{ry:.1f} 0 0 0 {x + r:.1f},{y:.1f} L{x + r:.1f},{y - h:.1f} Z" fill="url(#cylSide)"/>')
+            f'A{r:.1f},{ry:.1f} 0 0 0 {x + r:.1f},{y:.1f} L{x + r:.1f},{y - h:.1f} Z" fill="{side_fill}"/>')
     back_rim = (f'<path d="M{x - r:.1f},{y:.1f} A{r:.1f},{ry:.1f} 0 0 1 {x + r:.1f},{y:.1f}" fill="none" '
-                f'stroke="{EDGE_SOFT}" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>')
+                f'stroke="{EDGE_SOFT}" stroke-width="1.2" stroke-dasharray="5 7" stroke-opacity="0.7"/>') if hidden else ''
     front_rim = (f'<path d="M{x - r:.1f},{y:.1f} A{r:.1f},{ry:.1f} 0 0 0 {x + r:.1f},{y:.1f}" fill="none" '
-                 f'stroke="{EDGE}" stroke-width="1.6"/>')
-    top = (f'<ellipse cx="{x:.1f}" cy="{y - h:.1f}" rx="{r:.1f}" ry="{ry:.1f}" fill="url(#topFace)" '
-           f'stroke="{EDGE}" stroke-width="1.6"/>')
-    sides = line((x - r, y - h), (x - r, y)) + line((x + r, y - h), (x + r, y))
+                 f'stroke="{stroke}" stroke-width="1.6"/>')
+    top = (f'<ellipse cx="{x:.1f}" cy="{y - h:.1f}" rx="{r:.1f}" ry="{ry:.1f}" fill="{top_fill}" '
+           f'stroke="{stroke}" stroke-width="1.6"/>')
+    sides = line((x - r, y - h), (x - r, y), stroke) + line((x + r, y - h), (x + r, y), stroke)
     return back_rim + side + front_rim + sides + top
 
 
@@ -287,7 +299,92 @@ def more():
         'MORE', 'a slab holding a blue block, a blue cylinder and a gold sphere', body))
 
 
+def education():
+    u = 360  # side of the board
+    board_h = 0.045
+    centre = (W / 2, 560)  # screen point of the board's centre, underside
+    origin = (centre[0], centre[1] + 0.5 * u)  # front corner of the board
+    crown_r, crown_h = 0.34 * u, 0.66 * u  # tall enough to show below the front corner
+
+    on_board = lambda i, j: iso(origin, u, i, j, board_h)
+    button = on_board(0.5, 0.5)
+    corner = on_board(0.02, 0.02)  # the front corner, where the cord falls
+    end = (corner[0], corner[1] + 0.36 * u)
+    fringe = ''.join(line((end[0] + dx, end[1]), (end[0] + dx * 1.6, end[1] + 46), GOLD, 2.2)
+                     for dx in (-7, -3.5, 0, 3.5, 7))
+    tassel = (
+        line(button, corner, '#C9962E', 2.2)
+        + line(corner, end, '#C9962E', 2.2)
+        + fringe
+        + f'<rect x="{end[0] - 9:.1f}" y="{end[1] - 8:.1f}" width="18" height="14" rx="3" fill="{GOLD}"/>'
+        + glow_dot(end[0], end[1] + 22, 3.5)
+        + f'<circle cx="{button[0]:.1f}" cy="{button[1]:.1f}" r="6" fill="{GOLD}"/>'
+    )
+    shadow = (f'<ellipse cx="{centre[0]:.1f}" cy="{centre[1] + crown_h + 40:.1f}" rx="{u * 0.46:.1f}" '
+              f'ry="{u * 0.11:.1f}" fill="#000000" fill-opacity="0.6"/>')
+    body = '\n    '.join([
+        shadow,
+        cylinder((centre[0], centre[1] + crown_h), crown_r, crown_h),
+        box(origin, u, 1, 1, board_h),
+        tassel,
+        dimension(iso(origin, u, 0, -0.1, 0), iso(origin, u, 1, -0.1, 0)),
+    ])
+    write('Education/Education_card_site_ready.svg', frame(
+        'EDUCATION', 'a blue graduation cap on black, its tassel ending in gold', body))
+
+
+def interests():
+    u = 400  # side of the tray
+    base = (W / 2, 1010)
+    tray_h = 0.06
+    on = lambda i, j: iso(base, u, i, j, tray_h)
+    parts = [dimension(iso(base, u, 0, -0.08, 0), iso(base, u, 1, -0.08, 0))]
+
+    # the tray and its four compartments
+    walls = line(on(0.5, 0), on(0.5, 1), EDGE_SOFT, 1.4) + line(on(0, 0.5), on(1, 0.5), EDGE_SOFT, 1.4)
+    parts.append(box(base, u, 1, 1, tray_h, walls))
+
+    # back cell: a tower of three blocks, real estate and architecture
+    lift = 0
+    for side, h in [(0.3, 0.32), (0.22, 0.26), (0.14, 0.22)]:
+        off = 0.75 - side / 2
+        parts.append(box(iso(base, u, off, off, tray_h + lift), u, side, side, h))
+        lift += h
+
+    # left cell: a molecule floating, tech and AI
+    hub = (0.25, 0.75, 0.42)
+    arms = [(-0.13, -0.11, -0.13), (0.12, 0.1, -0.15), (-0.06, 0.12, 0.17), (0.08, -0.12, 0.19)]
+    nodes = [iso(base, u, *hub)] + [iso(base, u, hub[0] + a * 1.5, hub[1] + b * 1.5, hub[2] + c * 1.5) for a, b, c in arms]
+    for a, b in [(0, 1), (0, 2), (0, 3), (0, 4), (1, 4), (2, 3)]:
+        parts.append(line(nodes[a], nodes[b], EDGE, 1.6, None, 0.7))
+    for n, (x, y) in enumerate(nodes):
+        parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{17 if n == 0 else 11}" fill="#1A3D78" '
+                     f'stroke="{EDGE}" stroke-width="1.6"/>')
+
+    # right cell: a stack of gold coins, economics
+    cx, cy = on(0.75, 0.25)
+    parts.append(f'<ellipse cx="{cx:.1f}" cy="{cy - 0.08 * u:.1f}" rx="{0.3 * u:.1f}" ry="{0.2 * u:.1f}" '
+                 f'fill="url(#landing)" opacity="0.6"/>')
+    for n in range(4):
+        parts.append(cylinder((cx + (n % 2) * 3, cy - n * 0.035 * u), 0.12 * u, 0.03 * u, gold=True, hidden=False))
+
+    # front cell: a chessboard, 4 by 4
+    for a in range(4):
+        for b in range(4):
+            q = [on(0.05 + a * 0.1, 0.05 + b * 0.1), on(0.15 + a * 0.1, 0.05 + b * 0.1),
+                 on(0.15 + a * 0.1, 0.15 + b * 0.1), on(0.05 + a * 0.1, 0.15 + b * 0.1)]
+            fill = '#2A5AA6' if (a + b) % 2 == 0 else '#07132B'
+            parts.append(f'<polygon points="{pts(q)}" fill="{fill}"/>')
+    rim = [on(0.05, 0.05), on(0.45, 0.05), on(0.45, 0.45), on(0.05, 0.45)]
+    parts.append(f'<polygon points="{pts(rim)}" fill="none" stroke="{EDGE}" stroke-width="1.4"/>')
+
+    write('About/INTERESTS_card_site_ready.svg', frame(
+        'INTERESTS', 'a tray with a chessboard, a molecule, a tower of blocks and gold coins', '\n    '.join(parts)))
+
+
 if __name__ == '__main__':
+    education()
+    interests()
     work()
     projects()
     more()

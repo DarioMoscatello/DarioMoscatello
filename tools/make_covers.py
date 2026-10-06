@@ -4,8 +4,8 @@ images, only shapes. All three share the language of the Readings rose: black,
 the rose's blues, one single warm note in gold, a faint dot grid and a hairline
 orbit, and the section name in Geist Mono at the same spot as on every cover.
 
-    Education a graduation cap: a square board on a round crown, its tassel
-              hanging over the front corner and ending in gold.
+    Education a small classical temple, like the front of a university: three
+              steps, two rows of columns, a gable, and a gold light inside.
     Interests a tray in four parts, one per interest: a chessboard, a molecule,
               a tower of blocks and a stack of gold coins.
     Work      three blocks rising like a chart, a dashed trend line ending in
@@ -300,37 +300,58 @@ def more():
 
 
 def education():
-    u = 360  # side of the board
-    board_h = 0.045
-    centre = (W / 2, 560)  # screen point of the board's centre, underside
-    origin = (centre[0], centre[1] + 0.5 * u)  # front corner of the board
-    crown_r, crown_h = 0.34 * u, 0.66 * u  # tall enough to show below the front corner
+    u = 300  # one unit
+    base = (W / 2 - 0.2 * u, 990)  # front-bottom corner of the lowest step
+    L, D = 1.3, 0.85  # temple length (along i) and depth (along j)
+    step_h = 0.06
+    col_h, col_r = 0.95, 0.075
+    roof_h, gable = 0.09, 0.3
 
-    on_board = lambda i, j: iso(origin, u, i, j, board_h)
-    button = on_board(0.5, 0.5)
-    corner = on_board(0.02, 0.02)  # the front corner, where the cord falls
-    end = (corner[0], corner[1] + 0.36 * u)
-    fringe = ''.join(line((end[0] + dx, end[1]), (end[0] + dx * 1.6, end[1] + 46), GOLD, 2.2)
-                     for dx in (-7, -3.5, 0, 3.5, 7))
-    tassel = (
-        line(button, corner, '#C9962E', 2.2)
-        + line(corner, end, '#C9962E', 2.2)
-        + fringe
-        + f'<rect x="{end[0] - 9:.1f}" y="{end[1] - 8:.1f}" width="18" height="14" rx="3" fill="{GOLD}"/>'
-        + glow_dot(end[0], end[1] + 22, 3.5)
-        + f'<circle cx="{button[0]:.1f}" cy="{button[1]:.1f}" r="6" fill="{GOLD}"/>'
-    )
-    shadow = (f'<ellipse cx="{centre[0]:.1f}" cy="{centre[1] + crown_h + 40:.1f}" rx="{u * 0.46:.1f}" '
-              f'ry="{u * 0.11:.1f}" fill="#000000" fill-opacity="0.6"/>')
-    body = '\n    '.join([
-        shadow,
-        cylinder((centre[0], centre[1] + crown_h), crown_r, crown_h),
-        box(origin, u, 1, 1, board_h),
-        tassel,
-        dimension(iso(origin, u, 0, -0.1, 0), iso(origin, u, 1, -0.1, 0)),
-    ])
+    P = lambda i, j, k: iso(base, u, i, j, k)
+    parts = [dimension(P(0, -0.12, 0), P(L, -0.12, 0))]
+
+    # three steps, each a little smaller than the one below
+    for n in range(3):
+        inset = n * 0.06
+        parts.append(box(P(inset, inset, n * step_h), u, L - 2 * inset, D - 2 * inset, step_h,
+                         hidden=(n == 0)))
+    floor = 3 * step_h
+    inner = 0.18  # inset of the colonnade from the edge of the top step
+
+    def column(i, j):
+        x, y = P(i, j, floor)
+        return cylinder((x, y), col_r * u, col_h * u, hidden=False)
+
+    xs = [inner + t * (L - 2 * inner) / 3 for t in range(4)]
+    back_j, front_j = D - inner, inner
+
+    # back row, then the light inside, then the front row
+    parts += [column(i, back_j) for i in reversed(xs)]
+    cx, cy = P(L / 2, D / 2, floor)
+    parts.append(f'<ellipse cx="{cx:.1f}" cy="{cy - 0.38 * u:.1f}" rx="{0.7 * u:.1f}" ry="{0.62 * u:.1f}" '
+                 f'fill="url(#landing)"/>')
+    parts.append(f'<ellipse cx="{cx:.1f}" cy="{cy - 0.38 * u:.1f}" rx="{0.3 * u:.1f}" ry="{0.36 * u:.1f}" '
+                 f'fill="url(#landing)"/>')
+    parts.append(glow_dot(cx, cy - 0.38 * u, 5))
+    parts += [column(i, front_j) for i in reversed(xs)]
+
+    # entablature, then the gable: front triangle and the sunlit slope
+    top = floor + col_h
+    parts.append(box(P(0.06, 0.06, top), u, L - 0.12, D - 0.12, roof_h, hidden=False))
+    k0 = top + roof_h
+    a, b, c = P(0.06, 0.06, k0), P(L - 0.06, 0.06, k0), P(L / 2, 0.06, k0 + gable)
+    a2, b2, c2 = P(0.06, D - 0.06, k0), P(L - 0.06, D - 0.06, k0), P(L / 2, D - 0.06, k0 + gable)
+    # both slopes face up enough to be seen; the far one a shade darker
+    parts.append(f'<polygon points="{pts([c, b, b2, c2])}" fill="#1A3D78" stroke="{EDGE}" stroke-width="1.6" stroke-linejoin="round"/>')
+    parts.append(f'<polygon points="{pts([a, c, c2, a2])}" fill="url(#topFace)" stroke="{EDGE}" stroke-width="1.6" stroke-linejoin="round"/>')
+    parts.append(f'<polygon points="{pts([a, b, c])}" fill="{SIDE_RIGHT}" stroke="{EDGE}" stroke-width="1.6" stroke-linejoin="round"/>')
+    # a thin inner triangle on the gable, as carved
+    ia, ib, ic = P(0.2, 0.06, k0 + 0.04), P(L - 0.2, 0.06, k0 + 0.04), P(L / 2, 0.06, k0 + gable - 0.07)
+    parts.append(f'<polygon points="{pts([ia, ib, ic])}" fill="none" stroke="{EDGE_SOFT}" stroke-width="1.2"/>')
+
     write('Education/Education_card_site_ready.svg', frame(
-        'EDUCATION', 'a blue graduation cap on black, its tassel ending in gold', body))
+        'EDUCATION', 'a small blue classical temple on black, a gold light between its columns',
+        '\n    '.join(parts)))
 
 
 def interests():

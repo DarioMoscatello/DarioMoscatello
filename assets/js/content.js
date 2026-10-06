@@ -257,11 +257,12 @@ export const SECTIONS = [
         image: 'More/MORE_open_index_site_ready.svg',
         title: 'More',
       },
-      language('italian', 'Italian', 'Fluent', 'More/Italian_Fluent_card_site_ready.svg'),
-      language('estonian', 'Estonian', 'Fluent', 'More/Estonian_Fluent_card_site_ready_v2.svg'),
-      language('english', 'English', 'Fluent', 'More/English_Fluent_card_site_ready.svg'),
-      language('german', 'German', 'B1', 'More/German_B1_card_site_ready.svg'),
-      language('spanish', 'Spanish', 'B1', 'More/Spanish_B1_card_site_ready_v2.svg'),
+      {
+        id: 'languages',
+        image: 'More/LANGUAGES_card.svg',
+        title: 'Languages',
+        list: ['Italian · Fluent', 'English · Fluent', 'Estonian · Fluent', 'German · B1', 'Spanish · B1'],
+      },
       {
         id: 'chess',
         image: 'More/Horse_card_black_site_ready.svg',
@@ -283,6 +284,3 @@ function book(id, title, author, lang, image) {
   return { id, image, title, subtitle: author, meta: [lang] };
 }
 
-function language(id, name, level, image) {
-  return { id, image, title: name, subtitle: level, meta: ['Language'] };
-}

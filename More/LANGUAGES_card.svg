@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1000" width="700" height="1000"
+     role="img" aria-label="Languages: Italian fluent, English fluent, Estonian fluent, German B1, Spanish B1">
+  <style>@font-face{font-family:'Geist Card';font-weight:500;src:url(data:font/woff2;base64,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) format('woff2')}
+    text { font-family: 'Geist Card', 'Geist', system-ui, sans-serif; font-weight: 500; fill: #FFFFFF; }
+    .title { font-size: 58px; letter-spacing: -0.01em; }
+    .row { font-size: 46px; letter-spacing: 0.02em; }
+  </style>
+  <defs>
+    <clipPath id="cardClip"><rect width="700" height="1000" rx="42" ry="42"/></clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <rect width="700" height="1000" fill="#8B8881"/>
+  </g>
+  <text class="title" x="80" y="153.2">LANGUAGES</text>
+  <rect x="80" y="190.2" width="564" height="1.5" fill="#FFFFFF" fill-opacity="0.5"/>
+  <g transform="translate(80 330)">
+    <clipPath id="flag0"><rect width="72" height="48" rx="2.5" ry="2.5"/></clipPath>
+    <g clip-path="url(#flag0)">
+      <rect width="72" height="48" fill="#008C45"/>
+      <rect x="24.0" width="24.0" height="48" fill="#F4F5F0"/>
+      <rect x="48.0" width="24.0" height="48" fill="#CD212A"/>
+    </g>
+    <rect width="72" height="48" rx="2.5" ry="2.5" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+  <text class="row" x="186" y="370.3">FLUENT</text>
+  <rect x="80" y="412.0" width="564" height="1" fill="#FFFFFF" fill-opacity="0.22"/>
+  <g transform="translate(80 446)">
+    <clipPath id="flag1"><rect width="72" height="48" rx="2.5" ry="2.5"/></clipPath>
+    <g clip-path="url(#flag1)">
+      <rect width="72" height="48" fill="#012169"/>
+      <path d="M0 0L72 48M72 0L0 48" stroke="#FFFFFF" stroke-width="9.6"/>
+      <path d="M0 0L72 48M72 0L0 48" stroke="#C8102E" stroke-width="3.36"/>
+      <path d="M36.0 0V48M0 24.0H72" stroke="#FFFFFF" stroke-width="16.0"/>
+      <path d="M36.0 0V48M0 24.0H72" stroke="#C8102E" stroke-width="9.6"/>
+    </g>
+    <rect width="72" height="48" rx="2.5" ry="2.5" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+  <text class="row" x="186" y="486.3">FLUENT</text>
+  <rect x="80" y="528.0" width="564" height="1" fill="#FFFFFF" fill-opacity="0.22"/>
+  <g transform="translate(80 562)">
+    <clipPath id="flag2"><rect width="72" height="48" rx="2.5" ry="2.5"/></clipPath>
+    <g clip-path="url(#flag2)">
+      <rect width="72" height="16.0" fill="#0072CE"/>
+      <rect y="16.0" width="72" height="16.0" fill="#0F0F0F"/>
+      <rect y="32.0" width="72" height="16.0" fill="#FFFFFF"/>
+    </g>
+    <rect width="72" height="48" rx="2.5" ry="2.5" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+  <text class="row" x="186" y="602.3">FLUENT</text>
+  <rect x="80" y="644.0" width="564" height="1" fill="#FFFFFF" fill-opacity="0.22"/>
+  <g transform="translate(80 678)">
+    <clipPath id="flag3"><rect width="72" height="48" rx="2.5" ry="2.5"/></clipPath>
+    <g clip-path="url(#flag3)">
+      <rect width="72" height="16.0" fill="#000000"/>
+      <rect y="16.0" width="72" height="16.0" fill="#DD0000"/>
+      <rect y="32.0" width="72" height="16.0" fill="#FFCE00"/>
+    </g>
+    <rect width="72" height="48" rx="2.5" ry="2.5" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+  <text class="row" x="186" y="718.3">B1</text>
+  <rect x="80" y="760.0" width="564" height="1" fill="#FFFFFF" fill-opacity="0.22"/>
+  <g transform="translate(80 794)">
+    <clipPath id="flag4"><rect width="72" height="48" rx="2.5" ry="2.5"/></clipPath>
+    <g clip-path="url(#flag4)">
+      <rect width="72" height="48" fill="#AA151B"/>
+      <rect y="12.0" width="72" height="24.0" fill="#F1BF00"/>
+    </g>
+    <rect width="72" height="48" rx="2.5" ry="2.5" fill="none" stroke="#00000022" stroke-width="0.9"/>
+  </g>
+  <text class="row" x="186" y="834.3">B1</text>
+</svg>

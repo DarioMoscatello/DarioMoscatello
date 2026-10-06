@@ -65,20 +65,28 @@ FLAGS = {
     'ee': '''<rect width="{w}" height="{h3}" fill="#0072CE"/>
       <rect y="{h3}" width="{w}" height="{h3}" fill="#0F0F0F"/>
       <rect y="{h6}" width="{w}" height="{h3}" fill="#FFFFFF"/>''',
+    'de': '''<rect width="{w}" height="{h3}" fill="#000000"/>
+      <rect y="{h3}" width="{w}" height="{h3}" fill="#DD0000"/>
+      <rect y="{h6}" width="{w}" height="{h3}" fill="#FFCE00"/>''',
+    'es': '''<rect width="{w}" height="{h}" fill="#AA151B"/>
+      <rect y="{q1}" width="{w}" height="{half}" fill="#F1BF00"/>''',
 }
 
 
-def flag(lang):
-    w, h = FLAG_W, FLAG_H
+def flag(lang, x=None, y=None, w=FLAG_W, h=FLAG_H, clip='flagClip'):
+    """A small flag with rounded corners; top-right corner of a book by default."""
+    if x is None:
+        x, y = W - FLAG_INSET - w, FLAG_INSET
     shape = FLAGS[lang].format(
         w=w, h=h, t1=round(w / 3, 2), t2=round(w * 2 / 3, 2),
         h3=round(h / 3, 2), h6=round(h * 2 / 3, 2), cx=w / 2, cy=h / 2,
+        q1=round(h / 4, 2), half=round(h / 2, 2),
         diag=round(h * 0.2, 2), diag_red=round(h * 0.07, 2),
         cross=round(h / 3, 2), cross_red=round(h / 5, 2),
     )
-    return f'''  <g transform="translate({W - FLAG_INSET - w} {FLAG_INSET})">
-    <clipPath id="flagClip"><rect width="{w}" height="{h}" rx="{FLAG_R}" ry="{FLAG_R}"/></clipPath>
-    <g clip-path="url(#flagClip)">
+    return f'''  <g transform="translate({x} {y})">
+    <clipPath id="{clip}"><rect width="{w}" height="{h}" rx="{FLAG_R}" ry="{FLAG_R}"/></clipPath>
+    <g clip-path="url(#{clip})">
       {shape}
     </g>
     <rect width="{w}" height="{h}" rx="{FLAG_R}" ry="{FLAG_R}" fill="none" stroke="#00000022" stroke-width="0.9"/>

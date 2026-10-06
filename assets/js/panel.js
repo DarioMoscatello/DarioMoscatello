@@ -11,6 +11,15 @@ function entryMarkup(card, section) {
     parts.push(`<p class="entry__meta">${card.meta.map((m) => `<span>${escapeHtml(m)}</span>`).join('')}</p>`);
   }
 
+  // A project's own website sits right under its title, so it is visible
+  // without scrolling and easy to press.
+  if (card.site) {
+    parts.push(
+      `<p class="entry__site"><a href="${escapeHtml(card.site.href)}" target="_blank" rel="noopener">` +
+        `${escapeHtml(card.site.label)}<span aria-hidden="true"> ↗</span></a></p>`,
+    );
+  }
+
   if (card.body?.length) {
     parts.push(`<div class="entry__body">${card.body.map((b) => `<p>${escapeHtml(b)}</p>`).join('')}</div>`);
   }

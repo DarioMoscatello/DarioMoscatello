@@ -14,6 +14,7 @@
  *   facts     [label, value] pairs
  *   list      simple list (interests)
  *   links     [{ label, href }]
+ *   site      { label, href }: a project's website, as a button under the title
  *   me        true on the card with my portrait: the ME under the arrow shows only there
  */
 
@@ -196,7 +197,7 @@ export const SECTIONS = [
         subtitle: 'Founder',
         meta: ['Milan, Italy', '2025'],
         body: ['Founded a Bocconi exam-prep platform for practicing past exams by course and topic.'],
-        links: [{ label: 'bexams.app', href: 'https://bexams.app' }],
+        site: { label: 'bexams.app', href: 'https://bexams.app' },
       },
       {
         id: 'hedels',
@@ -208,7 +209,7 @@ export const SECTIONS = [
           'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 1,500+ deals.',
           'Clients include hedge funds, valuers and real estate companies looking for comparable deals to price assets.',
         ],
-        links: [{ label: 'hedels.com', href: 'https://hedels.com' }],
+        site: { label: 'hedels.com', href: 'https://hedels.com' },
       },
     ],
   },

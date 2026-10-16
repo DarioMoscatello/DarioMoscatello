@@ -166,6 +166,7 @@ export const SECTIONS = [
           'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 2,000+ deals.',
           'Clients include hedge funds, valuers and real estate companies looking for comparable deals to price assets.',
         ],
+        facts: [['Stack', 'Node.js, JavaScript (ES2022), PostgreSQL, Vercel Serverless, MapLibre GL, Python (pandas, Shapely)']],
         site: { label: 'hedels.com', href: 'https://hedels.com' },
       },
       {

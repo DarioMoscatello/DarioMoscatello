@@ -68,7 +68,9 @@ function entryMarkup(card, section) {
 
 /* A card's film plays over the page, with sound and controls. It closes with
    the button, Escape or a click outside it, and focus goes back to the
-   button that opened it. */
+   button that opened it. A landscape film seen on a phone held upright gets a
+   hint to turn the phone and a Full screen button that also turns the picture
+   to landscape where the browser allows it. */
 export function playVideo(src, poster, opener, ratio = '9 / 16') {
   const layer = document.createElement('div');
   layer.className = 'film';
@@ -79,9 +81,21 @@ export function playVideo(src, poster, opener, ratio = '9 / 16') {
     `<div class="film__frame" style="--ratio: ${escapeHtml(ratio)}"><video class="film__video" src="${escapeHtml(src)}"` +
     (poster ? ` poster="${escapeHtml(poster)}"` : '') +
     ' controls autoplay playsinline preload="auto"></video></div>' +
+    (isLandscape(ratio)
+      ? '<div class="film__turn"><span class="film__phone" aria-hidden="true"></span>' +
+        '<span>Turn your phone</span>' +
+        '<button type="button" class="film__full">Full screen</button></div>'
+      : '') +
     '<button type="button" class="film__close" aria-label="Close video">✕</button>';
+  const video = layer.querySelector('video');
   const close = () => {
-    layer.querySelector('video').pause();
+    video.pause();
+    if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
+    try {
+      screen.orientation?.unlock?.();
+    } catch {
+      /* not supported */
+    }
     layer.remove();
     document.removeEventListener('keydown', onKey);
     document.documentElement.classList.remove('has-film');
@@ -92,11 +106,29 @@ export function playVideo(src, poster, opener, ratio = '9 / 16') {
   };
   layer.addEventListener('click', (e) => {
     if (e.target === layer || e.target.closest('.film__close')) close();
+    if (e.target.closest('.film__full')) fullscreen(video);
   });
   document.addEventListener('keydown', onKey);
   document.documentElement.classList.add('has-film');
   document.body.append(layer);
   layer.querySelector('.film__close').focus();
+}
+
+function isLandscape(ratio) {
+  const [w, h] = String(ratio).split('/').map(Number);
+  return w > h;
+}
+
+// Full screen, then landscape. iPhone has no fullscreen for elements, only its
+// own video player, which turns with the phone by itself.
+async function fullscreen(video) {
+  try {
+    if (video.requestFullscreen) await video.requestFullscreen();
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+    await screen.orientation?.lock?.('landscape');
+  } catch {
+    /* the browser said no: the film still plays in the page */
+  }
 }
 
 export function createPanel(root, { onPick } = {}) {

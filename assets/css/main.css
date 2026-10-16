@@ -468,8 +468,11 @@ button.entry__site {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
   padding: 24px 16px;
   background: rgb(2 3 6 / 0.88);
   animation: film-in 0.25s ease-out;
@@ -493,6 +496,59 @@ button.entry__site {
   height: 100%;
   object-fit: contain;
   background: #000;
+}
+
+/* "Turn your phone": only for a landscape film on a phone held upright */
+.film__turn {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.8);
+}
+
+@media (orientation: portrait) and (pointer: coarse) {
+  .film__turn {
+    display: flex;
+  }
+}
+
+.film__phone {
+  width: 16px;
+  height: 26px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  animation: film-turn 2.4s ease-in-out infinite;
+}
+
+.film__full {
+  margin-left: 6px;
+  padding: 0.5em 1.1em;
+  border-radius: 999px;
+  font-size: 14px;
+  color: #fff;
+  background: var(--burgundy);
+}
+
+@keyframes film-turn {
+  0%,
+  25% {
+    transform: rotate(0deg);
+  }
+  50%,
+  80% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film__phone {
+    animation: none;
+    transform: rotate(-90deg);
+  }
 }
 
 .film__close {

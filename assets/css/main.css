@@ -483,7 +483,7 @@ button.entry__site {
      width for a landscape one */
   --ratio: 9 / 16;
   aspect-ratio: var(--ratio);
-  width: min(100%, calc(86svh * (var(--ratio))), 1400px);
+  width: min(100%, calc(76svh * (var(--ratio))), 1400px);
   border-radius: 22px;
   overflow: hidden;
   background: #000;

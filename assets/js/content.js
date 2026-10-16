@@ -227,6 +227,24 @@ export const SECTIONS = [
         body: ['An agentic AI for real estate valuation, carrying a property from the first steps of the appraisal to the final report.'],
         video: { src: 'Projects/ross-intro.mp4', poster: 'Projects/ross-intro-poster.webp', ratio: '16 / 9' },
       },
+      {
+        id: 'nsnv',
+        image: 'Projects/NSNV_card.svg',
+        title: 'NSNV',
+        subtitle: 'Founder',
+        meta: ['2026 — present'],
+        body: [
+          'A personal operating system that replaces a dozen apps: daily habits, sleep, meals, workouts, money and calendar in one place, on phone, tablet and desktop.',
+          'Log a whole day by voice, scan food labels and barcodes, and let bank notifications record expenses on their own.',
+        ],
+        facts: [
+          ['Stack', 'React 18, JavaScript (ES2022), PWA (Service Worker, Web App Manifest)'],
+          ['Backend & data', 'Vercel Serverless (Node.js), PostgreSQL (Neon), Vercel Blob'],
+          ['APIs & AI', 'Google Calendar and Drive (OAuth 2.0), Gemini, Web Speech API, Tesseract.js OCR, Open Food Facts'],
+        ],
+        site: { label: 'nsnvtracker.vercel.app', href: 'https://nsnvtracker.vercel.app' },
+        video: { src: 'Projects/nsnv-intro.mp4', poster: 'Projects/nsnv-intro-poster.webp', ratio: '9 / 16' },
+      },
     ],
   },
 

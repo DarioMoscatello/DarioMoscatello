@@ -155,6 +155,18 @@ export const SECTIONS = [
         title: 'Work',
       },
       {
+        id: 'hedels',
+        image: 'Projects/HEDELS_card_site_ready.svg',
+        title: 'Hedels',
+        subtitle: 'Partner',
+        meta: ['Milan, Italy', '2026'],
+        body: [
+          'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 1,500+ deals.',
+          'Clients include hedge funds, valuers and real estate companies looking for comparable deals to price assets.',
+        ],
+        site: { label: 'hedels.com', href: 'https://hedels.com' },
+      },
+      {
         id: 'copernicus',
         image: 'Work/Copernicus_card_site_ready_v3.svg',
         title: 'Copernicus',
@@ -198,18 +210,6 @@ export const SECTIONS = [
         meta: ['Milan, Italy', '2025'],
         body: ['Founded a Bocconi exam-prep platform for practicing past exams by course and topic.'],
         site: { label: 'bexams.app', href: 'https://bexams.app' },
-      },
-      {
-        id: 'hedels',
-        image: 'Projects/HEDELS_card_site_ready.svg',
-        title: 'Hedels',
-        subtitle: 'Founder',
-        meta: ['Milan, Italy', '2026'],
-        body: [
-          'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 1,500+ deals.',
-          'Clients include hedge funds, valuers and real estate companies looking for comparable deals to price assets.',
-        ],
-        site: { label: 'hedels.com', href: 'https://hedels.com' },
       },
     ],
   },

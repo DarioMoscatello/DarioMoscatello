@@ -281,29 +281,6 @@ export const SECTIONS = [
   },
 ];
 
-/*
- * Topic view. Pressing "Topics" above the menu swaps the sections listed in
- * `replaces` for these topics, in the same place; every other section stays.
- * Each card belongs to one topic only, named by its id, so nothing repeats.
- */
-export const TOPICS = {
-  replaces: ['work', 'projects'],
-  topics: [
-    {
-      id: 'realestate',
-      label: 'Real Estate',
-      image: 'Topics/REALESTATE_card.svg',
-      cards: ['hedels', 'copernicus'],
-    },
-    {
-      id: 'software',
-      label: 'Software',
-      image: 'Topics/SOFTWARE_card.svg',
-      cards: ['bexams', 'mrxshop'],
-    },
-  ],
-};
-
 function book(id, title, author, lang, image) {
   return { id, image, title, subtitle: author, meta: [lang] };
 }

@@ -1,29 +1,10 @@
-import { SECTIONS, TOPICS, CONFIG } from './content.js';
+import { SECTIONS, CONFIG } from './content.js';
 import { createTwistTitle } from './title-twist.js';
 import { createWheel } from './wheel.js';
 import { createPanel } from './panel.js';
 import { preloadAll } from './card-image.js';
 
-// The topic view: the same cards regrouped. Each topic becomes a section of
-// its own with a head card, and takes the place of the sections it replaces.
-const cardsById = new Map(SECTIONS.flatMap((s) => s.cards.map((c) => [c.id, c])));
-const TOPIC_SECTIONS = TOPICS.topics.map((t) => ({
-  id: t.id,
-  label: t.label,
-  cards: [{ id: t.id, head: true, image: t.image, title: t.label }, ...t.cards.map((id) => cardsById.get(id)).filter(Boolean)],
-}));
-const firstReplaced = SECTIONS.findIndex((s) => TOPICS.replaces.includes(s.id));
-const VIEWS = {
-  sections: SECTIONS,
-  topics: [
-    ...SECTIONS.slice(0, firstReplaced),
-    ...TOPIC_SECTIONS,
-    ...SECTIONS.slice(firstReplaced).filter((s) => !TOPICS.replaces.includes(s.id)),
-  ],
-};
-const isTopic = (id) => TOPIC_SECTIONS.some((t) => t.id === id);
-
-const sectionsById = new Map([...SECTIONS, ...TOPIC_SECTIONS].map((s) => [s.id, s]));
+const sectionsById = new Map(SECTIONS.map((s) => [s.id, s]));
 
 const stage = document.querySelector('[data-stage]');
 const navList = document.querySelector('[data-nav]');
@@ -31,7 +12,6 @@ const titleCanvas = document.querySelector('[data-title]');
 
 let current = null;
 let deck = [];
-let view = 'sections';
 
 /* ---------- title ---------- */
 
@@ -45,52 +25,23 @@ document.fonts
 // "Start Here" sits next to the first section until any section is pressed;
 // it comes back only on the next visit to the page.
 const startId = SECTIONS[0].id;
-let hintGone = false;
-const viewSwitch = document.querySelector('[data-view]');
 
-function renderNav() {
-  navList.innerHTML = VIEWS[view]
-    .map(
-      (s) =>
-        `<li><button type="button" data-section="${s.id}">${s.label}</button>` +
-        (s.id === startId && !hintGone
-          ? `<button type="button" class="sections__hint" data-section="${s.id}" data-hint>Start Here</button>`
-          : '') +
-        '</li>',
-    )
-    .join('');
-  for (const button of viewSwitch.querySelectorAll('[data-view-pick]')) {
-    button.setAttribute('aria-pressed', String(button.dataset.viewPick === view));
-  }
-  markNav();
-}
+navList.innerHTML = SECTIONS.map(
+  (s) =>
+    `<li><button type="button" data-section="${s.id}">${s.label}</button>` +
+    (s.id === startId
+      ? `<button type="button" class="sections__hint" data-section="${s.id}" data-hint>Start Here</button>`
+      : '') +
+    '</li>',
+).join('');
+
+const hint = navList.querySelector('[data-hint]');
 
 navList.addEventListener('click', (e) => {
   const button = e.target.closest('[data-section]');
   if (!button) return;
-  hintGone = true;
-  navList.querySelector('[data-hint]')?.remove();
+  hint?.remove();
   openSection(button.dataset.section, { scroll: true });
-});
-
-// Switching view keeps the current section when it exists in both; a card of
-// Work or Projects moves to its topic, and back.
-viewSwitch.addEventListener('click', (e) => {
-  const pick = e.target.closest('[data-view-pick]')?.dataset.viewPick;
-  if (!pick || pick === view) return;
-  view = pick;
-  renderNav();
-  if (VIEWS[view].includes(current)) return;
-  const shown = deck[0] && current;
-  const key = location.hash.split('/')[1];
-  let target;
-  if (view === 'topics') {
-    target = TOPIC_SECTIONS.find((t) => t.cards.some((c) => c.id === key)) || TOPIC_SECTIONS[0];
-  } else {
-    target = SECTIONS.find((s) => TOPICS.replaces.includes(s.id) && s.cards.some((c) => c.id === key)) ||
-      sectionsById.get(TOPICS.replaces[0]);
-  }
-  if (shown) openSection(target.id, { cardKey: target.cards.some((c) => c.id === key) ? key : undefined });
 });
 
 function markNav() {
@@ -167,31 +118,19 @@ function fromHash() {
   return { id: sectionsById.has(id) ? id : CONFIG.defaultSection, cardKey };
 }
 
-// A link to a topic opens the topic view.
-function viewFor(id) {
-  const wanted = isTopic(id) ? 'topics' : TOPICS.replaces.includes(id) ? 'sections' : view;
-  if (wanted !== view) {
-    view = wanted;
-    renderNav();
-  }
-}
-
 window.addEventListener('hashchange', () => {
   const { id, cardKey } = fromHash();
-  viewFor(id);
   openSection(id, { cardKey });
 });
 
 const initial = fromHash();
-if (isTopic(initial.id)) view = 'topics';
-renderNav();
 openSection(initial.id, { cardKey: initial.cardKey });
 wheel.setAutoRotate(CONFIG.autoRotate, CONFIG.autoRotateEvery);
 
 // Once the first section is on screen, fetch the artwork of the others in the
 // background, one section at a time, so later switches have nothing to wait for.
 const prefetchRest = async () => {
-  for (const section of [...SECTIONS, ...TOPIC_SECTIONS]) {
+  for (const section of SECTIONS) {
     if (section === current) continue;
     await preloadAll(imagesOf(section));
   }

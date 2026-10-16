@@ -291,34 +291,6 @@ a {
   transform: translate(0, -50%);
 }
 
-/* Sections / Topics: two small words above the menu, the chosen one in ink. */
-.sections__view {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5em;
-  margin: 0 0 0.9em;
-  font-size: clamp(12px, 1.02vw, 16px); /* same as the hero labels */
-  color: var(--muted);
-}
-
-.sections__view button {
-  padding: 0.15em 0;
-  color: inherit;
-  letter-spacing: 0.02em;
-  transition: color 0.2s ease;
-}
-
-.sections__view button[aria-pressed="true"] {
-  color: var(--ink);
-  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
-}
-
-@media (hover: hover) {
-  .sections__view button:hover {
-    color: var(--burgundy);
-  }
-}
-
 /* "Start Here", next to the first section: italic like the hero labels, red
    like the marker, and gone once pressed. */
 .sections li {

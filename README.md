@@ -60,6 +60,11 @@ Options at the top of the same file:
   until the first interaction.
 - `defaultSection` is the section shown when the URL has no `#section`.
 
+Topic view: the words `Sections · Topics` above the menu switch between the
+usual sections and a view by topic. `TOPICS` in `content.js` lists which
+sections it replaces (Work and Projects) and which cards each topic holds; a
+card belongs to one topic only. `…/#realestate` opens the topic view directly.
+
 Links work per card too: `…/#education/harvard` opens that card directly.
 
 ## Interactions

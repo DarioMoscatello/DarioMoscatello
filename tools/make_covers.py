@@ -12,6 +12,8 @@ orbit, and the section name in Geist Mono at the same spot as on every cover.
               a gold point on the tallest one.
     Projects  a block like a page of a blueprint, its hidden edges dashed, an
               empty slot lit in gold and a smaller block about to drop in.
+    Real estate  two buildings, one window lit in gold (topic view).
+    Software     three stacked panels, code on the top one, a gold cursor (topic view).
     More      a slab holding three different things: a block, a cylinder and
               a sphere lit in gold.
 
@@ -403,7 +405,87 @@ def interests():
         'INTERESTS', 'a tray with a chessboard, a molecule, a tower of blocks and gold coins', '\n    '.join(parts)))
 
 
+def face_quad(origin, unit, plane, a0, a1, k0, k1):
+    """A rectangle on a visible side of a box: plane 'right' runs along i at
+    j = 0, plane 'left' runs along j at i = 0; a is the position along it."""
+    if plane == 'right':
+        q = [iso(origin, unit, a0, 0, k0), iso(origin, unit, a1, 0, k0), iso(origin, unit, a1, 0, k1), iso(origin, unit, a0, 0, k1)]
+    else:
+        q = [iso(origin, unit, 0, a0, k0), iso(origin, unit, 0, a1, k0), iso(origin, unit, 0, a1, k1), iso(origin, unit, 0, a0, k1)]
+    return q
+
+
+def real_estate():
+    u = 150
+    base = (W / 2 + 0.25 * u, 1010)
+    parts = [dimension(iso(base, u, -1.15, -0.2, 0), iso(base, u, 1.2, -0.2, 0))]
+
+    def building(origin, sx, sy, floors, cols_r, cols_l, lit=None):
+        h = floors * 0.42 + 0.2
+        windows = []
+        for f in range(floors):
+            k0, k1 = 0.2 + f * 0.42, 0.2 + f * 0.42 + 0.24
+            for c in range(cols_r):
+                a0 = (c + 0.3) * sx / cols_r
+                q = face_quad(origin, u, 'right', a0, a0 + 0.4 * sx / cols_r, k0, k1)
+                on = lit == ('r', f, c)
+                windows.append(f'<polygon points="{pts(q)}" fill="{GOLD if on else "#081530"}" '
+                               f'stroke="{GOLD if on else EDGE_SOFT}" stroke-width="1"/>')
+                if on:
+                    cx = sum(x for x, _ in q) / 4
+                    cy = sum(y for _, y in q) / 4
+                    windows.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="46" fill="url(#landing)"/>')
+            for c in range(cols_l):
+                a0 = (c + 0.3) * sy / cols_l
+                q = face_quad(origin, u, 'left', a0, a0 + 0.4 * sy / cols_l, k0, k1)
+                windows.append(f'<polygon points="{pts(q)}" fill="#050D1F" stroke="{EDGE_SOFT}" stroke-width="1"/>')
+        return box(origin, u, sx, sy, h) + ''.join(windows)
+
+    # back to front: the tall tower, then the low block in front of it
+    parts.append(building(iso(base, u, 0.15, 0.55, 0), 1.0, 1.0, 9, 3, 3, lit=('r', 6, 1)))
+    parts.append(building(iso(base, u, -1.0, -0.05, 0), 1.05, 0.9, 3, 3, 2))
+    write('Topics/REALESTATE_card.svg', frame(
+        'REAL ESTATE', 'two blue buildings on black, one window lit in gold', '\n    '.join(parts)))
+
+
+def software():
+    u = 360
+    base = (W / 2 - 0.05 * u, 990)
+    parts = [dimension(iso(base, u, 0, -0.1, 0), iso(base, u, 1, -0.1, 0))]
+    # three floating panels, like stacked windows; code on the top one
+    for n, lift in enumerate((0.0, 0.32, 0.64)):
+        origin = iso(base, u, 0, 0, lift)
+        top = n == 2
+        content = ''
+        if top:
+            on = lambda i, j: iso(base, u, i, j, lift + 0.03)
+            # window dots
+            for d in range(3):
+                x, y = on(0.08 + d * 0.06, 0.9)
+                content += f'<ellipse cx="{x:.1f}" cy="{y:.1f}" rx="6" ry="3.5" fill="{EDGE}"/>'
+            content += line(on(0.03, 0.82), on(0.97, 0.82), EDGE_SOFT, 1.2)
+            rows = [(0.08, 0.55), (0.14, 0.7), (0.14, 0.45), (0.2, 0.62), (0.08, 0.3)]
+            for r, (indent, length) in enumerate(rows):
+                j = 0.7 - r * 0.12
+                content += line(on(indent, j), on(indent + length * 0.8, j), EDGE, 2.4, None, 0.9 - r * 0.08)
+            # the cursor, the one warm note
+            j = 0.7 - len(rows) * 0.12
+            cur = [on(0.08, j - 0.03), on(0.13, j - 0.03), on(0.13, j + 0.03), on(0.08, j + 0.03)]
+            cx = sum(x for x, _ in cur) / 4
+            cy = sum(y for _, y in cur) / 4
+            content += f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="42" fill="url(#landing)"/>'
+            content += f'<polygon points="{pts(cur)}" fill="{GOLD}"/>'
+        parts.append(box(origin, u, 1, 1, 0.03, content, hidden=top))
+        if not top:  # thin posts between the panels
+            for i, j in ((0.05, 0.05), (0.95, 0.05), (0.05, 0.95)):
+                parts.append(line(iso(base, u, i, j, lift + 0.03), iso(base, u, i, j, lift + 0.32), EDGE_SOFT, 1, '2 6', 0.8))
+    write('Topics/SOFTWARE_card.svg', frame(
+        'SOFTWARE', 'three stacked blue panels on black, lines of code and a gold cursor', '\n    '.join(parts)))
+
+
 if __name__ == '__main__':
+    real_estate()
+    software()
     education()
     interests()
     work()

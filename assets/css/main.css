@@ -617,6 +617,39 @@ button.entry__site {
     drop-shadow(0 calc(var(--cw) * 0.05) calc(var(--cw) * 0.08) rgb(0 0 0 / 0.14));
 }
 
+/* play button on a card that has a film, top-right corner */
+.card__play {
+  position: absolute;
+  top: 6%;
+  right: 7.5%;
+  width: calc(var(--cw) * 0.17);
+  height: calc(var(--cw) * 0.17);
+  border-radius: 50%;
+  background: rgb(10 45 99 / 0.92);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.card__play::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 34%;
+  height: 38%;
+  transform: translateX(10%);
+  background: #fff;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+@media (hover: hover) {
+  .card__play:hover {
+    transform: scale(1.1);
+    background: var(--burgundy);
+  }
+}
+
 .card__blank {
   display: block;
   width: 100%;

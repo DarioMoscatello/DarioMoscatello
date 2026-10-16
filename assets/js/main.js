@@ -1,7 +1,7 @@
 import { SECTIONS, CONFIG } from './content.js';
 import { createTwistTitle } from './title-twist.js';
 import { createWheel } from './wheel.js';
-import { createPanel } from './panel.js';
+import { createPanel, playVideo } from './panel.js';
 import { preloadAll } from './card-image.js';
 
 const sectionsById = new Map(SECTIONS.map((s) => [s.id, s]));
@@ -67,6 +67,7 @@ const wheel = createWheel(document.querySelector('[data-wheel]'), {
   // a pressed card shows its text right away; drags and draws when they land
   onTarget: showEntry,
   onSettle: showEntry,
+  onPlay: (entry, el) => playVideo(entry.data.video.src, entry.data.video.poster, el),
 });
 
 function buildDeck(section) {

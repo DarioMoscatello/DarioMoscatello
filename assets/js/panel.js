@@ -69,7 +69,7 @@ function entryMarkup(card, section) {
 /* A card's film plays over the page, with sound and controls. It closes with
    the button, Escape or a click outside it, and focus goes back to the
    button that opened it. */
-function playVideo(src, poster, opener) {
+export function playVideo(src, poster, opener) {
   const layer = document.createElement('div');
   layer.className = 'film';
   layer.setAttribute('role', 'dialog');

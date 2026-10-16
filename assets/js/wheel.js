@@ -25,7 +25,7 @@ const jitter = (i) => {
   return x - Math.floor(x);
 };
 
-export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
+export function createWheel(root, { onSettle, onTarget, onInteract, onPlay } = {}) {
   const layer = root.querySelector('[data-wheel-cards]');
   const ringGroup = root.querySelector('[data-wheel-ring]');
   const drawButton = root.querySelector('[data-wheel-draw]');
@@ -122,6 +122,13 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
       img.decoding = 'async';
       img.draggable = false;
       el.append(img);
+      // a card with a film gets a small play button in its top-right corner
+      if (entry.data.video) {
+        const play = document.createElement('span');
+        play.className = 'card__play';
+        play.setAttribute('aria-hidden', 'true'); // the Video button in the text does the same
+        el.append(play);
+      }
     } else {
       el.classList.add('card--blank');
       const blank = document.createElement('span');
@@ -159,8 +166,12 @@ export function createWheel(root, { onSettle, onTarget, onInteract } = {}) {
       });
     }
 
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
       if (spinning) return;
+      if (e.target.closest('.card__play')) {
+        onPlay?.(entry, el);
+        return;
+      }
       interact();
       select(card.i);
     });

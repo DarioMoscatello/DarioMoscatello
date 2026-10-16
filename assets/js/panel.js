@@ -6,12 +6,16 @@ function entryMarkup(card, section) {
   const title = `<h2 class="entry__title">${escapeHtml(card.title || section.label)}</h2>`;
   // A project's own website sits beside its title: visible without
   // scrolling, easy to press, and no extra line.
-  if (card.site) {
-    parts.push(
-      `<div class="entry__head">${title}` +
-        `<a class="entry__site" href="${escapeHtml(card.site.href)}" target="_blank" rel="noopener">` +
-        `${escapeHtml(card.site.label)}<span aria-hidden="true"> ↗</span></a></div>`,
-    );
+  if (card.site || card.video) {
+    const site = card.site
+      ? `<a class="entry__site" href="${escapeHtml(card.site.href)}" target="_blank" rel="noopener">` +
+        `${escapeHtml(card.site.label)}<span aria-hidden="true"> ↗</span></a>`
+      : '';
+    const video = card.video
+      ? `<button type="button" class="entry__site" data-video="${escapeHtml(card.video.src)}"` +
+        ` data-poster="${escapeHtml(card.video.poster || '')}"><span aria-hidden="true">▶ </span>Video</button>`
+      : '';
+    parts.push(`<div class="entry__head">${title}${site}${video}</div>`);
   } else {
     parts.push(title);
   }
@@ -62,6 +66,39 @@ function entryMarkup(card, section) {
   return `<article class="entry">${parts.join('')}</article>`;
 }
 
+/* A card's film plays over the page, with sound and controls. It closes with
+   the button, Escape or a click outside it, and focus goes back to the
+   button that opened it. */
+function playVideo(src, poster, opener) {
+  const layer = document.createElement('div');
+  layer.className = 'film';
+  layer.setAttribute('role', 'dialog');
+  layer.setAttribute('aria-modal', 'true');
+  layer.setAttribute('aria-label', 'Video');
+  layer.innerHTML =
+    `<div class="film__frame"><video class="film__video" src="${escapeHtml(src)}"` +
+    (poster ? ` poster="${escapeHtml(poster)}"` : '') +
+    ' controls autoplay playsinline preload="auto"></video></div>' +
+    '<button type="button" class="film__close" aria-label="Close video">✕</button>';
+  const close = () => {
+    layer.querySelector('video').pause();
+    layer.remove();
+    document.removeEventListener('keydown', onKey);
+    document.documentElement.classList.remove('has-film');
+    opener?.focus();
+  };
+  const onKey = (e) => {
+    if (e.key === 'Escape') close();
+  };
+  layer.addEventListener('click', (e) => {
+    if (e.target === layer || e.target.closest('.film__close')) close();
+  });
+  document.addEventListener('keydown', onKey);
+  document.documentElement.classList.add('has-film');
+  document.body.append(layer);
+  layer.querySelector('.film__close').focus();
+}
+
 export function createPanel(root, { onPick } = {}) {
   const inner = root.querySelector('[data-panel-inner]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -71,6 +108,8 @@ export function createPanel(root, { onPick } = {}) {
   inner.addEventListener('click', (e) => {
     const button = e.target.closest('[data-pick]');
     if (button) onPick?.(button.dataset.pick);
+    const film = e.target.closest('[data-video]');
+    if (film) playVideo(film.dataset.video, film.dataset.poster, film);
   });
 
   function measure() {

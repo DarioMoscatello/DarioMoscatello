@@ -15,6 +15,7 @@
  *   list      simple list (interests)
  *   links     [{ label, href }]
  *   site      { label, href }: a project's website, as a button beside the title
+ *   video     { src, poster }: a short film, opened by a Video button beside the title
  *   me        true on the card with my portrait: the ME under the arrow shows only there
  */
 
@@ -136,7 +137,7 @@ export const SECTIONS = [
         title: 'IIS Jean Monnet',
         subtitle: 'Diploma in Administration, Finance and Marketing, 100/100',
         meta: ['Como, Italy', '2023'],
-        body: ['Mathematics Olympiad team member, competing at national level.'],
+        body: ['Mathematics Olympiad team member, competing at national level, 16th place in Italy.'],
         facts: [
           ['Coursework', 'Law, Political Economy, Business Administration, Financial Accounting, Financial Mathematics'],
         ],
@@ -159,9 +160,9 @@ export const SECTIONS = [
         image: 'Projects/HEDELS_card_site_ready.svg',
         title: 'Hedels',
         subtitle: 'Partner',
-        meta: ['Milan, Italy', '2026'],
+        meta: ['Milan, Italy', '2026 — present'],
         body: [
-          'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 1,500+ deals.',
+          'Hedels is Italy\u2019s largest real estate transaction database for hotels, student housing (PBSA) and care homes (RSA), covering 2,000+ deals.',
           'Clients include hedge funds, valuers and real estate companies looking for comparable deals to price assets.',
         ],
         site: { label: 'hedels.com', href: 'https://hedels.com' },
@@ -210,6 +211,14 @@ export const SECTIONS = [
         meta: ['Milan, Italy', '2025'],
         body: ['Founded a Bocconi exam-prep platform for practicing past exams by course and topic.'],
         site: { label: 'bexams.app', href: 'https://bexams.app' },
+        video: { src: 'Projects/bexams-intro.mp4', poster: 'Projects/bexams-intro-poster.webp' },
+      },
+      {
+        id: 'ross',
+        image: 'Projects/ROSS_card.svg',
+        title: 'ROSS',
+        subtitle: 'Agentic AI',
+        body: ['An agentic AI for real estate valuation, carrying a property from the first steps of the appraisal to the final report.'],
       },
     ],
   },

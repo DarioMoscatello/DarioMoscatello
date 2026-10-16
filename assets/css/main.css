@@ -451,6 +451,78 @@ a {
   }
 }
 
+button.entry__site {
+  font: inherit;
+  font-size: 0.82em;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+}
+
+/* the film over the page */
+.has-film {
+  overflow: hidden;
+}
+
+.film {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: rgb(2 3 6 / 0.88);
+  animation: film-in 0.25s ease-out;
+}
+
+.film__frame {
+  height: min(86svh, 900px);
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
+}
+
+.film__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+.film__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #fff;
+  background: rgb(255 255 255 / 0.12);
+}
+
+@media (hover: hover) {
+  .film__close:hover {
+    background: var(--burgundy);
+  }
+}
+
+@keyframes film-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film {
+    animation: none;
+  }
+}
+
 .entry__links a {
   text-decoration: none;
   padding-bottom: 1px;

@@ -211,6 +211,10 @@ export const SECTIONS = [
         subtitle: 'Founder',
         meta: ['Milan, Italy', '2025'],
         body: ['Founded a Bocconi exam-prep platform for practicing past exams by course and topic.'],
+        facts: [
+          ['Stack', 'Next.js, React, TypeScript'],
+          ['Backend & data', 'Postgres'],
+        ],
         site: { label: 'bexams.app', href: 'https://bexams.app' },
         video: { src: 'Projects/bexams-intro.mp4', poster: 'Projects/bexams-intro-poster.webp' },
       },

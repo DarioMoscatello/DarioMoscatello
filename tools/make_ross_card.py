@@ -1,43 +1,58 @@
 """Builds the ROSS card in Projects: a white card like the other project logos,
-with the name set large in Geist and a small line in Geist Mono under it.
-A stand-in until ROSS has a logo of its own.
+with the ROSS penguin (Projects/ross-logo.png) and the name set in Geist
+under it, in the navy of the Hedels and BExams logos.
 
-    pip install fonttools brotli
+    pip install fonttools brotli pillow
     python3 tools/make_ross_card.py
 """
 
+import base64
+import io
 import os
 import sys
 
+from PIL import Image
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from make_book_cards import BOLD  # noqa: E402
-from make_covers import label_font  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOGO = os.path.join(ROOT, 'Projects/ross-logo.png')
 OUT = os.path.join(ROOT, 'Projects/ROSS_card.svg')
 
 W, H, RX = 700, 1000, 46
-NAVY = '#0A2D63'  # the navy of the Hedels and BExams logos
-NAME, NAME_SIZE, NAME_TRACK = 'ROSS', 168, 0.08
-LINE, LINE_SIZE, LINE_TRACK = 'AGENTIC VALUATION', 25, 0.2
+NAVY = '#0A2D63'
+NAME, NAME_SIZE, NAME_TRACK = 'ROSS', 118, 0.08
+LOGO_W = 430  # width of the penguin on the card
+
+
+def logo():
+    im = Image.open(LOGO).convert('RGBA')
+    im = im.crop(im.getbbox())
+    h = round(im.height * LOGO_W / im.width)
+    im = im.resize((LOGO_W * 2, h * 2), Image.LANCZOS)  # twice the size it is shown at
+    buf = io.BytesIO()
+    im.save(buf, 'WEBP', quality=88, method=6)
+    return base64.b64encode(buf.getvalue()).decode(), h
 
 
 def card():
+    data, logo_h = logo()
     name_w = BOLD.width(NAME, NAME_SIZE, NAME_TRACK)
-    name_y = H / 2 + BOLD.cap * NAME_SIZE / 2 - 30
-    line_w = len(LINE) * 0.6 * LINE_SIZE + LINE_TRACK * LINE_SIZE * (len(LINE) - 1)  # Geist Mono: 0.6 em each
+    gap = 56
+    block = logo_h + gap + BOLD.cap * NAME_SIZE
+    top = (H - block) / 2
+    name_y = top + logo_h + gap + BOLD.cap * NAME_SIZE
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="ROSS">
-  <style>{BOLD.embed(NAME, 'Geist Card', 500)}{label_font(LINE)}
+  <style>{BOLD.embed(NAME, 'Geist Card', 500)}
     .name {{ font-family: 'Geist Card', 'Geist', system-ui, sans-serif; font-weight: 500; font-size: {NAME_SIZE}px; letter-spacing: {NAME_TRACK}em; fill: {NAVY}; }}
-    .line {{ font-family: 'Geist Mono Card', 'Geist Mono', ui-monospace, monospace; font-weight: 500; font-size: {LINE_SIZE}px; letter-spacing: {LINE_TRACK}em; fill: {NAVY}; fill-opacity: 0.7; }}
   </style>
   <defs><clipPath id="c"><rect width="{W}" height="{H}" rx="{RX}" ry="{RX}"/></clipPath></defs>
   <g clip-path="url(#c)">
     <rect width="{W}" height="{H}" fill="#FFFFFF"/>
+    <image x="{(W - LOGO_W) / 2:.1f}" y="{top:.1f}" width="{LOGO_W}" height="{logo_h}" href="data:image/webp;base64,{data}"/>
   </g>
   <text class="name" x="{(W - name_w) / 2:.1f}" y="{name_y:.1f}">{NAME}</text>
-  <rect x="{(W - line_w) / 2:.1f}" y="{name_y + 44:.1f}" width="{line_w:.1f}" height="2" fill="{NAVY}" fill-opacity="0.25"/>
-  <text class="line" x="{(W - line_w) / 2:.1f}" y="{name_y + 100:.1f}">{LINE}</text>
 </svg>
 '''
     with open(OUT, 'w', encoding='utf-8') as fh:

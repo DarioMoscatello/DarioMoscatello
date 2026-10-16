@@ -15,7 +15,8 @@
  *   list      simple list (interests)
  *   links     [{ label, href }]
  *   site      { label, href }: a project's website, as a button beside the title
- *   video     { src, poster }: a short film, opened by a Video button beside the title
+ *   video     { src, poster, ratio }: a film, opened by a Video button beside the title
+ *             and the play button on the card; ratio is '16 / 9' for landscape (default 9 / 16)
  *   me        true on the card with my portrait: the ME under the arrow shows only there
  */
 
@@ -219,6 +220,7 @@ export const SECTIONS = [
         title: 'ROSS',
         subtitle: 'Agentic AI',
         body: ['An agentic AI for real estate valuation, carrying a property from the first steps of the appraisal to the final report.'],
+        video: { src: 'Projects/ross-intro.mp4', poster: 'Projects/ross-intro-poster.webp', ratio: '16 / 9' },
       },
     ],
   },

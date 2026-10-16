@@ -13,7 +13,7 @@ function entryMarkup(card, section) {
       : '';
     const video = card.video
       ? `<button type="button" class="entry__site" data-video="${escapeHtml(card.video.src)}"` +
-        ` data-poster="${escapeHtml(card.video.poster || '')}"><span aria-hidden="true">▶ </span>Video</button>`
+        ` data-poster="${escapeHtml(card.video.poster || '')}" data-ratio="${escapeHtml(card.video.ratio || '9 / 16')}"><span aria-hidden="true">▶ </span>Video</button>`
       : '';
     parts.push(`<div class="entry__head">${title}${site}${video}</div>`);
   } else {
@@ -69,14 +69,14 @@ function entryMarkup(card, section) {
 /* A card's film plays over the page, with sound and controls. It closes with
    the button, Escape or a click outside it, and focus goes back to the
    button that opened it. */
-export function playVideo(src, poster, opener) {
+export function playVideo(src, poster, opener, ratio = '9 / 16') {
   const layer = document.createElement('div');
   layer.className = 'film';
   layer.setAttribute('role', 'dialog');
   layer.setAttribute('aria-modal', 'true');
   layer.setAttribute('aria-label', 'Video');
   layer.innerHTML =
-    `<div class="film__frame"><video class="film__video" src="${escapeHtml(src)}"` +
+    `<div class="film__frame" style="--ratio: ${escapeHtml(ratio)}"><video class="film__video" src="${escapeHtml(src)}"` +
     (poster ? ` poster="${escapeHtml(poster)}"` : '') +
     ' controls autoplay playsinline preload="auto"></video></div>' +
     '<button type="button" class="film__close" aria-label="Close video">✕</button>';
@@ -109,7 +109,7 @@ export function createPanel(root, { onPick } = {}) {
     const button = e.target.closest('[data-pick]');
     if (button) onPick?.(button.dataset.pick);
     const film = e.target.closest('[data-video]');
-    if (film) playVideo(film.dataset.video, film.dataset.poster, film);
+    if (film) playVideo(film.dataset.video, film.dataset.poster, film, film.dataset.ratio);
   });
 
   function measure() {

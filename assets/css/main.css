@@ -476,9 +476,11 @@ button.entry__site {
 }
 
 .film__frame {
-  height: min(86svh, 900px);
-  aspect-ratio: 9 / 16;
-  max-width: 100%;
+  /* as large as fits: the height of the screen for a portrait film, its
+     width for a landscape one */
+  --ratio: 9 / 16;
+  aspect-ratio: var(--ratio);
+  width: min(100%, calc(86svh * (var(--ratio))), 1400px);
   border-radius: 22px;
   overflow: hidden;
   background: #000;

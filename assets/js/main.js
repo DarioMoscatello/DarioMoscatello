@@ -67,7 +67,7 @@ const wheel = createWheel(document.querySelector('[data-wheel]'), {
   // a pressed card shows its text right away; drags and draws when they land
   onTarget: showEntry,
   onSettle: showEntry,
-  onPlay: (entry, el) => playVideo(entry.data.video.src, entry.data.video.poster, el),
+  onPlay: (entry, el) => playVideo(entry.data.video.src, entry.data.video.poster, el, entry.data.video.ratio),
 });
 
 function buildDeck(section) {

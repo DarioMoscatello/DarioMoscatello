@@ -36,11 +36,12 @@ navList.innerHTML = SECTIONS.map(
 ).join('');
 
 const hint = navList.querySelector('[data-hint]');
+const hideHint = () => hint?.remove();
 
 navList.addEventListener('click', (e) => {
   const button = e.target.closest('[data-section]');
   if (!button) return;
-  hint?.remove();
+  hideHint();
   openSection(button.dataset.section, { scroll: true });
 });
 
@@ -52,8 +53,14 @@ function markNav() {
 
 /* ---------- panel + wheel ---------- */
 
+// A name in a section's index turns the wheel to that card and, like the
+// menu on the left, brings the wheel into view.
 const panel = createPanel(document.querySelector('[data-panel]'), {
-  onPick: (key) => wheel.selectKey(key),
+  onPick: (key) => {
+    hideHint();
+    wheel.selectKey(key);
+    scrollToStage();
+  },
 });
 
 function showEntry(entry) {
@@ -103,14 +110,16 @@ async function openSection(id, { cardKey, scroll = false } = {}) {
     wheel.setDeck(deck, { start });
   }
 
-  if (scroll) {
-    const box = stage.getBoundingClientRect();
-    if (box.top > 4 && box.bottom > window.innerHeight + 4) {
-      stage.scrollIntoView({
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'start',
-      });
-    }
+  if (scroll) scrollToStage();
+}
+
+function scrollToStage() {
+  const box = stage.getBoundingClientRect();
+  if (box.top > 4 && box.bottom > window.innerHeight + 4) {
+    stage.scrollIntoView({
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    });
   }
 }
 

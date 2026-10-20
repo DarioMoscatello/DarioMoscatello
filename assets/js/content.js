@@ -13,6 +13,7 @@
  *   body      paragraphs
  *   facts     [label, value] pairs
  *   list      simple list (interests)
+ *   points    bullet points under the subtitle (awards)
  *   links     [{ label, href }]
  *   index     the name this card has in its section's index, if not its title
  *   site      { label, href }: a project's website, as a button beside the title
@@ -221,14 +222,6 @@ export const SECTIONS = [
         video: { src: 'Projects/bexams-intro.mp4', poster: 'Projects/bexams-intro-poster.webp' },
       },
       {
-        id: 'ross',
-        image: 'Projects/ROSS_card.svg',
-        title: 'ROSS',
-        subtitle: 'Agentic AI',
-        body: ['An agentic AI for real estate valuation, carrying a property from the first steps of the appraisal to the final report.'],
-        video: { src: 'Projects/ross-intro.mp4', poster: 'Projects/ross-intro-poster.webp', ratio: '16 / 9' },
-      },
-      {
         id: 'nsnv',
         image: 'Projects/NSNV_card.svg',
         title: 'NSNV',
@@ -259,6 +252,7 @@ export const SECTIONS = [
       book('principles-changing-world-order', 'Principles for Dealing with the Changing World Order', 'Ray Dalio', 'English', 'Readings/Principles_card.svg'),
       book('selfish-gene', 'The Selfish Gene', 'Richard Dawkins', 'Italian', 'Readings/The_Selfish_Gene_card.svg'),
       book('zero-to-one', 'Zero to One', 'Peter Thiel', 'English', 'Readings/Zero_to_One_card_UK_flag_site_ready.svg'),
+      book('sovereign-individual', 'The Sovereign Individual', 'James Dale Davidson and Lord William Rees-Mogg', 'English', 'Readings/The_Sovereign_Individual_card.svg'),
       book('manifesteeri', 'Manifesteeri', 'Roxie Nafousi', 'Estonian', 'Readings/Manifest_card.svg'),
       book('social-media-prism', 'Breaking the Social Media Prism', 'Chris Bail', 'English', 'Readings/Social_Media_Prism_card.svg'),
       book('black-swan', 'The Black Swan', 'Nassim Nicholas Taleb', 'English', 'Readings/The_Black_Swan_card.svg'),
@@ -296,7 +290,7 @@ export const SECTIONS = [
         title: 'Fastweb AI Hackathon',
         index: '1x Winner · Fastweb AI Hackathon',
         subtitle: '1x Winner',
-        body: ['Won with ROSS, an agentic AI for real estate valuation.', 'Prize: ~€1,200'],
+        points: ['€1,200 prize'],
       },
       {
         id: 'languages',
@@ -309,13 +303,6 @@ export const SECTIONS = [
         image: 'More/Horse_card_black_site_ready.svg',
         title: '2000+ Rated',
         subtitle: 'Chess lover',
-      },
-      {
-        id: 'contact',
-        image: 'More/Contact_social_card_site_ready.svg',
-        title: 'Contact',
-        meta: ['Milano, Italy'],
-        links: LINKS,
       },
     ],
   },

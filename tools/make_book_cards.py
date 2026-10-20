@@ -99,6 +99,7 @@ BOOKS = [
     ('Principles for Dealing with the Changing World Order', 'Why nations succeed and fail', ['Ray Dalio'], 'uk', 'Principles_card.svg'),
     ('The Selfish Gene', '40th anniversary edition', ['Richard Dawkins'], 'it', 'The_Selfish_Gene_card.svg'),
     ('Zero to One', 'Notes on startups, or how to build the future', ['Peter Thiel'], 'uk', 'Zero_to_One_card_UK_flag_site_ready.svg'),
+    ('The Sovereign Individual', 'Mastering the transition to the information age', ['James Dale Davidson', 'Lord William Rees-Mogg'], 'uk', 'The_Sovereign_Individual_card.svg'),
     ('Manifesteeri', '', ['Roxie Nafousi'], 'ee', 'Manifest_card.svg'),
     ('Breaking the Social Media Prism', 'How to make our platforms less polarizing', ['Chris Bail'], 'uk', 'Social_Media_Prism_card.svg'),
     ('The Black Swan', 'The impact of the highly improbable', ['Nassim Nicholas Taleb'], 'uk', 'The_Black_Swan_card.svg'),

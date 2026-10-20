@@ -581,6 +581,17 @@ button.entry__site {
   }
 }
 
+.entry__points {
+  display: table;
+  margin: 0.7em auto 0;
+  padding-left: 1.1em;
+  text-align: left;
+}
+
+.entry__points li::marker {
+  color: var(--muted);
+}
+
 .entry__links a {
   text-decoration: none;
   padding-bottom: 1px;

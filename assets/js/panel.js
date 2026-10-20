@@ -30,6 +30,10 @@ function entryMarkup(card, section) {
     parts.push(`<div class="entry__body">${card.body.map((b) => `<p>${escapeHtml(b)}</p>`).join('')}</div>`);
   }
 
+  if (card.points?.length) {
+    parts.push(`<ul class="entry__points">${card.points.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`);
+  }
+
   if (card.list?.length) {
     parts.push(`<ul class="entry__list">${card.list.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`);
   }

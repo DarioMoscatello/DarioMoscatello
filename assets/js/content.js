@@ -290,7 +290,11 @@ export const SECTIONS = [
         title: 'Fastweb AI Hackathon',
         index: '1x Winner · Fastweb AI Hackathon',
         subtitle: '1x Winner',
-        points: ['€1,200 prize'],
+        points: [
+          '€1,200 in prizes',
+          'Winning project: ROSS',
+          'An agentic AI that carries a real estate valuation from the first documents to the final report.',
+        ],
       },
       {
         id: 'languages',

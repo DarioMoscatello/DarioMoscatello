@@ -291,7 +291,7 @@ export const SECTIONS = [
         index: '1x Winner · Fastweb AI Hackathon',
         subtitle: '1x Winner',
         points: [
-          '1st place in the ROSS challenge',
+          '1st place in ROSS challenge',
           '€1,200 in prizes',
           'Agentic AI workflow',
         ],

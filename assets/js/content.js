@@ -288,8 +288,8 @@ export const SECTIONS = [
         id: 'fastweb-hackathon',
         image: 'More/FASTWEB_card.svg',
         title: 'Fastweb AI Hackathon',
-        index: '#1 · Fastweb AI Hackathon',
-        subtitle: '#1',
+        index: '1x Winner · Fastweb AI Hackathon',
+        subtitle: '1x Winner',
         points: [
           '1st place in the ROSS challenge',
           '€1,200 in prizes',

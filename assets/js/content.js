@@ -293,7 +293,7 @@ export const SECTIONS = [
         points: [
           '1st place in the ROSS challenge',
           '€1,200 in prizes',
-          'An agentic AI that carries a real estate valuation from the first documents to the final report.',
+          'Agentic AI workflow',
         ],
       },
       {

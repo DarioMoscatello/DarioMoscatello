@@ -6,7 +6,7 @@ function entryMarkup(card, section) {
   const title = `<h2 class="entry__title">${escapeHtml(card.title || section.label)}</h2>`;
   // A project's own website sits beside its title: visible without
   // scrolling, easy to press, and no extra line.
-  if (card.site || card.video) {
+  if (card.site || card.video || card.date) {
     const site = card.site
       ? `<a class="entry__site" href="${escapeHtml(card.site.href)}" target="_blank" rel="noopener">` +
         `${escapeHtml(card.site.label)}<span aria-hidden="true"> ↗</span></a>`
@@ -15,7 +15,8 @@ function entryMarkup(card, section) {
       ? `<button type="button" class="entry__site" data-video="${escapeHtml(card.video.src)}"` +
         ` data-poster="${escapeHtml(card.video.poster || '')}" data-ratio="${escapeHtml(card.video.ratio || '9 / 16')}"><span aria-hidden="true">▶ </span>Video</button>`
       : '';
-    parts.push(`<div class="entry__head">${title}${site}${video}</div>`);
+    const date = card.date ? `<span class="entry__date">${escapeHtml(card.date)}</span>` : '';
+    parts.push(`<div class="entry__head">${title}${date}${site}${video}</div>`);
   } else {
     parts.push(title);
   }

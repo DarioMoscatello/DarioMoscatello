@@ -15,6 +15,7 @@
  *   list      simple list (interests)
  *   points    bullet points under the subtitle (awards)
  *   links     [{ label, href }]
+ *   date      a short date set beside the title (awards)
  *   index     the name this card has in its section's index, if not its title
  *   site      { label, href }: a project's website, as a button beside the title
  *   video     { src, poster, ratio }: a film, opened by a Video button beside the title
@@ -288,6 +289,7 @@ export const SECTIONS = [
         id: 'fastweb-hackathon',
         image: 'More/FASTWEB_card.svg',
         title: 'Fastweb AI Hackathon',
+        date: 'OCT 2026',
         index: '1x Winner · Fastweb AI Hackathon',
         subtitle: '1x Winner',
         points: [

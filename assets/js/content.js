@@ -299,6 +299,11 @@ export const SECTIONS = [
         ],
       },
       {
+        id: 'soon',
+        image: 'More/SOON_card.svg',
+        title: 'Soon',
+      },
+      {
         id: 'languages',
         image: 'More/LANGUAGES_card.svg',
         title: 'Languages',

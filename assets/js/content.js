@@ -289,7 +289,7 @@ export const SECTIONS = [
         id: 'fastweb-hackathon',
         image: 'More/FASTWEB_card.svg',
         title: 'Fastweb AI Hackathon',
-        date: 'OCT 2026',
+        date: 'Oct 2026',
         index: '1x Winner · Fastweb AI Hackathon',
         subtitle: '1x Winner',
         points: [

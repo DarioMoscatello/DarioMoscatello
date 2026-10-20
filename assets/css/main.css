@@ -432,12 +432,12 @@ a {
   gap: 0.35em 0.8em;
 }
 
-/* a date set beside the title instead of in the line under it */
+/* a date set beside the title instead of in the line under it, in the same
+   type as the dates under the other titles */
 .entry__date {
-  font-family: "Geist Mono", ui-monospace, monospace;
-  font-size: 0.72em;
-  letter-spacing: 0.08em;
+  font-size: 0.86em;
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 

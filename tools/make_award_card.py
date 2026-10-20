@@ -1,6 +1,6 @@
 """Builds the Fastweb AI Hackathon card in Awards & More: a white card with the
 Fastweb mark (More/fastweb-mark.png, the symbol without the word), AI
-HACKATHON in Geist Mono under it and a gold 1x WINNER mark.
+HACKATHON in Geist Mono under it and a gold #1 mark.
 
     pip install fonttools brotli pillow numpy
     python3 tools/make_award_card.py
@@ -25,7 +25,7 @@ W, H, RX = 700, 1000, 46
 INK = '#111111'
 MARK_W = 330
 LINE, LINE_SIZE = 'AI HACKATHON', 32
-BADGE, BADGE_SIZE = '1× WINNER', 28
+BADGE, BADGE_SIZE = '#1', 34
 TRACK = 0.2
 
 
@@ -55,7 +55,7 @@ def card():
     line_y = top + mark_h + 80 + LINE_SIZE * 0.72
     badge_w = mono_width(BADGE, BADGE_SIZE) + 60
     badge_y = line_y + 60
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Fastweb AI Hackathon, 1x winner">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Fastweb AI Hackathon, number one">
   <style>{label_font(LINE + BADGE)}
     .mono {{ font-family: 'Geist Mono Card', 'Geist Mono', ui-monospace, monospace; font-weight: 500; letter-spacing: {TRACK}em; fill: {INK}; }}
   </style>

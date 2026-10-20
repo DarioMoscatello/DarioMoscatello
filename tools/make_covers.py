@@ -22,6 +22,7 @@ orbit, and the section name in Geist Mono at the same spot as on every cover.
 import base64
 import io
 import os
+from xml.sax.saxutils import escape
 
 from fontTools import subset
 from fontTools.ttLib import TTFont
@@ -125,7 +126,7 @@ def label_font(text):
 def frame(label, description, body, orbit=(W / 2, 690, 372)):
     ox, oy, r = orbit
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}"
-     role="img" aria-label="{label.title()}: {description}">
+     role="img" aria-label="{escape(label.title())}: {escape(description)}">
   <style>{label_font(label)}
     .label {{ font-family: 'Geist Mono Card', 'Geist Mono', ui-monospace, monospace; font-weight: 500; font-size: {LABEL_SIZE}px; letter-spacing: {LABEL_TRACK}em; fill: #FFFFFF; }}
   </style>
@@ -180,7 +181,7 @@ def frame(label, description, body, orbit=(W / 2, 690, 372)):
     <circle cx="{ox + r * 0.6:.1f}" cy="{oy + r * 0.8:.1f}" r="3" fill="#FFFFFF" fill-opacity="0.25"/>
     {body}
   </g>
-  <text class="label" x="{LABEL_X}" y="{LABEL_Y}">{label}</text>
+  <text class="label" x="{LABEL_X}" y="{LABEL_Y}">{escape(label)}</text>
 </svg>
 '''
 
@@ -296,7 +297,7 @@ def more():
         slab, cyl, block, sphere,
     ])
     write('More/MORE_open_index_site_ready.svg', frame(
-        'MORE', 'a slab holding a blue block, a blue cylinder and a gold sphere', body))
+        'AWARDS & MORE', 'a slab holding a blue block, a blue cylinder and a gold sphere', body))
 
 
 def education():

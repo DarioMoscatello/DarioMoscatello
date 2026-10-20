@@ -14,6 +14,7 @@
  *   facts     [label, value] pairs
  *   list      simple list (interests)
  *   links     [{ label, href }]
+ *   index     the name this card has in its section's index, if not its title
  *   site      { label, href }: a project's website, as a button beside the title
  *   video     { src, poster, ratio }: a film, opened by a Video button beside the title
  *             and the play button on the card; ratio is '16 / 9' for landscape (default 9 / 16)
@@ -281,13 +282,21 @@ export const SECTIONS = [
 
   {
     id: 'more',
-    label: 'More',
+    label: 'Awards & More',
     cards: [
       {
         id: 'more',
         head: true,
         image: 'More/MORE_open_index_site_ready.svg',
-        title: 'More',
+        title: 'Awards & More',
+      },
+      {
+        id: 'fastweb-hackathon',
+        image: 'More/FASTWEB_card.svg',
+        title: 'Fastweb AI Hackathon',
+        index: '1x Winner · Fastweb AI Hackathon',
+        subtitle: '1x Winner',
+        body: ['Won with ROSS, an agentic AI for real estate valuation.', 'Prize: ~€1,200'],
       },
       {
         id: 'languages',

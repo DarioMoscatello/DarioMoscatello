@@ -57,7 +57,7 @@ function entryMarkup(card, section) {
     if (items.length) {
       const wide = items.length > 7 ? ' entry__index--wide' : '';
       const list = items
-        .map((c) => `<li><button type="button" data-pick="${escapeHtml(c.id)}">${escapeHtml(c.title)}</button></li>`)
+        .map((c) => `<li><button type="button" data-pick="${escapeHtml(c.id)}">${escapeHtml(c.index || c.title)}</button></li>`)
         .join('');
       parts.push(`<ul class="entry__index${wide}">${list}</ul>`);
     }
